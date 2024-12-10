@@ -55,10 +55,10 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
           </li>
           <li className="ml-4 inline-block">
             <SocialIcon
-              kind="twitter"
+              kind="x"
               size={5}
               aria-label={t('twittershare')}
-              href={`https://twitter.com/intent/tweet/?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
+              href={`https://x.com/intent/tweet/?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
             />
           </li>
           <li className="ml-4 inline-block">
