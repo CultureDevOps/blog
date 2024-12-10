@@ -7,7 +7,7 @@ const siteMetadata = {
   language: 'fr',
   theme: 'system', // system, dark or light
   siteUrl: 'https://culturedevops.fr',
-  siteRepo: 'https://github.com/PxlSyl/tailwind-nextjs-starter-blog-i18n',
+  siteRepo: 'https://github.com/CultureDevOps/blog',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
