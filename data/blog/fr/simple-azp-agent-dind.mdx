@@ -1,0 +1,143 @@
+---
+title: Docker-in-Docker avec un agent Azure DevOps auto-hébergé
+date: '2024-12-08'
+language: fr
+tags: ['azure', 'devops', 'pipelines','docker','docker-in-docker']
+authors: ['default']
+draft: false
+summary: Réaliser des builds Docker dans Azure DevOps avec un agent auto-hébergé
+featured: true
+---
+
+Pour réaliser des builds Docker dans une pipeline CI/CD il est utile de pouvoir lancer des images dockers qui puissent elles-mêmes lancer des commandes Docker.   
+Azure ne propose plus d’agents gratuitement et donc si vous souhaitez utiliser les pipelines CI Azure à des fins personnelles, le plus simple est d’avoir un agent auto-hébergé sur un serveur tiers ou sur votre PC personnel.
+
+Pour cela vous pouvez utiliser cette image que j’ai préparée : [https://github.com/CultureDevOps/simple-azp-agent-docker-dind](https://github.com/CultureDevOps/simple-azp-agent-docker-dind)
+
+# Fonctionnement d’une pipeline Azure avec un Agent auto-hébergé
+
+![Pipeline Azure](https://d3nrx9dqtowrp8.cloudfront.net/blog/simple-azp-agent-dind/AZP+Agent-fr.drawio.png)
+
+Le développeur commit son code avec un Dockerfile dans le repo Azure, ce qui déclenche l’exécution de la pipeline.
+Pendant ce temps l’agent tourne en fond sur une machine auto-hébergée et interroge régulièrement la pipeline Azure pour savoir s’il doit commencer à travailler.   
+Une fois la pipeline déclenchée l’agent construit l’image et la pousse dans Azure Container Registry.   
+ 
+
+## Utilisation de l’agent sur une machine Linux
+
+Dans le [dépot Github](https://github.com/CultureDevOps/simple-azp-agent-docker-dind) vous pouvez trouver le fichier docker-compose-linux.yml. 
+
+Commencez par modifier les variables d’environnement pour qu’elles correspondent à votre compte Azure DevOps :   
+
+```yml:docker-compose-linux.yml
+version: "3.8"
+
+services:  
+  dind:  
+    image: culturedevops/simple-azp-agent-docker-dind:latest  
+    tty: true  
+    restart: unless-stopped  
+    volumes:  
+      - "/var/run/docker.sock:/var/run/docker.sock"  
+    environment:  
+      AZP_URL: "https://dev.azure.com/youraccount"  
+      AZP_AGENT_NAME: "azure-agent-desktop"  
+      AZP_POOL: "azure-agent"  
+      AZP_TOKEN: "Your Token Here"  
+```
+
+Pour le lancer, placez vous dans le répertoire et lancez la commande :  
+```sh
+docker-compose -f "docker-compose-linux.yml" up -d
+```
+
+## Utilisation de l’agent sur une machine Windows
+
+De la même manière, dans le [dépot Github](https://github.com/CultureDevOps/simple-azp-agent-docker-dind) vous pouvez trouver le fichier docker-compose-windows.yml. Modifiez également les variables d’environnement.  
+
+```yml:docker-compose-windows.yml 
+version: "3.8"
+
+services:  
+  dind:  
+    image: culturedevops/simple-azp-agent-docker-dind:latest  
+    tty: true  
+    restart: unless-stopped  
+    volumes:  
+      - "//var/run/docker.sock:/var/run/docker.sock"  
+    group_add:  
+      - "0"  
+    environment:  
+      AZP_URL: "https://dev.azure.com/youraccount"  
+      AZP_AGENT_NAME: "azure-agent-desktop"  
+      AZP_POOL: "azure-agent"  
+      AZP_TOKEN: "Your Token Here"  
+```
+
+Pour le lancer, placez vous dans le répertoire et lancez la commande :  
+```sh
+docker-compose -f "docker-compose-windows.yml" up -d
+```
+
+# Pipeline Azure
+
+Une fois l’agent lancé, vous pouvez voir qu’il s’exécute bien en allant dans Organisation Settings > Agent pools > Votre pool > Agents
+
+![Azure Agent](https://d3nrx9dqtowrp8.cloudfront.net/blog/simple-azp-agent-dind/azure-agent.png)
+
+## Exemple de pipeline Azure pour construire une image Docker
+
+Créez un fichier azure-pipelines.yml à la racine de votre projet et configurez les variables : 
+
+```yml:azure-pipelines.yml 
+# Docker  
+# Build and push an image to Azure Container Registry  
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:  
+- main
+
+resources:  
+- repo: self
+
+variables:  
+
+  dockerRegistryServiceConnection: '<SERVICE_CONNECTION_NAME>'  
+  imageRepository: '<IMAGE_NAME>'  
+  containerRegistry: 'yourregistry.azurecr.io'  
+  tag: '$(Build.BuildId)'
+  dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+  dockerimage: '$(imageRepository)/docker_image'
+  agentName: 'azure-agent'
+  
+  # Agent VM image name  
+  vmImageName: 'alpine'
+
+stages:  
+- stage: Build  
+  displayName: Build and push stage  
+  pool:  
+    name: $(agentName)
+    vmImage: $(vmImageName)    
+  jobs:  
+  - job: Build_docker_image  
+    displayName: Build Docker Image  
+    steps:  
+    - task: Docker@2  
+      displayName: Build and push an image to container registry  
+      inputs:  
+        command: buildAndPush  
+        repository: $(dockerimage)
+        dockerfile: $(dockerfile)
+        containerRegistry: $(dockerRegistryServiceConnection)  
+        tags: |  
+          latest
+```
+Une fois fait, vous pouvez pousser votre Dockerfile dans Azure Repos. Au bout de quelques secondes la pipeline va se déclencher et votre image sera construite. Rendez vous dans l’onglet Pipelines de votre projet pour contrôler son exécution.  
+
+# Conclusion
+
+Vous pouvez maintenant réaliser facilement des builds Docker dans Azure Pipelines.
+
+![Build Success](https://d3nrx9dqtowrp8.cloudfront.net/blog/simple-azp-agent-dind/build_success.png)
+
