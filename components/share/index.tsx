@@ -107,6 +107,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
               onMouseLeave={() => setShowMenu(false)}
               onClick={handleCopy}
               className="fill-current text-gray-700 outline-none hover:text-primary-500 focus:outline-none dark:text-gray-200 dark:hover:text-primary-400"
+              aria-label="copy-button"
             >
               <svg height="24" viewBox="0 0 24 24" width="24">
                 <path d="M0 0h24v24H0z" fill="none" />
