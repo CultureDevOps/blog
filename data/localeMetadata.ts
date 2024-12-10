@@ -3,8 +3,8 @@ type Metadata = {
 }
 
 export const maintitle: Metadata = {
-  en: 'Next.js i18n Starter Blog',
-  fr: 'Starter Blog Next.js i18n',
+  en: 'Culture DevOps Blog',
+  fr: 'Culture DevOps Blog',
 }
 
 export const maindescription: Metadata = {

@@ -16,7 +16,7 @@ Pour cela vous pouvez utiliser cette image que j’ai préparée : [https://gith
 
 # Fonctionnement d’une pipeline Azure avec un Agent auto-hébergé
 
-![Pipeline Azure](https://d3nrx9dqtowrp8.cloudfront.net/blog/simple-azp-agent-dind/AZP+Agent-fr.drawio.png)
+![Pipeline Azure](https://d2mezi5ylxaxvl.cloudfront.net/blog/simple-azp-agent-dind/AZP+Agent-fr.drawio.png?format=auto)
 
 Le développeur commit son code avec un Dockerfile dans le repo Azure, ce qui déclenche l’exécution de la pipeline.
 Pendant ce temps l’agent tourne en fond sur une machine auto-hébergée et interroge régulièrement la pipeline Azure pour savoir s’il doit commencer à travailler.   
@@ -83,7 +83,7 @@ docker-compose -f "docker-compose-windows.yml" up -d
 
 Une fois l’agent lancé, vous pouvez voir qu’il s’exécute bien en allant dans Organisation Settings > Agent pools > Votre pool > Agents
 
-![Azure Agent](https://d3nrx9dqtowrp8.cloudfront.net/blog/simple-azp-agent-dind/azure-agent.png)
+![Azure Agent](https://d2mezi5ylxaxvl.cloudfront.net/blog/simple-azp-agent-dind/azure-agent.png?format=auto)
 
 ## Exemple de pipeline Azure pour construire une image Docker
 
@@ -139,5 +139,5 @@ Une fois fait, vous pouvez pousser votre Dockerfile dans Azure Repos. Au bout de
 
 Vous pouvez maintenant réaliser facilement des builds Docker dans Azure Pipelines.
 
-![Build Success](https://d3nrx9dqtowrp8.cloudfront.net/blog/simple-azp-agent-dind/build_success.png)
+![Build Success](https://d2mezi5ylxaxvl.cloudfront.net/blog/simple-azp-agent-dind/build_success.png?format=auto)
 

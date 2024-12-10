@@ -6,7 +6,7 @@ const siteMetadata = {
   description: 'A blog created with Next.js, i18n and Tailwind.css',
   language: 'fr',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://culturedevops.fr',
+  siteUrl: 'https://culturedevops.com',
   siteRepo: 'https://github.com/CultureDevOps/blog',
   siteLogo: '/static/images/logo.png',
   socialBanner: '/static/images/twitter-card.png',
