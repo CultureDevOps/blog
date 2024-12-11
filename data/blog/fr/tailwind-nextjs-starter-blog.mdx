@@ -1,0 +1,150 @@
+---
+title: Tailwind Nextjs Starter Blog
+date: '2024-12-10'
+language: fr
+tags: ['nextjs', 'tailwind', 'docker','vercel']
+authors: ['default']
+draft: false
+summary: Un template de blog ultra léger
+featured: true
+---
+
+![Tailwind Blog](https://d2mezi5ylxaxvl.cloudfront.net/blog/tailwind-nextjs-starter-blog/tailwind-blog.png?format=auto)
+
+### Création du blog avec Tailwind Next.js Starter Blog
+
+Ce blog a été construit à partir du template [Tailwind Next.js Starter Blog de Timlrx](https://github.com/timlrx/tailwind-nextjs-starter-blog), un excellent point de départ pour créer un site moderne et performant.
+
+Il repose sur les technologies suivantes :
+
+- **[Next.js](https://nextjs.org/)** pour une expérience utilisateur fluide.
+- **[Tailwind CSS](https://tailwindcss.com/)** pour un design personnalisable et rapide.
+- **[Vercel](https://vercel.com/)** pour un déploiement simple et efficace.
+- Stockage et distribution des images via **[Amazon S3](https://aws.amazon.com/s3/)** et **[Amazon CloudFront](https://aws.amazon.com/fr/cloudfront/)**.
+
+---
+
+## Fonctionnalités principales
+
+- **Next.js avec TypeScript** : pour un développement robuste.
+- **Contentlayer** : gestion facile du contenu.
+- **MDX** : mélangez Markdown et JSX dans vos articles.
+- **Tailwind CSS 3.0** : personnalisation rapide avec un attribut de couleur principale.
+- Vue adaptée aux mobiles.
+- Thème clair et sombre.
+- Optimisation des polices avec **next/font**.
+
+### Performances optimales
+
+- Score Lighthouse quasi parfait.
+- Léger : seulement 85 kB pour le premier chargement JS.
+
+![Rapport Lighthouse](https://d2mezi5ylxaxvl.cloudfront.net/blog/tailwind-nextjs-starter-blog/performances-culturedevops.png?format=auto)
+
+---
+
+## Intégration avec **Pliny**
+
+Ce blog bénéficie des fonctionnalités avancées offertes par **Pliny**, notamment :
+
+- **Analytique** : choix entre [Umami](https://umami.is/), [Plausible](https://plausible.io/), [Simple Analytics](https://simpleanalytics.com/), [Posthog](https://posthog.com/) ou [Google Analytics](https://analytics.google.com/analytics/web/).
+- **Commentaires** : via [Giscus](https://giscus.app/), [Utterances](https://utteranc.es/) ou [Disqus](https://disqus.com/).
+- **Newsletters** : supporte [Mailchimp](https://mailchimp.com/), [Convertkit](https://convertkit.com/), et plus encore.
+- **Recherche avancée** : avec [Kbar](https://kbar.vercel.app/) ou [Algolia](https://www.algolia.com/).
+- **Syntaxe mise en valeur** : avec **rehype-prism-plus** pour numérotation et surlignage des lignes.
+- **Mathématiques** : prises en charge via **KaTeX**.
+- **Citations et bibliographies** : avec **rehype-citation**.
+- **Optimisation des images** : grâce à **next/image**.
+
+---
+
+## Fonctionnalités supplémentaires
+
+- Pages par tag : chaque tag unique dispose d'une page dédiée.
+- Support multi-auteurs.
+- Mises en page variées pour blogs et listes d'articles.
+- Routes imbriquées pour les articles de blog.
+- Page de projets.
+- En-têtes de sécurité préconfigurés.
+- SEO optimisé : flux RSS, sitemaps, et plus encore.
+
+### Internationalisation (i18n)
+
+Le blog est multilingue grâce à l'intégration d'i18next, avec l'aide de [PxlSyl](https://github.com/PxlSyl/tailwind-nextjs-starter-blog-i18n).
+
+---
+
+## Docker : déployer facilement le blog
+
+Pour ceux qui souhaitent utiliser Docker, voici un exemple de configuration. Retrouvez les fichiers complets dans [mon dépôt GitHub](https://github.com/CultureDevOps/blog).
+
+### Exemple de Dockerfile
+
+```dockerfile
+FROM jitesoft/node-yarn:19
+
+ADD package.json /package.json
+
+ENV NODE_PATH=/node_modules
+ENV PATH=$PATH:/node_modules/.bin
+ENV YARN_VERSION 3.6.1
+
+RUN yarn policies set-version $YARN_VERSION
+
+WORKDIR /app
+ADD . /app
+
+RUN yarn
+
+EXPOSE 3000
+
+CMD ["yarn","dev"]
+```
+
+Nous utilisons une image **yarn** spécialisée, qui offre de meilleures performances par rapport à une image Node classique.
+
+### Exemple de docker-compose.yml
+
+```yml
+version: '3.8'
+services:
+
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    restart: unless-stopped
+    volumes:
+      - '.:/app'
+      - './node_modules:/app/node_modules:cached'
+    environment:
+      - NODE_ENV=development
+    ports:
+      - "3000:3000"
+```
+
+### Instructions pour l'installation
+
+1. **Initialiser les dépendances Yarn** :
+   
+Créez un container temporaire pour accéder à sa console :
+```bash
+docker-compose run --rm blog sh
+```
+Une fois dans le container, lancez :
+```bash
+yarn install
+```
+
+2. **Démarrer la stack** :
+   
+Après l'installation des dépendances, quittez le container et lancez :
+```bash
+docker-compose up -d
+```
+
+---
+
+Ce blog, puissant et personnalisable, constitue une solution idéale pour les développeurs cherchant un environnement flexible et performant. N'hésitez pas à partager vos retours ou suggestions !
+
