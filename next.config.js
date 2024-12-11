@@ -64,7 +64,7 @@ module.exports = () => {
       remotePatterns: [
         {
           protocol: 'https',
-          hostname: 'picsum.photos',
+          hostname: 'd2mezi5ylxaxvl.cloudfront.net',
           pathname: '**',
         },
       ],
