@@ -46,10 +46,10 @@ const Header = () => {
               return link.href
             })
             .map((link) => {
-              let isSelected = pathname!.includes(link.href as string)
-              if(pathname==="/" && link.href === "/landing"){
-                isSelected = true
-              }
+              const isSelected = pathname!.includes(link.href as string)
+              // if(pathname==="/" && link.href === "/landing"){
+              //   isSelected = true
+              // }
               return (
                 <Link
                   key={link.title}
