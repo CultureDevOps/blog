@@ -21,16 +21,10 @@ export default async function Hero({ params: { locale } }: Props) {
               {siteMetadata.headerTitle}
             </h1> */}
             <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">
-              {t('title_1')}
-            </h1>
-            <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">
-              {t('title_2')}
-            </h1>
-            <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">
-              {t('title_3')}
+              {t('profession')}
             </h1>
             <p className="py-5 text-xl leading-normal text-gray-500 dark:text-gray-300 lg:text-xl xl:text-2xl">
-              {t('title_description')}
+              {t('profession_description')}
             </p>
             <div className="mb-3 flex space-x-4">
               <SocialIcon kind="mail" href={`mailto:${siteMetadata.email}`} size={6} />
