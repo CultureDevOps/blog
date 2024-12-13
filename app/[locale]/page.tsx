@@ -5,23 +5,17 @@ import HomeLayout from '@/layouts/HomeLayout'
 import { LocaleTypes } from './i18n/settings'
 import ListLayout from '@/layouts/ListLayout'
 import { createTranslation } from './i18n/server'
+import Landing from './landing/page'
 
 type HomeProps = {
   params: { locale: LocaleTypes }
 }
 
 export default async function Page({ params: { locale } }: HomeProps) {
-  const sortedPosts = sortPosts(allBlogs)
-  const posts = allCoreContent(sortedPosts)
-  const filteredPosts = posts.filter((p) => p.language === locale)
-  const hasFeaturedPosts = filteredPosts.filter((p) => p.featured === true)
-  const { t } = await createTranslation(locale, 'home')
   
   return (
     <>
-      {/* {hasFeaturedPosts && <FeaturedLayout posts={hasFeaturedPosts} params={{ locale }} />}
-      <HomeLayout posts={filteredPosts} params={{ locale }} /> */}
-      <ListLayout params={{ locale: locale }} posts={filteredPosts} title={t('all')} />
+      <Landing params={{ locale: locale }} />
     </>
   )
 }

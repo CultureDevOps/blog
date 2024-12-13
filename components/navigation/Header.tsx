@@ -43,7 +43,7 @@ const Header = () => {
         <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
           {headerNavLinks
             .filter((link) => {
-              return link.href !== '/'
+              return link.href
             })
             .map((link) => {
               const isSelected = pathname!.includes(link.href as string)
