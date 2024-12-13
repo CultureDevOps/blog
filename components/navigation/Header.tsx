@@ -40,13 +40,19 @@ const Header = () => {
             </div>
           </Link>
         </div>
-        <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
+        <div className="flex items-center space-x-4 leading-5 sm:space-x-6 snap-always snap-center">
           {headerNavLinks
             .filter((link) => {
               return link.href
             })
             .map((link) => {
-              const isSelected = pathname!.includes(link.href as string)
+              let isSelected = false
+              if(pathname==="/" && link.href == "/landing"){
+                isSelected = true
+              }else{
+                isSelected = pathname!.includes(link.href as string)
+              }
+              
               return (
                 <Link
                   key={link.title}
