@@ -28,7 +28,7 @@ export default async function Hero({ params: { locale } }: Props) {
             </h1>
             <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">
               {t('title_3')}
-            </h1>                        
+            </h1>
             <p className="py-5 text-xl leading-normal text-gray-500 dark:text-gray-300 lg:text-xl xl:text-2xl">
               {t('title_description')}
             </p>
