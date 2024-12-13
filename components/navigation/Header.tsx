@@ -40,7 +40,7 @@ const Header = () => {
             </div>
           </Link>
         </div>
-        <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
+        <div className="flex items-center space-x-4 leading-5 sm:space-x-6 snap-always snap-center">
           {headerNavLinks
             .filter((link) => {
               return link.href
