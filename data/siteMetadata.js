@@ -8,7 +8,7 @@ const siteMetadata = {
   theme: 'system', // system, dark or light
   siteUrl: 'https://culturedevops.com',
   siteRepo: 'https://github.com/CultureDevOps/blog',
-  siteLogo: '/static/images/logo.png',
+  siteLogo: '/static/images/logo-small.png',
   socialBanner: '/static/images/x-card.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'culturedevops@gmail.com',
