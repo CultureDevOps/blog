@@ -3,20 +3,17 @@ import { LocaleTypes } from '../i18n/settings'
 import Hero from '@/components/landing/Hero'
 import Benefits from '@/components/landing/Benefits'
 import { devOps, cloud } from '@/data/benefits'
-import { formatDate } from 'pliny/utils/formatDate'
-import SectionTitle from '@/components/landing/SectionTitle'
 
 interface LandingProps {
   params: { locale: LocaleTypes }
 }
-const MAX_DISPLAY = 5
 
 export default async function Landing({ params: { locale } }: LandingProps) {
   const { t } = await createTranslation(locale, 'home')
   return (
     <>
       <div>
-        <div className='snap-always snap-center'>
+        <div className='snap-always snap-start'>
           <Hero params={{ locale: locale }} />
         </div>
         <div className='snap-always snap-center'>
