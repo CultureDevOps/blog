@@ -1,0 +1,148 @@
+---
+title: 'Optimize Your Images with AWS S3 and CloudFront: CDN Guide for Ultra-Fast Websites'
+date: '2024-12-14'
+language: en
+tags: ['aws', 'cloudfront', 'S3', 'docker', 'cdn', 'image-optimization', 'lambda', 'web-performance', 'cloud-computing', 'infrastructure']
+authors: ['default']
+draft: false
+summary: A practical guide to combining AWS S3 and CloudFront to improve the speed and efficiency of your online images
+featured: true
+---
+
+In today's web world, site speed and efficiency are essential factors for:  
+- providing an optimal user experience,  
+- and improving SEO.  
+
+Images, while indispensable for enriching visual content, often make up a significant portion of the data to be loaded, which directly impacts performance.  
+
+This is where **Content Delivery Networks (CDN)** and image optimization solutions come into play.  
+
+With **AWS S3** and **CloudFront**, you can:  
+- store your files reliably,  
+- deliver your content quickly,  
+- and optimize your images to reduce loading times, while preserving their quality.  
+
+In this article, we will explore how to configure and use these tools to transform your site into a fast and efficient platform.
+
+## Architecture
+
+Amazon offers an out-of-the-box solution for distributing and optimizing your images. You can learn more about their approach here: [Image Optimization Using Amazon CloudFront and AWS Lambda](https://aws.amazon.com/fr/blogs/networking-and-content-delivery/image-optimization-using-amazon-cloudfront-and-aws-lambda/).
+
+This solution relies on **AWS Lambda**, which allows you to transform your images into optimized formats such as **WebP**, **AVIF**, or **JPEG**.
+
+---
+
+### Concept
+
+- Images are stored in an **Amazon S3 bucket**.  
+- Instead of making this bucket publicly accessible, they are distributed via **CloudFront**, with a specific access policy (OAC) that prevents direct requests to the S3 bucket.  
+- When a visitor accesses an image on your site, **CloudFront** invokes a **Lambda** function to generate an optimized version of the image, suitable for the format supported by the browser. This image is then cached for future visitors.  
+- If the optimized image is already in the CloudFront cache, it is served directly, avoiding any calls to Lambda or S3.  
+
+The URL of an optimized image looks like this:  
+```bash
+https://example.cloudfront.net/images/cats/mycat.jpg?format=webp&width=200
+```
+
+You can also let **CloudFront** automatically choose the best format (JPEG, WebP, or AVIF) by using the `format=auto` directive. This choice is based on the `Accept` header of the request sent by the browser.  
+
+In the example above, the `/images/cats/mycat.jpg` part corresponds to the image path in your S3 bucket.
+
+---
+
+## The Amazon Solution
+
+To simplify the deployment and use of this architecture, I have prepared a fork of the original GitHub repository provided by Amazon:  
+```bash
+git clone https://github.com/CultureDevOps/docker-aws-image-optimization.git
+```
+
+This fork contains an optimized configuration, making it easier to deploy Amazon's solution in a Docker environment with minimal effort.
+
+---
+
+## Initial Setup
+
+In the `aws` directory, configure the `credentials` and `config` files to connect the application to your AWS account.  
+
+**`config`**  
+```ini
+[default]
+# Specify your preferred AWS region
+region = eu-west-3
+output = json
+```
+
+**`credentials`**  
+```ini
+[default]
+aws_access_key_id = <ACCESS_KEY>
+aws_secret_access_key = <SECRET_KEY>
+```
+
+Make sure to replace `<ACCESS_KEY>` and `<SECRET_KEY>` with your AWS credentials.
+
+### Installing Node.js Dependencies
+
+To initialize the necessary dependencies, run the following command:  
+```bash
+docker-compose run --rm image-optimizer npm install
+```  
+
+---
+
+## Deploying the Solution
+
+Once your configuration is ready, you can use Docker to provision and deploy the necessary infrastructure.
+
+### Accessing the Docker Environment  
+Launch the Docker environment and access the console:  
+```bash
+docker-compose run --rm image-optimizer bash
+```  
+
+### Deployment Commands  
+From the Docker console, run the following commands:  
+```bash
+cdk bootstrap
+npm run build
+cdk deploy -c S3_IMAGE_BUCKET_NAME=<S3_BUCKET_NAME>
+```  
+
+**Notes:**  
+- Replace `<S3_BUCKET_NAME>` with the name of your S3 bucket.  
+- If no bucket is specified, the process will automatically create an S3 bucket with an example file: `/images/rio/1.jpeg`.  
+
+### Removing Resources  
+If you want to remove the resources created in your AWS account at the end of the test, use the following command:  
+```bash
+cdk destroy
+```  
+---
+
+## Verification
+
+You can test the solution by accessing the following URL:  
+```bash
+https://<DISTRIBUTION>.cloudfront.net/images/rio/1.jpeg?format=auto&width=300
+```
+
+Replace `<DISTRIBUTION>` with the name of your CloudFront distribution (available in the AWS console).  
+
+> **Tip**: The URL of an optimized image corresponds to the image path in the S3 bucket, preceded by the CloudFront distribution domain.  
+
+---
+
+## Conclusion
+
+By combining **AWS S3**, **CloudFront**, and **Lambda**, you can efficiently optimize your images, reduce loading times, and improve the user experience. With this architecture, your images are served in modern formats like **WebP**, **JPEG**, or **AVIF**, perfectly suited to different browsers.
+
+Take the example of the image below: it weighs 6.2 MB when stored in my **S3** bucket, but once optimized and served via **CloudFront** in the **WebP** format, it’s only 48 KB. This significant reduction in size, with no noticeable loss of quality, clearly shows the benefits of image optimization in a CDN environment.
+
+![Image Optimization with AWS](https://d2mezi5ylxaxvl.cloudfront.net/blog/aws-s3-cloudfront-image-optimization/chat-pc.png?format=webp)
+
+By adopting this solution, you ensure fast and performant delivery of your images, while reducing bandwidth usage and providing a better experience for users.
+
+---
+
+Let me know if you'd like any further changes or additions!

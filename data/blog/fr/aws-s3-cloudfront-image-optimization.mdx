@@ -1,0 +1,145 @@
+---
+title: 'Optimisez vos images avec AWS S3 et CloudFront : Guide CDN pour des sites ultra-rapides'
+date: '2024-12-14'
+language: fr
+tags: ['aws', 'cloudfront', 'S3', 'docker', 'cdn', 'image-optimization', 'lambda', 'web-performance', 'cloud-computing', 'infrastructure']
+authors: ['default']
+draft: false
+summary: Un guide pratique pour combiner AWS S3 et CloudFront afin d’améliorer la vitesse et l’efficacité de vos images en ligne
+featured: true
+---
+
+Dans le monde du web moderne, la rapidité et l’efficacité d’un site sont des facteurs essentiels pour :  
+- offrir une expérience utilisateur optimale,  
+- et améliorer son référencement.  
+
+Les images, bien qu’indispensables pour enrichir le contenu visuel, représentent souvent une part importante des données à charger. Cela impacte directement les performances.  
+
+C’est ici qu’interviennent les **Content Delivery Networks (CDN)** et les solutions d’optimisation d’images.  
+
+Avec **AWS S3** et **CloudFront**, vous pouvez :  
+- stocker vos fichiers de manière fiable,  
+- diffuser vos contenus rapidement,  
+- et optimiser vos images pour réduire les temps de chargement, tout en préservant leur qualité.  
+
+Dans cet article, nous explorerons comment configurer et exploiter ces outils pour transformer votre site en une plateforme rapide et performante.  
+
+## Architecture
+
+Amazon propose une solution clé en main pour distribuer et optimiser vos images. Vous pouvez en apprendre davantage sur leur approche ici : [Image Optimization Using Amazon CloudFront and AWS Lambda](https://aws.amazon.com/fr/blogs/networking-and-content-delivery/image-optimization-using-amazon-cloudfront-and-aws-lambda/).
+
+Cette solution repose sur **AWS Lambda**, qui permet de transformer vos images en formats optimisés tels que **WebP**, **AVIF**, ou **JPEG**.
+
+---
+
+### Principe
+
+- Les images sont stockées dans un **bucket Amazon S3**.  
+- Au lieu de rendre ce bucket accessible publiquement, elles sont distribuées via **CloudFront**, avec une politique d’accès spécifique (OAC) qui empêche toute requête directe au bucket S3.  
+- Lorsqu’un visiteur accède à une image sur votre site, **CloudFront** appelle une fonction **Lambda** pour générer une version optimisée de l’image, adaptée au format pris en charge par le navigateur. Cette image est ensuite mise en cache pour les futurs visiteurs.  
+- Si l’image optimisée est déjà présente dans le cache CloudFront, elle est directement servie, évitant tout appel à Lambda ou S3.  
+
+L’URL d’une image optimisée ressemble à ceci :  
+```bash
+https://exemple.cloudfront.net/images/cats/mycat.jpg?format=webp&width=200
+```
+
+Vous pouvez également laisser **CloudFront** choisir automatiquement le meilleur format (JPEG, WebP, ou AVIF) en utilisant la directive `format=auto`. Ce choix se base sur l’en-tête `Accept` de la requête envoyée par le navigateur.  
+
+Dans l’exemple ci-dessus, la partie `/images/cats/mycat.jpg` correspond au chemin de l’image dans votre bucket S3.
+
+---
+
+## La solution Amazon
+
+Pour simplifier le déploiement et l’utilisation de cette architecture, j’ai préparé un fork du dépôt GitHub original proposé par Amazon :  
+```bash
+git clone https://github.com/CultureDevOps/docker-aws-image-optimization.git
+```
+
+Ce fork contient une configuration optimisée, permettant de déployer la solution d’Amazon dans un environnement Docker avec un minimum d’efforts.  
+
+---
+
+## Configuration initiale
+
+Dans le répertoire `aws`, configurez les fichiers `credentials` et `config` pour connecter l’application à votre compte AWS.  
+
+**`config`**  
+```ini
+[default]
+# Indiquez votre région AWS préférée
+region = eu-west-3
+output = json
+```
+
+**`credentials`**  
+```ini
+[default]
+aws_access_key_id = <ACCESS_KEY>
+aws_secret_access_key = <SECRET_KEY>
+```
+
+Assurez-vous de remplacer `<ACCESS_KEY>` et `<SECRET_KEY>` par vos identifiants AWS.  
+
+### Installation des dépendances Node.js
+
+Pour initialiser les dépendances nécessaires, exécutez la commande suivante :  
+```bash
+docker-compose run --rm image-optimizer npm install
+```  
+
+---
+
+## Déploiement de la solution
+
+Une fois votre configuration prête, vous pouvez utiliser Docker pour provisionner et déployer l’infrastructure nécessaire.  
+
+### Accéder à l’environnement Docker  
+Lancez l’environnement Docker et accédez à la console :  
+```bash
+docker-compose run --rm image-optimizer bash
+```  
+
+### Commandes de déploiement  
+À partir de la console Docker, exécutez les commandes suivantes :  
+```bash
+cdk bootstrap
+npm run build
+cdk deploy -c S3_IMAGE_BUCKET_NAME=<S3_BUCKET_NAME>
+```  
+
+**Remarques :**  
+- Remplacez `<S3_BUCKET_NAME>` par le nom de votre bucket S3.  
+- Si aucun bucket n’est spécifié, le processus crée automatiquement un bucket S3 avec un fichier d’exemple : `/images/rio/1.jpeg`.  
+
+### Suppression des ressources  
+Si à la fin du test vous souhaitez retirer les ressources créées sur votre compte AWS, utilisez la commande suivante :  
+```bash
+cdk destroy
+```  
+---
+
+## Vérification
+
+Vous pouvez tester la solution en accédant à l’URL suivante :  
+```bash
+https://<DISTRIBUTION>.cloudfront.net/images/rio/1.jpeg?format=auto&width=300
+```
+
+Remplacez `<DISTRIBUTION>` par le nom de votre distribution CloudFront (disponible dans la console AWS).  
+
+> **Astuce** : l’URL d’une image optimisée correspond au chemin de l’image dans le bucket S3, précédé du domaine de la distribution CloudFront.  
+
+---
+## Conclusion
+
+En combinant **AWS S3**, **CloudFront** et **Lambda**, vous pouvez optimiser vos images de manière efficace, réduire les temps de chargement et améliorer l'expérience utilisateur. Grâce à cette architecture, vos images sont servies dans des formats modernes comme **WebP**, **JPEG** ou **AVIF**, parfaitement adaptés aux différents navigateurs.
+
+Prenons l'exemple de l'image ci-dessous : elle pèse 6,2 Mo lorsqu'elle est stockée sur mon bucket **S3**, mais une fois optimisée et servie via **CloudFront** au format **WebP**, elle ne fait plus que 48 Ko. Cette réduction significative de taille, sans perte notable de qualité, montre concrètement les bénéfices de l'optimisation d'images dans un environnement CDN.
+
+![Optimisation des images avec AWS](https://d2mezi5ylxaxvl.cloudfront.net/blog/aws-s3-cloudfront-image-optimization/chat-pc.png?format=webp)
+
+En adoptant cette solution, vous assurez une livraison rapide et performante de vos images, tout en réduisant la bande passante utilisée et en offrant une meilleure expérience aux utilisateurs.
+
+---
