@@ -66,7 +66,7 @@ const Header = () => {
                     className={`hidden font-medium ${
                       isSelected
                         ? 'text-heading-500'
-                        : 'text-gray-500 hover:text-gray-900 dark:hover:text-gray-100'
+                        : 'text-black hover:text-blue-900 dark:text-white dark:hover:text-blue-300'
                     } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
                   >
                     <span className="relative z-10">{t(`${link.title.toLowerCase()}`)}</span>
@@ -74,7 +74,7 @@ const Header = () => {
                       <motion.span
                         layoutId="tab"
                         transition={{ type: 'spring', duration: 0.4 }}
-                        className="absolute inset-0 z-0 rounded-md bg-gray-100 dark:bg-gray-600"
+                        className="absolute inset-0 z-0 rounded-md shadow-sm bg-gray-50 dark:bg-slate-800/70 dark:shadow-slate-600/40"
                       ></motion.span>
                     )}
                   </div>

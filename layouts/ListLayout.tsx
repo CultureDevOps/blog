@@ -109,7 +109,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
             <div className="px-6 py-4">
               <button
                 onClick={() => setSelectedTag('')}
-                className={`${useTagStore.getState().selectedTag === '' ? 'text-heading-500 dark:text-heading-400' : 'text-gray-500 dark:text-gray-400'} font-bold uppercase`}
+                className={`${useTagStore.getState().selectedTag === '' ? 'text-heading-500 dark:text-heading-400' : 'text-gray-900 dark:text-gray-100'} font-bold uppercase`}
               >
                 {t('all')}
               </button>
@@ -126,7 +126,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                       <article className="flex flex-col space-y-2 xl:space-y-0">
                         <dl>
                           <dt className="sr-only">{t('pub')}</dt>
-                          <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                          <dd className="text-base font-medium leading-6 text-gray-700 dark:text-gray-400">
                             <time dateTime={date}>{formatDate(date, language)}</time>
                           </dd>
                         </dl>
@@ -149,7 +149,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                                     className={`${
                                       useTagStore.getState().selectedTag === t
                                         ? 'text-heading-500 dark:text-heading-400'
-                                        : 'text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-500'
+                                        : 'text-primary-500 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-500'
                                     } mr-3 text-sm font-medium uppercase`}
                                     aria-label={`View posts tagged ${t}`}
                                   >
@@ -159,7 +159,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                               ))}
                             </ul>
                           </div>
-                          <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                          <div className="prose max-w-none text-gray-700 dark:text-gray-400">
                             {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
                           </div>
                         </div>
