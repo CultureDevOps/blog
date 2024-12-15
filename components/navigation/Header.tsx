@@ -65,7 +65,7 @@ const Header = () => {
                   <div
                     className={`hidden font-medium ${
                       isSelected
-                        ? 'text-heading-500'
+                        ? 'text-heading-800 dark:text-heading-300'
                         : 'text-black hover:text-blue-900 dark:text-white dark:hover:text-blue-300'
                     } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
                   >
