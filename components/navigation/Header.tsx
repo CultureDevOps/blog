@@ -53,7 +53,7 @@ const Header = () => {
             .filter((link) => !!link.href) // Vérifie que `link.href` est défini
             .map((link) => {
               const isSelected =
-                selectedPath === '/' && link.href === '/landing'
+                (selectedPath === `/${locale}` ||  selectedPath === '/') && link.href === '/landing'
                   ? true
                   : selectedPath?.includes(link.href as string)
               return (
