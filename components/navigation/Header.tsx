@@ -12,11 +12,21 @@ import SearchButton from '../search/SearchButton'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 
 const Header = () => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const pathname = usePathname()
+
+  const [selectedPath, setSelectedPath] = useState<string | null>(null)
+
+  // Mise à jour de l'état `selectedPath` uniquement côté client
+  useEffect(() => {
+    if (pathname) {
+      setSelectedPath(pathname)
+    }
+  }, [pathname])
 
   return (
     <header>
@@ -40,14 +50,12 @@ const Header = () => {
         </div>
         <div className="flex items-center space-x-4 leading-5 sm:space-x-6 snap-always snap-center">
           {headerNavLinks
-            .filter((link) => {
-              return link.href
-            })
+            .filter((link) => !!link.href) // Vérifie que `link.href` est défini
             .map((link) => {
-              const isSelected = pathname!.includes(link.href as string)
-              // if(pathname==="/" && link.href === "/landing"){
-              //   isSelected = true
-              // }
+              const isSelected =
+                selectedPath === '/' && link.href === '/landing'
+                  ? true
+                  : selectedPath?.includes(link.href as string)
               return (
                 <Link
                   key={link.title}
