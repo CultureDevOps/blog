@@ -15,10 +15,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
   }, [isMobileQuery]);
 
   if (isMobile) {
-    console.log("Mobile return children")
     return <>{children}</>;
   }
-  console.log("Desktop return motion")
+
   return (
     <motion.div
       initial={{ y: 15, opacity: 0 }}

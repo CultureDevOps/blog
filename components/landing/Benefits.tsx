@@ -4,6 +4,9 @@ import Container from './Container'
 
 const Benefits = (props) => {
   const { data } = props
+  if (!data || !data.image) {
+    return <p>Loading...</p>  // Afficher un message de chargement si `data` ou `data.image` est undefined
+  }  
   return (
     <>
       <Container className="mb-20 flex flex-wrap lg:flex-nowrap lg:gap-10 ">

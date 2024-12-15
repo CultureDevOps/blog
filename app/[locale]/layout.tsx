@@ -69,6 +69,11 @@ export async function generateMetadata({ params: { locale } }): Promise<Metadata
       card: 'summary_large_image',
       images: [siteMetadata.socialBanner],
     },
+    icons: {
+      icon: '/static/favicons/favicon-32x32.png',
+      apple: '/static/favicons/apple-touch-icon.png',
+      shortcut: '/static/favicons/android-chrome-192x192.png',
+    },
   }
 }
 
@@ -80,38 +85,16 @@ export default function RootLayout({
   params: { locale: LocaleTypes }
 }) {
   return (
-    <><Head>
-      <link
-        rel="preload"
-        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap"
-        as="font"
-        type="font/woff2"
-        crossOrigin="anonymous" />
-      <link
-        rel="preload"
-        href="/css/tailwind.css"
-        as="style"
-        type="text/css"
-        crossOrigin="anonymous"
-      />
-      <link
-        rel="preload"
-        href="/static/images/logo-small.png"
-        as="image"
-        type="image/jpeg"
-        crossOrigin="anonymous"
-      />      
-    </Head>
     <html
       lang={locale}
       dir={dir(locale)}
       className={`${open_sans.variable} scroll-smooth snap-y snap-proximity overflow-scroll`}
       suppressHydrationWarning
     >
-        <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
+        {/* <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/static/favicons/android-chrome-192x192.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/static/favicons/android-chrome-192x192.png" /> */}
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
         <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#000000" />
@@ -133,6 +116,6 @@ export default function RootLayout({
             </SectionContainer>
           </ThemeProvider>
         </body>
-      </html></>
+      </html>
   )
 }
