@@ -84,8 +84,8 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
           <h3
             className={`inline px-3 py-2 text-sm font-medium uppercase ${
               useTagStore.getState().selectedTag === postTag
-                ? 'text-primary-500'
-                : 'text-gray-500 hover:text-primary-500 dark:text-gray-300 dark:hover:text-primary-500'
+                ? 'text-primary-600'
+                : 'text-gray-600 hover:text-primary-700 dark:text-gray-300 dark:hover:text-primary-500'
             }`}
           >
             {' '}
@@ -109,7 +109,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
             <div className="px-6 py-4">
               <button
                 onClick={() => setSelectedTag('')}
-                className={`${useTagStore.getState().selectedTag === '' ? 'text-heading-500 dark:text-heading-400' : 'text-gray-900 dark:text-gray-100'} font-bold uppercase`}
+                className={`${useTagStore.getState().selectedTag === '' ? 'text-heading-700 dark:text-heading-400' : 'text-gray-900 dark:text-gray-100'} font-bold uppercase`}
               >
                 {t('all')}
               </button>
@@ -148,8 +148,8 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                                     onClick={() => handleTagClick(t)}
                                     className={`${
                                       useTagStore.getState().selectedTag === t
-                                        ? 'text-heading-500 dark:text-heading-400'
-                                        : 'text-primary-500 hover:text-primary-700 dark:text-primary-300 dark:hover:text-primary-500'
+                                        ? 'text-heading-700 dark:text-heading-400'
+                                        : 'text-primary-700 hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-500'
                                     } mr-3 text-sm font-medium uppercase`}
                                     aria-label={`View posts tagged ${t}`}
                                   >
