@@ -22,7 +22,7 @@ const Tag = ({ text }: Props) => {
     <Link href={`/${locale}/blog`}>
       <span
         onClick={handleClick}
-        className="mr-3 cursor-pointer text-sm font-medium uppercase text-primary-500 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400"
+        className="mr-3 cursor-pointer text-sm font-medium uppercase text-primary-700 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400"
       >
         {text.split(' ').join('-')}
       </span>

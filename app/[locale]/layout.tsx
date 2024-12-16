@@ -101,7 +101,7 @@ export default function RootLayout({
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-        <body className="pl-[calc(100vw-100%)] text-black antialiased dark:text-white bg-gradient-to-r from-sky-100 to-stone-100 dark:from-blue-950 dark:to-slate-900">
+        <body className="pl-[calc(100vw-100%)] text-black antialiased dark:text-white bg-gradient-to-r from-blue-200 to-stone-100 dark:from-blue-950 dark:to-slate-900">
         {/* <body className="bg-stone-100 pl-[calc(100vw-100%)] text-black antialiased dark:bg-slate-900 dark:text-white"> */}
           <TwSizeIndicator />
           <ThemeProvider>

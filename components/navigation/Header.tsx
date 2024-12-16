@@ -65,7 +65,7 @@ const Header = () => {
                   <div
                     className={`hidden font-medium ${
                       isSelected
-                        ? 'text-heading-800 dark:text-heading-300 bg-gradient-to-b from-white/60 via-blue-200/40 to-blue-white/30 backdrop-blur-md shadow-sm dark:bg-gradient-to-b dark:from-slate-950/80 dark:via-slate-800/60 dark:to-slate-900/40 dark:shadow-slate-700/40'
+                        ? 'text-heading-800 dark:text-heading-300'
                         : 'text-black hover:text-blue-900 dark:text-white dark:hover:text-blue-300'
                     } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
                   >
@@ -79,10 +79,7 @@ const Header = () => {
                           damping: 25,
                           stiffness: 300,
                         }}
-                        className="absolute inset-0 z-0 rounded-md shadow-md border border-white/10"
-                        // style={{
-                        //   background: 'transparent',
-                        // }}
+                        className="absolute inset-0 z-0 rounded-md shadow-md border border-white/10  bg-gradient-to-b from-white/60 via-blue-200/40 to-blue-white/30 backdrop-blur-md dark:bg-gradient-to-b dark:from-slate-950/80 dark:via-slate-800/60 dark:to-slate-900/40 dark:shadow-slate-700/40"
                       ></motion.div>
                     )}
                   </div>
