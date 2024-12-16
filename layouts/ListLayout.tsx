@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTagStore } from '@/components/util/useTagStore'
 import { motion } from 'framer-motion'
 import { formatDate } from 'pliny/utils/formatDate'
@@ -49,7 +49,12 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
   const postsPerPage = POSTS_PER_PAGE
   const sortedPosts = sortByDate(posts)
   const setSelectedTag = useTagStore((state) => state.setSelectedTag)
+  const [isHydrated, setIsHydrated] = useState(false);
 
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+  
   const filteredPosts = useTagStore((state) => {
     if (state.selectedTag) {
       return sortedPosts.filter((post) => post.tags.includes(state.selectedTag))
@@ -106,7 +111,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
         </div>
         <div className="flex sm:space-x-24">
         <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded 
-            bg-gradient-to-b from-white/60 via-blue-100/50 to-white/30 backdrop-blur-md border border-white/10 
+            bg-gradient-to-b from-white/60 via-blue-200/30 to-white/30 backdrop-blur-md border border-white/10 
             pt-5 shadow-md dark:bg-gradient-to-b dark:from-slate-900/60 dark:via-slate-800/40 dark:to-slate-900/30 
             dark:shadow-slate-700/40 sm:flex">
             <div className="px-6 py-4">
@@ -126,9 +131,12 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
             </div>
         </div>
 
-
           <div>
-            <motion.ul variants={container} initial="hidden" animate="show">
+            <motion.ul
+              variants={container}
+              initial={isHydrated ? "hidden" : false} // Désactive l'animation si pas hydraté
+              animate={isHydrated ? "show" : false}
+            >
               {displayPosts.map((post) => {
                 const { slug, date, title, summary, tags, language } = post
                 if (language === locale) {
