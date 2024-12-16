@@ -112,7 +112,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
         <div className="flex sm:space-x-24">
         <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded 
             bg-gradient-to-b from-white/60 via-blue-200/30 to-white/30 backdrop-blur-md border border-white/10 
-            pt-5 shadow-md dark:bg-gradient-to-b dark:from-slate-900/60 dark:via-slate-800/40 dark:to-slate-900/30 
+            pt-5 shadow-md dark:bg-gradient-to-b dark:from-slate-900/60 dark:via-blue-950/40 dark:to-slate-900/30 
             dark:shadow-slate-700/40 sm:flex">
             <div className="px-6 py-4">
                 <button
