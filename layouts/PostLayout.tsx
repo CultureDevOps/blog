@@ -101,7 +101,7 @@ export default async function PostLayout({
                           {author.twitter && (
                             <Link
                               href={author.twitter}
-                              className="text-primary-500 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400"
+                              className="text-primary-700 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400"
                             >
                               {author.twitter.replace('https://twitter.com/', '@')}
                             </Link>
@@ -159,7 +159,7 @@ export default async function PostLayout({
                         <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           {t('preva')}
                         </p>
-                        <div className="text-primary-500 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400">
+                        <div className="text-primary-700 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400">
                           <Link href={`/${locale}/blog/${prev.slug}`}>{prev.title}</Link>
                         </div>
                       </div>
@@ -169,7 +169,7 @@ export default async function PostLayout({
                         <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           {t('nexta')}
                         </p>
-                        <div className="text-primary-500 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400">
+                        <div className="text-primary-700 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400">
                           <Link href={`/${locale}/blog/${next.slug}`}>{next.title}</Link>
                         </div>
                       </div>
@@ -180,7 +180,7 @@ export default async function PostLayout({
               <div className="pt-4 xl:pt-8">
                 <Link
                   href={`/${locale}/${basePath}`}
-                  className="text-primary-500 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400"
+                  className="text-primary-700 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400"
                   aria-label="Back to the blog"
                 >
                   &larr;{t('back')}
