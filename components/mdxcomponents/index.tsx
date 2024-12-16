@@ -7,6 +7,7 @@ import CustomLink from './Link'
 import TableWrapper from './TableWrapper'
 import Audioplayer from './Audioplayer'
 import WebsiteEmbed from './WebsiteEmbed'
+import FancyBoxImage from './FancyBoxImage'
 
 export const components: MDXComponents = {
   Image,
@@ -17,4 +18,5 @@ export const components: MDXComponents = {
   BlogNewsletterForm,
   Audioplayer,
   WebsiteEmbed,
+  FancyBoxImage,
 }

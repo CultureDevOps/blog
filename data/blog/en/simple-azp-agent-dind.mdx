@@ -16,7 +16,10 @@ To make it easier for you, I’ve prepared a ready-to-use Docker image: [https:/
 
 ### How an Azure Pipeline Works with a Self-Hosted Agent
 
-![Azure Pipeline](https://d2mezi5ylxaxvl.cloudfront.net/blog/simple-azp-agent-dind/AZP+Agent.drawio.png?format=auto)
+<FancyBoxImage 
+  src="https://d2mezi5ylxaxvl.cloudfront.net/blog/simple-azp-agent-dind/AZP+Agent.drawio.png?format=auto" 
+  alt="Pipeline Azure" 
+/>
 
 The developer commits their code with a `Dockerfile` in the Azure repository. This commit then triggers the pipeline execution.  
 Meanwhile, the self-hosted agent runs in the background on a machine, regularly polling the Azure pipeline to check if it should start working.  
@@ -82,7 +85,10 @@ docker-compose -f "docker-compose-windows.yml" up -d
 
 Once the agent is running, you can verify that it’s working correctly by going to **Organisation Settings > Agent Pools > Your Pool > Agents**.
 
-![Azure Agent](https://d2mezi5ylxaxvl.cloudfront.net/blog/simple-azp-agent-dind/azure-agent.png?format=auto)
+<FancyBoxImage 
+  src="https://d2mezi5ylxaxvl.cloudfront.net/blog/simple-azp-agent-dind/azure-agent.png?format=auto" 
+  alt="Azure Agent" 
+/>
 
 ### Example of an Azure Pipeline to Build a Docker Image
 
@@ -136,4 +142,7 @@ After making these configurations, push your `Dockerfile` to Azure Repos. After 
 
 You now have a simple and efficient method for building Docker images in Azure Pipelines. By using a self-hosted agent, you can easily integrate Docker into your CI/CD pipeline on Azure.
 
-![Build Success](https://d2mezi5ylxaxvl.cloudfront.net/blog/simple-azp-agent-dind/build_success.png?format=auto)
+<FancyBoxImage 
+  src="https://d2mezi5ylxaxvl.cloudfront.net/blog/simple-azp-agent-dind/build_success.png?format=auto" 
+  alt="Build Success" 
+/>

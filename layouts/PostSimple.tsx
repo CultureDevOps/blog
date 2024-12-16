@@ -15,6 +15,7 @@ import { PostSeriesBox } from '@/components/seriescard'
 import Share from '@/components/share'
 import { Toc } from 'pliny/mdx-plugins'
 import Sidetoc from '@/components/sidetoc'
+import FancyboxWrapper from '@/components/mdxcomponents/FancyboxWrapper'
 
 interface PostSimpleProps {
   content: CoreContent<Blog>
@@ -39,6 +40,7 @@ export default async function PostLayout({
       <ScrollTopAndComment />
       <Sidetoc toc={tableOfContents} />
       <SectionContainer>
+      <FancyboxWrapper>
         <article>
           <div>
             <header>
@@ -101,6 +103,7 @@ export default async function PostLayout({
             </div>
           </div>
         </article>
+        </FancyboxWrapper>
       </SectionContainer>
     </>
   )

@@ -16,6 +16,7 @@ import { PostSeriesBox } from '@/components/seriescard'
 import Share from '@/components/share'
 import { Toc } from 'pliny/mdx-plugins'
 import Sidetoc from '@/components/sidetoc'
+import FancyboxWrapper from '@/components/mdxcomponents/FancyboxWrapper'
 
 const editUrl = (path) => `${siteMetadata.siteRepo}/blob/main/data/${path}`
 const discussUrl = (path) =>
@@ -53,6 +54,7 @@ export default async function PostLayout({
     <>
       <ScrollTopAndComment />
       <Sidetoc toc={tableOfContents} />
+      <FancyboxWrapper>
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
           <header className="pt-6 xl:pb-6">
@@ -188,6 +190,7 @@ export default async function PostLayout({
           </div>
         </div>
       </article>
+      </FancyboxWrapper>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import Image from '../mdxcomponents/Image'
+import Image from '../mdxcomponents/FancyBoxImage'
 import Link from '../mdxcomponents/Link'
 import { useParams } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
