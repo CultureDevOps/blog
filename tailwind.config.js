@@ -48,12 +48,19 @@ module.exports = {
             code: {
               color: theme('colors.indigo.500'),
             },
+            hr: {
+              borderColor: theme('colors.gray-300'), // Séparateur en mode clair
+              borderTopWidth: '2px',
+            },
+            'ul li::marker': {
+              color: theme('colors.black'), // Couleur des bullet points
+            },         
           },
         },
         invert: {
           css: {
             a: {
-              color: theme('colors.primary.500'),
+              color: theme('colors.primary.300'),
               '&:hover': {
                 color: `${theme('colors.primary.400')}`,
               },
@@ -62,6 +69,16 @@ module.exports = {
             'h1,h2,h3,h4,h5,h6': {
               color: theme('colors.gray.100'),
             },
+            hr: {
+              borderColor: theme('colors.gray-700'), // Séparateur en mode sombre
+              borderTopWidth: '1px',
+            },
+            'ul li::marker': {
+              color: theme('colors.gray.100'), // Couleur des bullet points
+            },     
+            code: {
+              color: theme('colors.indigo.400'),
+            },     
           },
         },
       }),

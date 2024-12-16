@@ -105,17 +105,28 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
           </h1>
         </div>
         <div className="flex sm:space-x-24">
-          <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded bg-gray-50 pt-5 shadow-md dark:bg-slate-900/70 dark:shadow-slate-700/40 sm:flex">
+        <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded 
+            bg-gradient-to-b from-white/60 via-blue-100/50 to-white/30 backdrop-blur-md border border-white/10 
+            pt-5 shadow-md dark:bg-gradient-to-b dark:from-slate-900/60 dark:via-slate-800/40 dark:to-slate-900/30 
+            dark:shadow-slate-700/40 sm:flex">
             <div className="px-6 py-4">
-              <button
-                onClick={() => setSelectedTag('')}
-                className={`${useTagStore.getState().selectedTag === '' ? 'text-heading-700 dark:text-heading-400' : 'text-gray-900 dark:text-gray-100'} font-bold uppercase`}
-              >
-                {t('all')}
-              </button>
-              <ul>{filteredTags}</ul>
+                <button
+                    onClick={() => setSelectedTag('')}
+                    className={`${
+                        useTagStore.getState().selectedTag === ''
+                            ? 'text-blue-600 dark:text-blue-300'  /* Couleur de texte plus douce */
+                            : 'text-gray-900 dark:text-gray-200'
+                    } font-bold uppercase transition-colors duration-300`}
+                >
+                    {t('all')}
+                </button>
+                <ul className="mt-4 space-y-2">
+                    {filteredTags}
+                </ul>
             </div>
-          </div>
+        </div>
+
+
           <div>
             <motion.ul variants={container} initial="hidden" animate="show">
               {displayPosts.map((post) => {

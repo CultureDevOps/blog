@@ -65,20 +65,29 @@ const Header = () => {
                   <div
                     className={`hidden font-medium ${
                       isSelected
-                        ? 'text-heading-800 dark:text-heading-300'
+                        ? 'text-heading-800 dark:text-heading-300 bg-gradient-to-b from-white/60 via-blue-200/40 to-blue-white/30 backdrop-blur-md shadow-sm dark:bg-gradient-to-b dark:from-slate-950/80 dark:via-slate-800/60 dark:to-slate-900/40 dark:shadow-slate-700/40'
                         : 'text-black hover:text-blue-900 dark:text-white dark:hover:text-blue-300'
                     } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
                   >
                     <span className="relative z-10">{t(`${link.title.toLowerCase()}`)}</span>
                     {isSelected && (
-                      <motion.span
+                      <motion.div
                         layoutId="tab"
-                        transition={{ type: 'spring', duration: 0.4 }}
-                        className="absolute inset-0 z-0 rounded-md shadow-sm bg-gray-50 dark:bg-slate-800/70 dark:shadow-slate-600/40"
-                      ></motion.span>
+                        transition={{
+                          type: 'spring',
+                          duration: 0.4,
+                          damping: 25,
+                          stiffness: 300,
+                        }}
+                        className="absolute inset-0 z-0 rounded-md shadow-md border border-white/10"
+                        // style={{
+                        //   background: 'transparent',
+                        // }}
+                      ></motion.div>
                     )}
                   </div>
                 </Link>
+
               )
             })}
           {/* <AuthorsMenu className="hidden sm:block" /> */}
