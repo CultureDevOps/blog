@@ -15,6 +15,7 @@ import { KBarPortal, KBarAnimator, KBarPositioner, KBarSearch } from 'kbar'
 import { Toaster } from 'react-hot-toast'
 import { SearchIcon, MailIcon, SettingsIcon } from '../icons'
 import { LocaleTypes, locales } from 'app/[locale]/i18n/settings'
+import { motion } from 'framer-motion'
 
 interface KBarModalProps {
   actions: any
@@ -81,17 +82,28 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
 
   const handleThemeChange = (newTheme: string) => setTheme(newTheme)
 
+  const animationProps = {
+    initial: { opacity: 0, scale: 0.99 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.99 },
+    transition: { duration: 0.5 }, // Durée de l'animation
+  };
+
   if (!mounted) return null
 
   return (
     <>
       <KBarPortal>
-        <KBarPositioner className="bg-gray-300/50 p-4 backdrop-blur backdrop-filter dark:bg-black/50">
+        <KBarPositioner className="bg-gray-300/60 p-4 backdrop-blur-sm dark:bg-black/60">
           <KBarAnimator className="w-full max-w-xl">
-            <div
-              style={{ zIndex: '100' }}
-              className="overflow-hidden rounded-2xl border border-gray-100 bg-gray-50 dark:border-gray-800 dark:bg-[#1c1c1c]"
-            >
+          <motion.div
+            style={{ zIndex: "100" ,transformOrigin: "center center" }}
+            className="overflow-hidden rounded-2xl border border-white/30 bg-gradient-to-b 
+                      from-white/70 via-blue-200/40 to-white/30 backdrop-blur-lg 
+                      shadow-2xl dark:border-gray-800 dark:bg-gradient-to-b 
+                      dark:from-slate-900/70 dark:via-blue-950/50 dark:to-slate-900/40 dark:shadow-slate-900/70"
+            {...animationProps}
+          >
               <div className="flex items-center space-x-4 p-4">
                 <span className="block w-5">
                   <SearchIcon className="text-gray-400 dark:text-gray-300" />
@@ -160,10 +172,12 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
                   {t('loading')}
                 </div>
               )}
-            </div>
+            </motion.div>
           </KBarAnimator>
         </KBarPositioner>
       </KBarPortal>
+
+
       <Toaster />
     </>
   )
