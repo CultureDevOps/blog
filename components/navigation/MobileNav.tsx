@@ -24,7 +24,7 @@ export function ChevronDownIcon({ className, ...props }: SVGProps<SVGSVGElement>
   )
 }
 
-const MobileNav = () => {
+const MobileNav = ({ navShow, onToggleNav }: { navShow: boolean, onToggleNav: () => void }) => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const authors = allAuthors
@@ -33,19 +33,8 @@ const MobileNav = () => {
 
   const mainAuthor = allAuthors.filter((a) => a.default === true && a.language === locale)
 
-  const [navShow, setNavShow] = useState<boolean>(false)
   const [accordionOpen, setAccordionOpen] = useState<boolean>(false)
 
-  const onToggleNav = () => {
-    setNavShow((status) => {
-      if (status) {
-        document.body.style.overflow = 'auto'
-      } else {
-        document.body.style.overflow = 'hidden'
-      }
-      return !status
-    })
-  }
 
   const toggleAccordion = () => {
     setAccordionOpen(!accordionOpen)
@@ -68,10 +57,10 @@ const MobileNav = () => {
         </svg>
       </button>
       <div
-        className={`fixed left-0 top-0 z-10 my-auto h-full w-full transform overflow-y-auto bg-white opacity-95 duration-300 ease-in-out dark:bg-gray-950 dark:opacity-[0.98] ${
+        className={`fixed top-0 left-0 z-50 h-full w-full bg-white bg-opacity-90 dark:bg-gray-950 dark:bg-opacity-95 transition-transform duration-300 ease-in-out ${
           navShow ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
+          }`}
+        >
         <div className="flex justify-end">
           <button className="mr-8 mt-11 h-8 w-8" aria-label="Toggle Menu" onClick={onToggleNav}>
             <svg
