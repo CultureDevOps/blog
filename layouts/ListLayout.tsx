@@ -143,6 +143,13 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                   return (
                     <motion.li variants={item} key={slug} className="py-5">
                       <article className="flex flex-col space-y-2 xl:space-y-0">
+                        {post.banner && (
+                          <img
+                            src={post.banner}
+                            alt={`${post.title} banner`}
+                            className="w-full h-auto rounded-lg border border-gray-200 shadow-md dark:border-gray-700"
+                          />
+                        )}
                         <dl>
                           <dt className="sr-only">{t('pub')}</dt>
                           <dd className="text-base font-medium leading-6 text-gray-700 dark:text-gray-400">
@@ -151,7 +158,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                         </dl>
                         <div className="space-y-3">
                           <div>
-                            <div className="text-2xl font-bold leading-8 tracking-tight font-headings">
+                            <div className="text-2xl font-bold leading-8 tracking-tight font-headings antialiased">
                               <Link
                                 href={`/${locale}/blog/${slug}`}
                                 className="text-gray-900 dark:text-gray-100"

@@ -51,7 +51,7 @@ const Header = () => {
                 <Image alt="logo" src={siteMetadata.siteLogo ?? ''} width={180} height={180} priority={true}/>
               </div>
               {typeof siteMetadata.headerTitle === 'string' ? (
-                <div className="hidden h-6 text-2xl sm:block font-logo">
+                <div className="hidden h-6 text-2xl sm:block font-logo antialiased">
                   {siteMetadata.headerTitle}
                 </div>
               ) : (
@@ -60,7 +60,7 @@ const Header = () => {
             </div>
           </Link>
         </div>
-        <div className={`flex items-center space-x-4 leading-5 sm:space-x-6 snap-always snap-center font-headings`}>
+        <div className={`flex items-center space-x-4 leading-5 sm:space-x-6 snap-always snap-center font-headings antialiased`}>
           {headerNavLinks
             .filter((link) => !!link.href) // Vérifie que `link.href` est défini
             .map((link) => {

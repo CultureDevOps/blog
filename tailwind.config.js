@@ -27,10 +27,10 @@ module.exports = {
         // headings: ['var(--font-bitter)'],
         headings: ['var(--font-roboto-slab)'],
         // logo: ['var(--font-audiowide)'],
-        // logo: ['var(--font-alfa-slab-one)'],   
+        logo: ['var(--font-alfa-slab-one)'],   
         // logo: ['var(--font-russo-one)'],  
         // logo: ['var(--font-titan-one)'],
-        logo: ['var(--font-ultra)'],
+        // logo: ['var(--font-ultra)'],
       },
       colors: {
         primary: colors.blue,
