@@ -144,11 +144,17 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                     <motion.li variants={item} key={slug} className="py-5">
                       <article className="flex flex-col space-y-2 xl:space-y-0">
                         {post.banner && (
-                          <img
+                          <Link
+                            href={`/${locale}/blog/${slug}`}
+                            className="text-gray-900 dark:text-gray-100"
+                            aria-labelledby={title}
+                          >
+                            <img
                             src={post.banner}
                             alt={`${post.title} banner`}
                             className="w-full h-auto rounded-lg border border-gray-200 shadow-md dark:border-gray-700"
-                          />
+                            />
+                          </Link>
                         )}
                         <dl>
                           <dt className="sr-only">{t('pub')}</dt>
