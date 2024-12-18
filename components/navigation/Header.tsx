@@ -51,7 +51,7 @@ const Header = () => {
                 <Image alt="logo" src={siteMetadata.siteLogo ?? ''} width={180} height={180} priority={true}/>
               </div>
               {typeof siteMetadata.headerTitle === 'string' ? (
-                <div className="hidden h-6 text-2xl font-semibold sm:block">
+                <div className="hidden h-6 text-2xl sm:block font-logo">
                   {siteMetadata.headerTitle}
                 </div>
               ) : (
@@ -60,12 +60,7 @@ const Header = () => {
             </div>
           </Link>
         </div>
-        <div className={`flex items-center space-x-4 leading-5 sm:space-x-6 snap-always snap-center 
-          backdrop-blur-md rounded border border-white/10 shadow-md 
-          bg-gradient-to-tr from-white/60 via-blue-200/30 to-white/30
-          dark:bg-gradient-to-tr dark:from-slate-900/60 dark:via-blue-950/40 dark:to-slate-900/30 
-          dark:shadow-slate-700/40 
-          px-5 py-3 mx-3 my-5`}>
+        <div className={`flex items-center space-x-4 leading-5 sm:space-x-6 snap-always snap-center font-headings`}>
           {headerNavLinks
             .filter((link) => !!link.href) // Vérifie que `link.href` est défini
             .map((link) => {
@@ -98,7 +93,7 @@ const Header = () => {
                         }}
                         className="absolute inset-0 z-0 rounded-md shadow-md border border-white/10  
                         bg-gradient-to-b from-blue-200/60 via-white/40 to-blue-200/30 backdrop-blur-md 
-                        dark:bg-gradient-to-b dark:from-blue-900/30 dark:via-slate-900/30 dark:to-blue-900/30 
+                        dark:bg-gradient-to-b dark:from-slate-900/60 dark:via-blue-900/30 dark:to-slate-900/30 
                         dark:shadow-slate-700/40"
                       ></motion.div>
                     )}
@@ -123,11 +118,12 @@ const Header = () => {
               fill="currentColor"
               className="h-8 w-8"
             >
-              <path
-                fillRule="evenodd"
-                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 001-1z"
-                clipRule="evenodd"
-              />
+            <path
+              fillRule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clipRule="evenodd"
+            />
+
             </svg>
           </button>          
         </div>

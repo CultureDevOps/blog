@@ -9,7 +9,7 @@ const Benefits = (props) => {
   }  
   return (
     <>
-      <Container className="mb-20 flex flex-wrap lg:flex-nowrap lg:gap-10 ">
+      <Container className="mb-20 flex flex-wrap lg:flex-nowrap lg:gap-10">
         <div
           className={`flex w-full items-center justify-center lg:w-1/2 ${
             props.imgPos === 'right' ? 'lg:order-1' : ''
@@ -35,7 +35,7 @@ const Benefits = (props) => {
         >
           <div>
             <div className="mt-4 flex w-full flex-col">
-              <h3 className="mt-3 max-w-2xl text-3xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight">
+              <h3 className="mt-3 max-w-2xl text-3xl font-bold font-headings leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight">
                 {data.title}
               </h3>
 
@@ -68,7 +68,7 @@ function Benefit(props) {
           })}
         </div>
         <div>
-          <h4 className="text-xl font-medium text-gray-800 dark:text-gray-200">{props.title}</h4>
+          <h4 className="text-xl font-medium font-headings text-gray-800 dark:text-gray-200">{props.title}</h4>
           <p className="mt-1 text-gray-500 dark:text-gray-400">{props.children}</p>
         </div>
       </div>

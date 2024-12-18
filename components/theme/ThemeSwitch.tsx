@@ -61,9 +61,13 @@ const ThemeSwitch = () => {
           leaveFrom="opacity-100 scale-100 translate-y-0"
           leaveTo="opacity-0 scale-95 translate-y-[10px]"
         >
-          <MenuItems className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800">
+          <MenuItems className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md 
+                                shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <RadioGroup value={theme} onChange={handleThemeChange}>
-              <div className="p-1">
+              <div className="p-1                                 
+                              bg-gradient-to-br from-white/80 via-blue-200/60 to-white/60
+                              dark:bg-gradient-to-br dark:from-slate-900/60 dark:via-blue-900/20 dark:to-slate-900/30                                
+                              shadow-md shadow-gray-300/80 dark:shadow-slate-700/40">
                 <Radio value="light">
                   <MenuItem>
                     {({ focus }) => (
@@ -71,9 +75,12 @@ const ThemeSwitch = () => {
                         onClick={() => handleThemeChange('light')}
                         className={`${
                           focus
-                            ? 'bg-gray-100 dark:bg-gray-600'
-                            : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
+                              ? 'bg-blue-200/70 dark:bg-blue-900/30'
+                              : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
+                        } group flex w-full items-center rounded-md px-2 py-2 text-sm 
+                        text-gray-700 hover:text-primary-500
+                        dark:text-white dark:hover:text-primary-500
+                        dark:hover:text-primary-500`}
                       >
                         <Sun className="h-6 w-6" />
                         <span className="ml-2">{t('light')}</span>
@@ -88,9 +95,12 @@ const ThemeSwitch = () => {
                         onClick={() => handleThemeChange('dark')}
                         className={`${
                           focus
-                            ? 'bg-gray-100 dark:bg-gray-600'
-                            : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
+                              ? 'bg-blue-200/70 dark:bg-blue-900/30'
+                              : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
+                        } group flex w-full items-center rounded-md px-2 py-2 text-sm 
+                        text-gray-700 hover:text-primary-500
+                        dark:text-white dark:hover:text-primary-500
+                        dark:hover:text-primary-500`}
                       >
                         <Moon className="h-6 w-6" />
                         <span className="ml-2">{t('dark')}</span>
@@ -105,9 +115,12 @@ const ThemeSwitch = () => {
                         onClick={() => handleThemeChange('system')}
                         className={`${
                           focus
-                            ? 'bg-gray-100 dark:bg-gray-600'
-                            : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
+                              ? 'bg-blue-200/70 dark:bg-blue-900/30'
+                              : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
+                        } group flex w-full items-center rounded-md px-2 py-2 text-sm 
+                        text-gray-700 hover:text-primary-500
+                        dark:text-white dark:hover:text-primary-500
+                        dark:hover:text-primary-500`}
                       >
                         <Monitor className="h-6 w-6" />
                         <span className="ml-2">{t('system')}</span>

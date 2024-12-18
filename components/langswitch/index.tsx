@@ -79,15 +79,21 @@ const LangSwitch = () => {
               leaveTo="opacity-0 scale-95 translate-y-[10px]"
             >
               <MenuItems
-                className="absolute right-0 z-50 mt-2 w-22 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
+                className="absolute right-0 z-50 mt-4 w-22 origin-top-right divide-y divide-gray-100 rounded-md 
+                          backdrop-blur-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none 
+                          dark:border-gray-700 dark:border/10"
                 aria-orientation="vertical"
                 onBlur={() => setIsMenuOpen(false)}
               >
                 <RadioGroup>
                   <div
-                    className="py-1"
-                    role="none"
-                    style={{ listStyle: 'none', margin: 0, padding: 0 }}
+                    className={`w-full 
+                                backdrop-blur-lg
+                                bg-gradient-to-br from-white/80 via-blue-200/60 to-white/60
+                                dark:bg-gradient-to-br dark:from-slate-900/60 dark:via-blue-900/20 dark:to-slate-900/30                                
+                                shadow-md shadow-gray-300/80 dark:shadow-slate-700/40
+                                rounded-md 
+                                overflow-hidden`}
                   >
                     {locales.map((newLocale: string) => (
                       <Radio key={newLocale} value={newLocale}>
@@ -97,14 +103,16 @@ const LangSwitch = () => {
                               onClick={() => handleLinkClick(newLocale)}
                               className={`${
                                 focus
-                                  ? 'bg-gray-100 dark:bg-gray-600'
-                                  : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-                              } flex rounded-md px-4 py-2 text-sm text-gray-700 hover:text-primary-500 dark:text-white dark:hover:text-primary-500`}
+                                  ? 'bg-blue-200/70 dark:bg-blue-900/30'
+                                  : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
+                              } 
+                              flex w-full rounded-none px-4 py-2 text-sm 
+                              text-gray-700  hover:text-primary-500
+                              dark:text-white dark:hover:text-primary-500                              
+                              transition-all duration-300 ease-in-out`}
                               role="menuitem"
-                              style={{ display: 'block', width: '100%', textDecoration: 'none' }}
                             >
-                              {/* {newLocale.charAt(0).toUpperCase() + newLocale.slice(1)} */}
-                              <Flag locale={newLocale}/>
+                              <Flag locale={newLocale} />
                             </button>
                           )}
                         </MenuItem>

@@ -2,6 +2,15 @@ import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 
 import { Open_Sans } from 'next/font/google'
+import { Merriweather } from 'next/font/google'
+import { Libre_Baskerville } from 'next/font/google'
+import { Bitter } from 'next/font/google'
+import { Roboto_Slab } from 'next/font/google'
+import { Audiowide } from 'next/font/google'
+import { Russo_One } from 'next/font/google'
+import { Alfa_Slab_One} from 'next/font/google'
+import { Titan_One} from 'next/font/google'
+import { Ultra} from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider } from '@/components/search/SearchProvider'
 import Header from '@/components/navigation/Header'
@@ -14,7 +23,6 @@ import { Metadata } from 'next'
 import { dir } from 'i18next'
 import { LocaleTypes, locales } from './i18n/settings'
 import TwSizeIndicator from '@/components/helper/TwSizeIndicator'
-import Head from 'next/head'
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -25,6 +33,70 @@ const open_sans = Open_Sans({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-open-sans',
+})
+
+const merriweather = Merriweather({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-merriweather',
+})
+
+const libreBaskerville = Libre_Baskerville({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-libre-baskerville',
+})
+
+const bitter = Bitter({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-bitter',
+})
+
+const robotoSlab = Roboto_Slab({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto-slab',
+})
+
+const russoOne = Russo_One({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-russo-one',
+})
+
+const audiowide = Audiowide({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-audiowide',
+})
+
+
+const alfaSlabOne = Alfa_Slab_One({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-alfa-slab-one',
+})
+
+const titanOne = Titan_One({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-titan-one',
+})
+
+const ultra = Ultra({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-ultra',
 })
 
 export async function generateMetadata({ params: { locale } }): Promise<Metadata> {
@@ -88,7 +160,9 @@ export default function RootLayout({
     <html
       lang={locale}
       dir={dir(locale)}
-      className={`${open_sans.variable} scroll-smooth snap-y snap-proximity overflow-scroll`}
+      className={`${open_sans.variable} ${robotoSlab.variable} ${russoOne.variable} ${audiowide.variable} 
+      ${alfaSlabOne.variable} ${titanOne.variable} ${ultra.variable} 
+      scroll-smooth snap-y snap-proximity overflow-scroll`}
       suppressHydrationWarning
     >
         {/* <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />

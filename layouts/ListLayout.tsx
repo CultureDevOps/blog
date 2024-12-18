@@ -151,7 +151,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                         </dl>
                         <div className="space-y-3">
                           <div>
-                            <div className="text-2xl font-bold leading-8 tracking-tight">
+                            <div className="text-2xl font-bold leading-8 tracking-tight font-headings">
                               <Link
                                 href={`/${locale}/blog/${slug}`}
                                 className="text-gray-900 dark:text-gray-100"

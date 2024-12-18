@@ -16,7 +16,7 @@ export default async function Hero({ params: { locale } }: Props) {
     <>
       <Container className="flex flex-wrap ">
         <div className="flex w-full items-center lg:w-1/2">
-          <div className="mb-8 max-w-2xl">
+          <div className="mb-8 max-w-2xl font-headings">
             {/* <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">
               {siteMetadata.headerTitle}
             </h1> */}

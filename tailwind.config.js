@@ -22,6 +22,15 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-open-sans)', ...fontFamily.sans],
+        // headings: ['var(--font-merriweather)'],
+        // headings: ['var(--font-libre-baskerville)'],
+        // headings: ['var(--font-bitter)'],
+        headings: ['var(--font-roboto-slab)'],
+        // logo: ['var(--font-audiowide)'],
+        // logo: ['var(--font-alfa-slab-one)'],   
+        // logo: ['var(--font-russo-one)'],  
+        // logo: ['var(--font-titan-one)'],
+        logo: ['var(--font-ultra)'],
       },
       colors: {
         primary: colors.blue,
@@ -44,6 +53,9 @@ module.exports = {
             },
             h3: {
               fontWeight: '600',
+            },
+            'h1,h2,h3,h4,h5,h6': {
+              fontFamily: theme('fontFamily.headings'), 
             },
             code: {
               color: theme('colors.indigo.500'),
@@ -68,6 +80,7 @@ module.exports = {
             },
             'h1,h2,h3,h4,h5,h6': {
               color: theme('colors.gray.100'),
+              fontFamily: theme('fontFamily.headings'), 
             },
             hr: {
               borderColor: theme('colors.gray-700'), // Séparateur en mode sombre
