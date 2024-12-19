@@ -9,7 +9,7 @@ const siteMetadata = {
   siteUrl: 'https://culturedevops.com',
   siteRepo: 'https://github.com/CultureDevOps/blog',
   siteLogo: '/static/images/logo-small.png',
-  socialBanner: '/static/images/x-card-02.png',
+  socialBanner: '/static/images/x-card-03.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'culturedevops@gmail.com',
   github: 'https://github.com/CultureDevOps',
@@ -21,7 +21,7 @@ const siteMetadata = {
   threads: 'https://www.threads.net',
   instagram: 'https://www.instagram.com',
   locale: 'en',
-  multiauthors: true,
+  multiauthors: false,
   analytics: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.
