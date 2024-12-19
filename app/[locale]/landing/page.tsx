@@ -16,10 +16,10 @@ export default async function Landing({ params: { locale } }: LandingProps) {
         <div className='snap-always snap-start'>
           <Hero params={{ locale: locale }} />
         </div>
-        <div className='snap-always snap-center h-screen'>
+        <div className='snap-always snap-center'>
           <Benefits data={devOps[locale]} />
         </div>
-        <div className='snap-always snap-center h-screen'>
+        <div className='snap-always snap-center'>
           <Benefits imgPos="right" data={cloud[locale]} />
         </div>
       </div>
