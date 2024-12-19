@@ -22,15 +22,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ['var(--font-open-sans)', ...fontFamily.sans],
-        // headings: ['var(--font-merriweather)'],
-        // headings: ['var(--font-libre-baskerville)'],
-        // headings: ['var(--font-bitter)'],
         headings: ['var(--font-roboto-slab)'],
-        // logo: ['var(--font-audiowide)'],
         logo: ['var(--font-alfa-slab-one)'],   
-        // logo: ['var(--font-russo-one)'],  
-        // logo: ['var(--font-titan-one)'],
-        // logo: ['var(--font-ultra)'],
       },
       colors: {
         primary: colors.blue,

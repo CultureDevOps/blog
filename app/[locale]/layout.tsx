@@ -2,15 +2,8 @@ import 'css/tailwind.css'
 import 'pliny/search/algolia.css'
 
 import { Open_Sans } from 'next/font/google'
-import { Merriweather } from 'next/font/google'
-import { Libre_Baskerville } from 'next/font/google'
-import { Bitter } from 'next/font/google'
 import { Roboto_Slab } from 'next/font/google'
-import { Audiowide } from 'next/font/google'
-import { Russo_One } from 'next/font/google'
 import { Alfa_Slab_One} from 'next/font/google'
-import { Titan_One} from 'next/font/google'
-import { Ultra} from 'next/font/google'
 import { Analytics, AnalyticsConfig } from 'pliny/analytics'
 import { SearchProvider } from '@/components/search/SearchProvider'
 import Header from '@/components/navigation/Header'
@@ -35,27 +28,6 @@ const open_sans = Open_Sans({
   variable: '--font-open-sans',
 })
 
-const merriweather = Merriweather({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-merriweather',
-})
-
-const libreBaskerville = Libre_Baskerville({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-libre-baskerville',
-})
-
-const bitter = Bitter({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-bitter',
-})
-
 const robotoSlab = Roboto_Slab({
   weight: ['400', '700'],
   subsets: ['latin'],
@@ -63,40 +35,11 @@ const robotoSlab = Roboto_Slab({
   variable: '--font-roboto-slab',
 })
 
-const russoOne = Russo_One({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-russo-one',
-})
-
-const audiowide = Audiowide({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-audiowide',
-})
-
-
 const alfaSlabOne = Alfa_Slab_One({
   weight: '400',
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-alfa-slab-one',
-})
-
-const titanOne = Titan_One({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-titan-one',
-})
-
-const ultra = Ultra({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-ultra',
 })
 
 export async function generateMetadata({ params: { locale } }): Promise<Metadata> {
@@ -160,8 +103,7 @@ export default function RootLayout({
     <html
       lang={locale}
       dir={dir(locale)}
-      className={`${open_sans.variable} ${robotoSlab.variable} ${russoOne.variable} ${audiowide.variable} 
-      ${alfaSlabOne.variable} ${titanOne.variable} ${ultra.variable} 
+      className={`${open_sans.variable} ${robotoSlab.variable} ${alfaSlabOne.variable}
       scroll-smooth snap-y snap-proximity`}
       suppressHydrationWarning
     >
@@ -184,7 +126,6 @@ export default function RootLayout({
                 <Footer />
               </div>
             </SectionContainer>
-            {/* </div> */}
           </ThemeProvider>
         </body>
       </html>

@@ -9,7 +9,7 @@ const siteMetadata = {
   siteUrl: 'https://culturedevops.com',
   siteRepo: 'https://github.com/CultureDevOps/blog',
   siteLogo: '/static/images/logo-small.png',
-  socialBanner: '/static/images/x-card.png',
+  socialBanner: '/static/images/x-card-02.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'culturedevops@gmail.com',
   github: 'https://github.com/CultureDevOps',
