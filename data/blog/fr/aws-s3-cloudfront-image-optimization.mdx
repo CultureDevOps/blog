@@ -31,6 +31,9 @@ Amazon propose une solution clé en main pour distribuer et optimiser vos images
 
 Cette solution repose sur **AWS Lambda**, qui permet de transformer vos images en formats optimisés tels que **WebP**, **AVIF**, ou **JPEG**.
 
+Pour mieux comprendre le fonctionnement de l'architecture, voici un diagramme illustrant l'échange entre CloudFront, Lambda et S3 :
+
+<FancyBoxImage src="https://d2mezi5ylxaxvl.cloudfront.net/blog/aws-s3-cloudfront-image-optimization/aws-s3-cloudfront-image-optimization.drawio.png?format=auto" alt="Diagramme AWS S3, Cloudfront, Lambda" />
 ---
 
 ### Principe
@@ -147,3 +150,7 @@ Prenons l'exemple de l'image ci-dessous : elle pèse 6,2 Mo lorsqu'elle est stoc
 En adoptant cette solution, vous assurez une livraison rapide et performante de vos images, tout en réduisant la bande passante utilisée et en offrant une meilleure expérience aux utilisateurs.
 
 
+<FancyBoxImage 
+  src="https://d2mezi5ylxaxvl.cloudfront.net/blog/aws-s3-cloudfront-image-optimization/aws-s3-cloudfront-image-optimization.drawio.png?format=auto" 
+  alt="Optimisation des images avec AWS" 
+/>
