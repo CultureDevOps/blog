@@ -1,6 +1,6 @@
 // import benefitOneImg from '../public/static/images/benefit-one.png'
-import benefitOneImg from '../public/static/images/devops_teams.png'
-import benefitTwoImg from '../public/static/images/infra.png'
+import benefitOneImg from '../public/static/images/team-03.png'
+import benefitTwoImg from '../public/static/images/infra-05.png'
 import {
   CheckBadgeIcon,
   RocketLaunchIcon,
