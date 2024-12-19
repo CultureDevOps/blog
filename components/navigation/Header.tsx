@@ -60,7 +60,7 @@ const Header = () => {
             </div>
           </Link>
         </div>
-        <div className={`flex items-center space-x-4 leading-5 sm:space-x-6 snap-always snap-center font-headings antialiased`}>
+        <div className={`flex items-center space-x-4 leading-5 sm:space-x-6 font-headings antialiased`}>
           {headerNavLinks
             .filter((link) => !!link.href) // Vérifie que `link.href` est défini
             .map((link) => {

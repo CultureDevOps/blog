@@ -104,7 +104,7 @@ export default function RootLayout({
       lang={locale}
       dir={dir(locale)}
       className={`${open_sans.variable} ${robotoSlab.variable} ${alfaSlabOne.variable}
-      scroll-smooth snap-y snap-proximity`}
+      scroll-smooth`}
       suppressHydrationWarning
     >
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
