@@ -106,7 +106,7 @@ const LangSwitch = () => {
                                   ? 'bg-blue-200/70 dark:bg-blue-900/30'
                                   : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
                               } 
-                              flex w-full rounded-none px-4 py-2 text-sm 
+                              group flex w-full items-center rounded-md px-4 py-2 text-sm 
                               text-gray-700  hover:text-primary-500
                               dark:text-white dark:hover:text-primary-500                              
                               transition-all duration-300 ease-in-out`}
