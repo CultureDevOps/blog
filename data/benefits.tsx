@@ -1,4 +1,4 @@
-import benefitOneImg from '../public/static/images/team-03-compressed.png'
+import benefitOneImg from '../public/static/images/team-03-1200w-cp.png'
 import benefitTwoImg from '../public/static/images/infra-05-compressed.png'
 import {
   CheckBadgeIcon,
