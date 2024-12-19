@@ -27,7 +27,7 @@ export default function Footer() {
   return (
     <>
       <footer>
-        <div className="mt-16 flex flex-col items-center">
+        <div className="mt-16 flex flex-col items-center snap-always snap-center ">
           <div className="mb-3 flex space-x-4">
             <div className="flex items-center">
               {siteMetadata.formspree === false ? (
