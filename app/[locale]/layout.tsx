@@ -162,13 +162,9 @@ export default function RootLayout({
       dir={dir(locale)}
       className={`${open_sans.variable} ${robotoSlab.variable} ${russoOne.variable} ${audiowide.variable} 
       ${alfaSlabOne.variable} ${titanOne.variable} ${ultra.variable} 
-      scroll-smooth snap-y snap-proximity overflow-scroll`}
+      scroll-smooth snap-y snap-proximity`}
       suppressHydrationWarning
     >
-        {/* <link rel="apple-touch-icon" sizes="76x76" href="/static/favicons/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/static/favicons/android-chrome-192x192.png" /> */}
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
         <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#000000" />
@@ -176,11 +172,9 @@ export default function RootLayout({
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
         <body className="pl-[calc(100vw-100%)] text-black antialiased dark:text-white bg-gradient-to-r from-blue-300 via-blue-200 via-20% to-stone-100 dark:from-blue-900 dark:via-blue-950 dark:via-40% dark:via-slate-900 dark:via-75% dark:to-slate-900">
-        {/* <body className="bg-stone-100 pl-[calc(100vw-100%)] text-black antialiased dark:bg-slate-900 dark:text-white"> */}
           <TwSizeIndicator />
           <ThemeProvider>
             <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-            {/* <div className="h-full bg-gradient-to-r from-stone-200 to-stone-300 dark:from-slate-800 dark:to-slate-900"> */}
             <SectionContainer>
               <div className="flex h-screen flex-col justify-between font-sans">
                 <SearchProvider>
