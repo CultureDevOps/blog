@@ -47,6 +47,7 @@ export default async function Hero({ params: { locale } }: Props) {
               className="object-cover"
               alt="Hero Illustration"
               placeholder="blur"
+              loading="eager"
               priority
               width={500}
               height={500}
