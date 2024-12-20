@@ -1,5 +1,8 @@
-import benefitOneImg from '../public/static/images/team-03-1200w-cp.png'
+import benefitOneImg from '../public/static/images/devops-team-01-1200w-cp.png'
 import benefitTwoImg from '../public/static/images/infra-05-compressed.png'
+import benefitThreeImg from '../public/static/images/freelance-developper-05-1200w-cp.png'
+import benefitFourImg from '../public/static/images/freelance-developper-04-1200w-cp.png'
+
 import {
   CheckBadgeIcon,
   RocketLaunchIcon,
@@ -124,4 +127,109 @@ const cloud = {
   },
 }
 
-export { devOps, cloud }
+const services = {
+  en: {
+    title: 'What I can do for you',
+    desc: '',
+    image: benefitThreeImg,
+    bullets: [
+      {
+        title: 'CI/CD pipeline optimization',
+        desc: 'Improve speed and reliability in your software deliveries.',
+        icon: <RocketLaunchIcon />, 
+      },
+      {
+        title: 'Cloud infrastructure automation',
+        desc: 'Deploy scalable and reproducible environments using Infrastructure as Code.',
+        icon: <ServerStackIcon />, 
+      },
+      {
+        title: 'DevOps training for teams',
+        desc: 'Empower your teams with best practices for adopting DevOps.',
+        icon: <PresentationChartLineIcon />, 
+      },
+      {
+        title: 'DevOps process audit and improvement',
+        desc: 'Identify bottlenecks and optimize your IT workflows.',
+        icon: <FontAwesomeIcon icon={faArrowsSpin} />, 
+      },
+    ],
+  },
+  fr: {
+    title: 'Ce que je peux faire pour vous',
+    desc: '',
+    image: benefitThreeImg,
+    bullets: [
+      {
+        title: 'Optimisation des pipelines CI/CD',
+        desc: 'Gagnez en rapidité et en fiabilité dans vos livraisons logicielles.',
+        icon: <RocketLaunchIcon />, 
+      },
+      {
+        title: 'Automatisation de vos infrastructures Cloud',
+        desc: 'Déployez des environnements reproductibles et scalables grâce à IaC.',
+        icon: <ServerStackIcon />, 
+      },
+      {
+        title: 'Formation DevOps pour vos équipes',
+        desc: 'Accompagnez vos équipes dans l’adoption des bonnes pratiques DevOps.',
+        icon: <PresentationChartLineIcon />, 
+      },
+      {
+        title: 'Audit et amélioration de vos process DevOps',
+        desc: 'Identifiez les freins et optimisez vos workflows IT.',
+        icon: <FontAwesomeIcon icon={faArrowsSpin} />, 
+      },
+    ],
+  },
+}
+
+const experience = {
+  en: {
+    title: 'DevOps Expertise Backed by Certification',
+    desc: "With over 17 years in IT and a DevOps Foundation certification from the DevOps Institute (2021), I bring a unique blend of experience and continuous learning to help your business innovate and scale.",
+    image: benefitFourImg,
+    bullets: [
+      {
+        title: 'Certified DevOps Professional',
+        desc: 'DevOps Foundation certification obtained in 2021 from the DevOps Institute.',
+        icon: <CheckBadgeIcon />,
+      },
+      {
+        title: 'DevOps Specialist since 2018',
+        desc: 'Transforming IT workflows with hands-on expertise in CI/CD and automation.',
+        icon: <RocketLaunchIcon />,
+      },
+      {
+        title: 'Versatility and Adaptability',
+        desc: 'Broad technical foundation across Ansible, Javascript, Java, Python, Docker, and more.',
+        icon: <PresentationChartLineIcon />,
+      }, 
+    ],
+  },
+  fr: {
+    title: 'Expertise DevOps Certifiée',
+    desc: "Fort de plus de 17 ans dans l'IT et d'une certification DevOps Foundation délivrée par le DevOps Institute (2021), j'apporte un mélange unique d'expérience et d'apprentissage continu pour aider votre entreprise à innover et évoluer.",
+    image: benefitFourImg,
+    bullets: [
+      {
+        title: 'Professionnel certifié DevOps',
+        desc: 'Certification DevOps Foundation obtenue en 2021 auprès du DevOps Institute.',
+        icon: <CheckBadgeIcon />,
+      },
+      {
+        title: 'Spécialiste DevOps depuis 2018',
+        desc: 'Transformation des workflows IT grâce à une expertise pratique en CI/CD et automatisation.',
+        icon: <RocketLaunchIcon />,
+      },
+      {
+        title: 'Polyvalence et adaptabilité',
+        desc: 'Base technique étendue couvrant Ansible, Javascript, Java, Python, Docker et plus encore.',
+        icon: <PresentationChartLineIcon />,
+      },
+    ],
+  },
+};
+
+
+export { devOps, cloud, services, experience }
