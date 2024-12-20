@@ -51,6 +51,7 @@ export default async function Hero({ params: { locale } }: Props) {
               priority
               width={500}
               height={500}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         </div>
