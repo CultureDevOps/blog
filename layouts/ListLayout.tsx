@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useTagStore } from '@/components/util/useTagStore'
 import { motion } from 'framer-motion'
 import { formatDate } from 'pliny/utils/formatDate'
@@ -13,6 +13,8 @@ import tagData from 'app/[locale]/tag-data.json'
 import { POSTS_PER_PAGE } from '@/data/postsPerPage'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { create } from 'zustand';
+import { subscribeWithSelector } from 'zustand/middleware';
 
 interface PaginationProps {
   totalPages: number
@@ -50,32 +52,69 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
   const sortedPosts = sortByDate(posts)
   const setSelectedTag = useTagStore((state) => state.setSelectedTag)
   const [isHydrated, setIsHydrated] = useState(false);
+  const selectedTag = useTagStore((state) => state.selectedTag);
 
+  useEffect(() => {
+    const unsubscribe = useTagStore.subscribe(
+      (state) => state.selectedTag,
+      (newSelectedTag) => {
+        // Synchronise uniquement si l'état local est différent
+        if (newSelectedTag !== selectedTag) {
+          setSelectedTag(newSelectedTag); // Mettre à jour l'état local
+        }
+      }
+    );
+  
+    return () => unsubscribe(); // Nettoie l'abonnement
+  }, [selectedTag]); // Dépendance sur `selectedTag`
+  
   useEffect(() => {
     setIsHydrated(true);
   }, []);
-  
-  const filteredPosts = useTagStore((state) => {
-    if (state.selectedTag) {
-      return sortedPosts.filter((post) => post.tags.includes(state.selectedTag))
-    } else {
-      return sortedPosts
-    }
-  })
+
+  useEffect(() => {
+    setCurrentPage(1); // Réinitialiser la pagination sur un changement de tag
+  }, [selectedTag]);  
+
+  const filteredPosts = selectedTag
+                        ? sortedPosts.filter((post) => post.tags.includes(selectedTag))
+                        : sortedPosts;
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage)
   const startIndex = (currentPage - 1) * postsPerPage
   const endIndex = startIndex + postsPerPage
-  const displayPosts = filteredPosts.slice(startIndex, endIndex)
+  
+  const displayPosts = useMemo(() => {
+    const startIndex = (currentPage - 1) * postsPerPage;
+    const endIndex = startIndex + postsPerPage;
+    return filteredPosts.slice(startIndex, endIndex);
+  }, [filteredPosts, currentPage, postsPerPage]);
 
   const onPageChange = (page: number) => {
     setCurrentPage(page)
   }
 
   const handleTagClick = (tag: string) => {
-    setSelectedTag(tag === useTagStore.getState().selectedTag ? '' : tag)
-    setCurrentPage(1)
-  }
+    setSelectedTag(tag === selectedTag ? '' : tag);
+    setCurrentPage(1);
+  };
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2, // Ajoute un effet décalé
+      },
+    },
+  };
+  
+  const item = {
+    hidden: { opacity: 0, x: -25, y: 0 }, // Initialement masqué
+    show: { opacity: 1, x: 0, y: 0 },     // Devient visible
+    exit: { opacity: 0, x: 25 },         // Pour les éléments retirés
+  };
+  
 
   const tagCountMap = tagData[locale]
 
@@ -141,7 +180,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                 const { slug, date, title, summary, tags, language } = post
                 if (language === locale) {
                   return (
-                    <motion.li variants={item} key={slug} className="py-5">
+                    <motion.li variants={item} key={slug} initial="hidden" animate="show" exit="hidden" className="py-5">
                       <article className="flex flex-col space-y-2 xl:space-y-0">
                         {post.banner && (
                           <Link
