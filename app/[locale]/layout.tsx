@@ -16,6 +16,8 @@ import { Metadata } from 'next'
 import { dir } from 'i18next'
 import { LocaleTypes, locales } from './i18n/settings'
 import TwSizeIndicator from '@/components/helper/TwSizeIndicator'
+import Script from 'next/script'
+import ThemeScript from '@/components/theme/ThemeScript'
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -113,7 +115,10 @@ export default function RootLayout({
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-        <body className="pl-[calc(100vw-100%)] text-black antialiased dark:text-white bg-gradient-to-r from-blue-300 via-blue-200 via-20% to-stone-100 dark:from-blue-900 dark:via-blue-950 dark:via-40% dark:via-slate-900 dark:via-75% dark:to-slate-900">
+        <body className="pl-[calc(100vw-100%)] text-black antialiased dark:text-white 
+                        bg-gradient-to-r from-blue-300 via-blue-200 via-20% to-stone-100 
+                        dark:from-blue-900 dark:via-blue-950 dark:via-40% dark:via-slate-900 dark:via-75% dark:to-slate-900">
+          <ThemeScript />
           <TwSizeIndicator />
           <ThemeProvider>
             <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />

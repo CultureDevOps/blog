@@ -26,14 +26,18 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       theme === 'dark' ||
       (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
-      document.documentElement.classList.add('dark')
+      if (!document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.add('dark')
+      }
     } else {
-      document.documentElement.classList.remove('dark')
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark')
+      }
     }
   }, [theme])
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, mounted }}>{children}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme, mounted }}>{mounted ? children : null}</ThemeContext.Provider>
   )
 }
 
