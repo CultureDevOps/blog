@@ -16,7 +16,6 @@ import { Metadata } from 'next'
 import { dir } from 'i18next'
 import { LocaleTypes, locales } from './i18n/settings'
 import TwSizeIndicator from '@/components/helper/TwSizeIndicator'
-import Script from 'next/script'
 import ThemeScript from '@/components/theme/ThemeScript'
 
 export async function generateStaticParams() {

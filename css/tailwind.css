@@ -6,19 +6,18 @@
 
 :root {
   --background-color-light: #f5f5f4; /* Fond clair stone-100 */
-  --background-color-dark: #020617; /* Fond sombre blue-950 */
+  --background-color-dark: #0f172a; /* Fond sombre slate-900 */
 }
 
-html {
+body {
   background-color: var(--background-color-light);
 }
 
 @media (prefers-color-scheme: dark) {
-  html {
+  body {
     background-color: var(--background-color-dark);
   }
 }
-
 
 .fancybox-wrapper {
   display: inline-block; /* Assurer que la div se comporte comme un élément inline */

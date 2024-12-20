@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useState, useContext, useEffect } from 'react'
+import React, { createContext, useState, useContext, useEffect, useLayoutEffect } from 'react'
 
 interface ThemeContextProps {
   theme: string
@@ -18,26 +18,38 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const savedTheme = localStorage.getItem('theme') || 'system'
     setTheme(savedTheme)
     setMounted(true)
-  }, [])
+  }, []) // Uniquement au montage initial
 
-  useEffect(() => {
-    localStorage.setItem('theme', theme)
-    if (
-      theme === 'dark' ||
-      (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
-    ) {
-      if (!document.documentElement.classList.contains('dark')) {
+  // Utilisation de useLayoutEffect pour appliquer le thème et fond immédiatement
+  useLayoutEffect(() => {
+    if (mounted) {
+      const themeToApply = theme === 'dark' ||
+        (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ? 'dark' : 'light'
+
+      // Appliquer directement le fond via les styles CSS
+      if (themeToApply === 'dark') {
+        // document.body.style.backgroundColor = '#020617' // Fond sombre
         document.documentElement.classList.add('dark')
-      }
-    } else {
-      if (document.documentElement.classList.contains('dark')) {
+      } else {
+        // document.body.style.backgroundColor = '#f5f5f4' // Fond clair
+        // document.documentElement.style.backgroundColor = '#f5f5f4' // fond clair
         document.documentElement.classList.remove('dark')
       }
     }
-  }, [theme])
+  }, [mounted, theme]) // Ce useLayoutEffect sera déclenché après que l'état mounted soit true et theme ait changé
+
+  // Sauvegarder le thème dans localStorage
+  useEffect(() => {
+    if (mounted) {
+      localStorage.setItem('theme', theme)
+    }
+  }, [theme, mounted]) // Sauvegarder dans localStorage après chaque changement de thème
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, mounted }}>{mounted ? children : null}</ThemeContext.Provider>
+    <ThemeContext.Provider value={{ theme, setTheme, mounted }}>
+      {mounted ? children : null} {/* Affiche les enfants uniquement après que le thème soit appliqué */}
+    </ThemeContext.Provider>
   )
 }
 
