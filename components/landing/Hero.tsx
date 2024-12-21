@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Container from './Container'
-import heroImg from 'public/static/images/light-and-gears-01-1200w-cp.png'
+import heroImg from 'public/static/images/light-and-gears-03-1200w-cp.png'
 import SocialIcon from '@/components/social-icons'
 import siteMetadata from '@/data/siteMetadata'
 import { createTranslation } from 'app/[locale]/i18n/server'
@@ -47,6 +47,7 @@ export default async function Hero({ params: { locale } }: Props) {
               className="object-cover"
               alt="Hero Illustration"
               placeholder="blur"
+              blurDataURL={heroImg.src}
               loading="eager"
               priority
               width={500}
