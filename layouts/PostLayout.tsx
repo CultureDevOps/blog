@@ -120,11 +120,11 @@ export default async function PostLayout({
                 </div>
               )}
               <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
-              <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300">
+              <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300 flex items-center justify-center space-x-2">
                 <Link href={discussUrl(path)} rel="nofollow">
                   {t('twitter')}
                 </Link>
-                {` • `}
+                <span>{` • `}</span>
                 <Link href={editUrl(filePath)}>{t('github')}</Link>
               </div>
               <Share title={title} slug={slug} />

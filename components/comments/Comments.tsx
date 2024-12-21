@@ -17,7 +17,13 @@ export default function Comments({ slug }: CommentsProps) {
   const { t } = useTranslation(locale, 'home')
   return (
     <>
-      {!loadComments && <button onClick={() => setLoadComments(true)}> {t('comment')}</button>}
+      {!loadComments && <button onClick={() => setLoadComments(true)}> 
+        <p className="mr-3 px-4 font-bold 
+                      text-highlighted text-primary-700 hover:text-primary-600 
+                      dark:text-darkmode-highlighted dark:text-primary-300 dark:hover:text-primary-400">
+          {t('comment')}
+        </p>
+        </button>}
       {siteMetadata.comments && loadComments && (
         <CommentsComponent commentsConfig={siteMetadata.comments} slug={slug} />
       )}
