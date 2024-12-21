@@ -171,16 +171,18 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
         </div>
 
           <div>
-            <motion.ul
-              variants={container}
+            {/* <motion.ul
+              variants={isHydrated ? container : undefined}
               initial={isHydrated ? "hidden" : false} // Désactive l'animation si pas hydraté
               animate={isHydrated ? "show" : false}
-            >
+            > */}
+            <ul>
               {displayPosts.map((post) => {
                 const { slug, date, title, summary, tags, language } = post
                 if (language === locale) {
                   return (
-                    <motion.li variants={item} key={slug} initial="hidden" animate="show" exit="hidden" className="py-5">
+                    // <motion.li variants={isHydrated ? item : undefined} key={slug} initial="hidden" animate="show" exit="hidden" className="py-5">
+                    <li key={slug} className="py-5">
                       <article className="flex flex-col space-y-2 xl:space-y-0">
                         {post.banner && (
                           <Link
@@ -235,11 +237,13 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                           </div>
                         </div>
                       </article>
-                    </motion.li>
+                    </li>
+                    // </motion.li>
                   )
                 }
               })}
-            </motion.ul>
+            </ul>
+            {/* </motion.ul> */}
             {totalPages > 1 && (
               <Pagination
                 totalPages={totalPages}

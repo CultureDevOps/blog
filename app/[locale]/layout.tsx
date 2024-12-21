@@ -16,7 +16,6 @@ import { Metadata } from 'next'
 import { dir } from 'i18next'
 import { LocaleTypes, locales } from './i18n/settings'
 import TwSizeIndicator from '@/components/helper/TwSizeIndicator'
-import ThemeScript from '@/components/theme/ThemeScript'
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -108,30 +107,32 @@ export default function RootLayout({
       scroll-smooth`}
       suppressHydrationWarning
     >
+      <head>
+        <script src="/static/js/theme-switcher.js" />     
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
         <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-        <body className="pl-[calc(100vw-100%)] text-black antialiased dark:text-white 
-                        bg-gradient-to-r from-blue-300 via-blue-200 via-20% to-stone-100 
-                        dark:from-blue-900 dark:via-blue-950 dark:via-40% dark:via-slate-900 dark:via-75% dark:to-slate-900">
-          <ThemeScript />
-          <TwSizeIndicator />
-          <ThemeProvider>
-            <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-            <SectionContainer>
-              <div className="flex h-screen flex-col justify-between font-sans">
-                <SearchProvider>
-                  <Header />
-                  <main className="mb-auto">{children}</main>
-                </SearchProvider>
-                <Footer />
-              </div>
-            </SectionContainer>
-          </ThemeProvider>
-        </body>
-      </html>
+      </head>
+      <body className="pl-[calc(100vw-100%)] text-black antialiased dark:text-white 
+                      bg-gradient-to-r from-blue-300 via-blue-200 via-20% to-stone-100 
+                      dark:from-blue-900 dark:via-blue-950 dark:via-40% dark:via-slate-900 dark:via-75% dark:to-slate-900">
+        <TwSizeIndicator />
+        <ThemeProvider>
+          <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
+          <SectionContainer>
+            <div className="flex h-screen flex-col justify-between font-sans">
+              <SearchProvider>
+                <Header />
+                <main className="mb-auto">{children}</main>
+              </SearchProvider>
+              <Footer />
+            </div>
+          </SectionContainer>
+        </ThemeProvider>
+      </body>
+    </html>
   )
 }
