@@ -24,6 +24,8 @@ const Benefits = (props) => {
               className="object-cover"
               placeholder="blur"
               blurDataURL={data.image.src}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                                
+              quality={80}
             />
           </div>
         </div>

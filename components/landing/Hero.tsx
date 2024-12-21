@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Container from './Container'
-import heroImg from 'public/static/images/light-and-gears-03-1200w-cp.png'
+import heroImg from 'public/static/images/light-and-gears-01.png'
 import SocialIcon from '@/components/social-icons'
 import siteMetadata from '@/data/siteMetadata'
 import { createTranslation } from 'app/[locale]/i18n/server'
@@ -52,6 +52,8 @@ export default async function Hero({ params: { locale } }: Props) {
               priority
               width={500}
               height={500}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                                
+              quality={80}              
             />
           </div>
         </div>

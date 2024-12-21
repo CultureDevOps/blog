@@ -1,7 +1,7 @@
-import benefitOneImg from '../public/static/images/devops-team-01-1200w-cp.png'
-import benefitTwoImg from '../public/static/images/infra-05-compressed.png'
-import benefitThreeImg from '../public/static/images/freelance-developper-05-1200w-cp.png'
-import benefitFourImg from '../public/static/images/freelance-developper-04-1200w-cp.png'
+import benefitOneImg from '../public/static/images/devops-team-01.png'
+import benefitTwoImg from '../public/static/images/infra-01.png'
+import benefitThreeImg from '../public/static/images/freelance-developper-05.png'
+import benefitFourImg from '../public/static/images/freelance-developper-04.png'
 
 import {
   CheckBadgeIcon,

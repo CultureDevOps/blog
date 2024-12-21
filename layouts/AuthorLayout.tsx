@@ -38,6 +38,8 @@ export default async function AuthorLayout({
                 width={192}
                 height={192}
                 className="h-48 w-48 rounded-full"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                                
+                quality={80}                
               />
             )}
             <h2 className="pb-2 pt-4 text-2xl font-bold leading-8 tracking-tight">{name}</h2>
