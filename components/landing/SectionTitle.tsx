@@ -21,7 +21,7 @@ const SectionTitle = (props) => {
       )}
 
       {props.children && (
-        <p className="max-w-2xl py-4 text-lg leading-normal text-gray-500 dark:text-gray-300 lg:text-xl xl:text-xl">
+        <p className="max-w-2xl py-4 text-lg leading-normal text-gray-600 dark:text-gray-300 lg:text-xl xl:text-xl">
           {props.children}
         </p>
       )}

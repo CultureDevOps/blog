@@ -33,7 +33,7 @@ const PostList: React.FC<PostListProps> = ({ posts, locale, t, maxDisplay }) => 
               <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                 <dl>
                   <dt className="sr-only">{t('pub')}</dt>
-                  <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <dd className="text-base font-medium leading-6 text-gray-600 dark:text-gray-400">
                     <time dateTime={date}>{formatDate(date, locale)}</time>
                   </dd>
                 </dl>
@@ -56,7 +56,7 @@ const PostList: React.FC<PostListProps> = ({ posts, locale, t, maxDisplay }) => 
                         ))}
                       </ul>
                     </div>
-                    <div className="prose max-w-none text-gray-500 dark:text-gray-400">
+                    <div className="prose max-w-none text-gray-600 dark:text-gray-400">
                       {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
                     </div>
                   </div>

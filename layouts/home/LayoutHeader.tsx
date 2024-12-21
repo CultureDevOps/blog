@@ -12,7 +12,7 @@ const LayoutHeader: React.FC<LayoutHeaderProps> = ({ title, description }) => {
         {title}
       </h1>
       {description && (
-        <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">{description}</p>
+        <p className="text-lg leading-7 text-gray-600 dark:text-gray-400">{description}</p>
       )}
     </div>
   )

@@ -8,7 +8,7 @@ const Button = () => {
     <div className="fixed bottom-8 left-6 z-50">
       <button
         onClick={toggleSidebar}
-        className="rounded-full bg-gray-200 p-2 text-gray-500 opacity-100 transition-colors hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
+        className="rounded-full bg-gray-200 p-2 text-gray-600 opacity-100 transition-colors hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
         aria-label="sidebar-button"
       >
         <ArrowRightIcon

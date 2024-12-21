@@ -62,7 +62,7 @@ export default async function PostLayout({
               <dl className="space-y-10">
                 <div>
                   <dt className="sr-only">{t('pub')}</dt>
-                  <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
+                  <dd className="text-base font-medium leading-6 text-gray-600 dark:text-gray-400">
                     <time dateTime={date}>
                       {new Date(date).toLocaleDateString(language, postDateTemplate)}
                     </time>
@@ -146,7 +146,7 @@ export default async function PostLayout({
               <div className="divide-gray-300 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">
                 {tags && (
                   <div className="py-4 xl:py-8">
-                    <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                    <p className="text-xs uppercase tracking-wide text-gray-600 dark:text-gray-400">
                       Tags
                     </p>
                     <div className="flex flex-wrap">
@@ -160,7 +160,7 @@ export default async function PostLayout({
                   <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
                     {prev && prev.slug && (
                       <div>
-                        <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                        <p className="text-xs uppercase tracking-wide text-gray-600 dark:text-gray-400">
                           {t('preva')}
                         </p>
                         <div className="text-primary-700 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400">
@@ -170,7 +170,7 @@ export default async function PostLayout({
                     )}
                     {next && next.slug && (
                       <div>
-                        <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                        <p className="text-xs uppercase tracking-wide text-gray-600 dark:text-gray-400">
                           {t('nexta')}
                         </p>
                         <div className="text-primary-700 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400">

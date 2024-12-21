@@ -41,7 +41,7 @@ const Benefits = (props) => {
                 {data.title}
               </h3>
 
-              <p className="max-w-2xl py-4 text-lg leading-normal text-gray-500 dark:text-gray-300 lg:text-xl xl:text-xl">
+              <p className="max-w-2xl py-4 text-lg leading-normal text-gray-600 dark:text-gray-300 lg:text-xl xl:text-xl">
                 {data.desc}
               </p>
             </div>
@@ -71,7 +71,7 @@ function Benefit(props) {
         </div>
         <div>
           <h4 className="text-xl font-medium font-headings text-gray-800 dark:text-gray-200">{props.title}</h4>
-          <p className="mt-1 text-gray-500 dark:text-gray-400">{props.children}</p>
+          <p className="mt-1 text-gray-600 dark:text-gray-400">{props.children}</p>
         </div>
       </div>
     </>
