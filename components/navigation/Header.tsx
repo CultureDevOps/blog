@@ -73,6 +73,7 @@ const Header = () => {
                   key={link.title}
                   href={`/${locale}${link.href}`}
                   className="flex transform-gpu items-center space-x-1 transition-transform duration-300"
+                  aria-label={link.title}
                 >
                   <div
                     className={`hidden font-medium ${
