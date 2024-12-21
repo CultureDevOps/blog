@@ -193,6 +193,8 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                                 height={200}
                                 src={post.banner}
                                 alt={`${post.title} banner`}
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                                
+                                quality={100}
                                 className="w-full h-auto rounded-lg border border-gray-200 shadow-md dark:border-gray-700"
                                 priority
                             />
