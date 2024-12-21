@@ -1,10 +1,9 @@
-const { withContentlayer } = require('next-contentlayer2')
-
+const { withContentlayer } = require('next-contentlayer2');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
-})
+});
 
-// You might need to insert additional domains in script-src if you are using external services
+// Définition des politiques de sécurité
 const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is statichunt.com http://www.youtube.com https://*.googletagmanager.com https://vercel.live/ https://vercel.com;
@@ -13,36 +12,30 @@ const ContentSecurityPolicy = `
   media-src 'self' *.s3.amazonaws.com;
   connect-src * statichunt.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://vercel.live/ https://vercel.com *.pusher.com *.pusherapp.com;
   font-src 'self';
-  frame-src giscus.app https://www.youtube.com/ https://www.youtube-nocookie.com/ https://vercel.live/ https://vercel.com
+  frame-src giscus.app https://www.youtube.com/ https://www.youtube-nocookie.com/ https://vercel.live/ https://vercel.com;
 `;
 
 const securityHeaders = [
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
   {
     key: 'Content-Security-Policy',
     value: ContentSecurityPolicy.replace(/\n/g, ''),
   },
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referrer-Policy
   {
     key: 'Referrer-Policy',
     value: 'strict-origin-when-cross-origin',
   },
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options
   {
     key: 'X-Content-Type-Options',
     value: 'nosniff',
   },
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-DNS-Prefetch-Control
   {
     key: 'X-DNS-Prefetch-Control',
     value: 'on',
   },
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security
   {
     key: 'Strict-Transport-Security',
     value: 'max-age=31536000; includeSubDomains',
   },
-  // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
   {
     key: 'Permissions-Policy',
     value: 'camera=(), microphone=(), geolocation=()',
@@ -50,47 +43,50 @@ const securityHeaders = [
 ];
 
 /**
- * @type {import('next/dist/next-server/server/config').NextConfig}
- **/
-module.exports = () => {
-  const plugins = [withContentlayer, withBundleAnalyzer]
-  return plugins.reduce((acc, next) => next(acc), {
-    reactStrictMode: true,
-    pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
-    eslint: {
-      dirs: ['app', 'components', 'layouts', 'scripts'],
-    },
-    images: {
-      remotePatterns: [
-        {
-          protocol: 'https',
-          hostname: 'd2mezi5ylxaxvl.cloudfront.net',
-          pathname: '**',
-        },
-      ],
-    },
-    async headers() {
-      return [
-        {
-          source: '/(.*)',
-          headers: securityHeaders,
-        },
-      ]
-    },
-    webpack: (config, options) => {
-      config.module.rules.push({
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
-      })
-      if (process.env.NODE_ENV === "development"){
-        config.watchOptions = {
-          poll: 1000,
-          aggregateTimeout: 300,
-          ignored: '**/node_modules',
-        }
-      }
-      return config
-    },
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+  reactStrictMode: true,
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+  eslint: {
+    dirs: ['app', 'components', 'layouts', 'scripts'],
   },
-  )
-}
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'd2mezi5ylxaxvl.cloudfront.net',
+        pathname: '**',
+      },
+    ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: securityHeaders,
+      },
+    ];
+  },
+  webpack: (config, options) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+
+    if (process.env.NODE_ENV === 'development') {
+      config.watchOptions = {
+        poll: 1000,
+        aggregateTimeout: 300,
+        ignored: '**/node_modules',
+      };
+    }
+
+    return config;
+  },
+};
+
+module.exports = () => {
+  const plugins = [withContentlayer, withBundleAnalyzer];
+  return plugins.reduce((acc, plugin) => plugin(acc), nextConfig);
+};

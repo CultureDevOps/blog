@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useTagStore } from '@/components/util/useTagStore'
-import { motion } from 'framer-motion'
 import { formatDate } from 'pliny/utils/formatDate'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog } from 'contentlayer/generated'
@@ -13,8 +12,7 @@ import tagData from 'app/[locale]/tag-data.json'
 import { POSTS_PER_PAGE } from '@/data/postsPerPage'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
-import { create } from 'zustand';
-import { subscribeWithSelector } from 'zustand/middleware';
+import Image from 'next/image';
 
 interface PaginationProps {
   totalPages: number
@@ -190,10 +188,13 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                             className="text-gray-900 dark:text-gray-100"
                             aria-labelledby={title}
                           >
-                            <img
-                            src={post.banner}
-                            alt={`${post.title} banner`}
-                            className="w-full h-auto rounded-lg border border-gray-200 shadow-md dark:border-gray-700"
+                            <Image
+                                width={800}
+                                height={200}
+                                src={post.banner}
+                                alt={`${post.title} banner`}
+                                className="w-full h-auto rounded-lg border border-gray-200 shadow-md dark:border-gray-700"
+                                priority
                             />
                           </Link>
                         )}
