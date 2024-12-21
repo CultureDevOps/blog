@@ -120,23 +120,27 @@ export default async function PostLayout({
                 </div>
               )}
               <div className="prose max-w-none pb-8 pt-10 dark:prose-invert">{children}</div>
-              <div className="pb-6 pt-6 text-sm text-gray-700 dark:text-gray-300 flex items-center justify-center space-x-2">
-                <Link href={discussUrl(path)} rel="nofollow">
-                  {t('twitter')}
-                </Link>
-                <span>{` • `}</span>
-                <Link href={editUrl(filePath)}>{t('github')}</Link>
-              </div>
               <Share title={title} slug={slug} />
-              <div
-                className="mt-10 pb-6 pt-6 text-center text-gray-700 dark:text-gray-300"
-                id="comment"
-              >
-                {siteMetadata.iswaline === true && <WalineComments />}
-                {siteMetadata.comments && siteMetadata.iscomments === true && (
-                  <Comments slug={slug} />
-                )}
-              </div>
+              <div className="pb-6 pt-6">
+                <div className="flex items-center justify-center space-x-2 text-sm
+                                text-gray-700 dark:text-gray-300">
+                  <Link href={discussUrl(path)} rel="nofollow"
+                        className="hover:text-primary-600 dark:hover:text-primary-400">
+                    {t('twitter')}
+                  </Link>
+                  <span>{` • `}</span>
+                  <Link href={editUrl(filePath)}
+                        className="hover:text-primary-600 dark:hover:text-primary-400">
+                          {t('github')}
+                  </Link>
+                </div>
+                <div className="pt-6 text-center" id="comment">
+                  {siteMetadata.iswaline === true && <WalineComments />}
+                  {siteMetadata.comments && siteMetadata.iscomments === true && (
+                    <Comments slug={slug} />
+                  )}
+                </div>
+              </div>              
             </div>
             <footer>
               <div className="divide-gray-300 text-sm font-medium leading-5 dark:divide-gray-700 xl:col-start-1 xl:row-start-2 xl:divide-y">

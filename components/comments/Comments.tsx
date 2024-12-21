@@ -18,7 +18,7 @@ export default function Comments({ slug }: CommentsProps) {
   return (
     <>
       {!loadComments && <button onClick={() => setLoadComments(true)}> 
-        <p className="mr-3 px-4 font-bold 
+        <p className="mr-3 px-4 font-bold text-lg
                       text-highlighted text-primary-700 hover:text-primary-600 
                       dark:text-darkmode-highlighted dark:text-primary-300 dark:hover:text-primary-400">
           {t('comment')}
