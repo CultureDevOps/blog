@@ -47,6 +47,7 @@ const securityHeaders = [
  */
 const nextConfig = {
   reactStrictMode: true,
+  // assetPrefix: "https://d2mezi5ylxaxvl.cloudfront.net/assets/",
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   eslint: {
     dirs: ['app', 'components', 'layouts', 'scripts'],
@@ -59,6 +60,10 @@ const nextConfig = {
         pathname: '**',
       },
     ],
+    loader: 'custom',
+    loaderFile: './components/loader/cloudfrontLoader.ts',
+    formats: ['image/avif', 'image/webp'],
+    domains: ['d2mezi5ylxaxvl.cloudfront.net'],    
   },
   async headers() {
     return [
