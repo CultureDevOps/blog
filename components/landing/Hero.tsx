@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Container from './Container'
-import heroImg from 'public/static/images/light-and-gears-01.png'
 import SocialIcon from '@/components/social-icons'
 import siteMetadata from '@/data/siteMetadata'
 import { createTranslation } from 'app/[locale]/i18n/server'
@@ -9,6 +8,8 @@ import { LocaleTypes } from 'app/[locale]/i18n/settings'
 type Props = {
   params: { locale: LocaleTypes }
 }
+
+const heroImg = 'https://d2mezi5ylxaxvl.cloudfront.net/blog/site/images/light-and-gears-01.png?format=auto'
 
 export default async function Hero({ params: { locale } }: Props) {
   const { t } = await createTranslation(locale, 'hero')
@@ -47,13 +48,13 @@ export default async function Hero({ params: { locale } }: Props) {
               className="object-cover"
               alt="Hero Illustration"
               placeholder="blur"
-              blurDataURL={heroImg.src}
+              blurDataURL={heroImg}
               loading="eager"
               priority
               width={500}
               height={500}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                                
-              quality={80}              
+              quality={100}              
             />
           </div>
         </div>
