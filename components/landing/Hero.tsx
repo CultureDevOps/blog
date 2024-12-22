@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from '@/components/mdxcomponents/Image'
 import Container from './Container'
 import SocialIcon from '@/components/social-icons'
 import siteMetadata from '@/data/siteMetadata'
@@ -52,8 +52,7 @@ export default async function Hero({ params: { locale } }: Props) {
               loading="eager"
               priority
               width={500}
-              height={500}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                                
+              height={500}                     
               quality={100}              
             />
           </div>

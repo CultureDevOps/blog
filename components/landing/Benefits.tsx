@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Image from '@/components/mdxcomponents/Image'
 import React from 'react'
 import Container from './Container'
 
@@ -23,8 +23,7 @@ const Benefits = (props) => {
               alt="Benefits"
               className="object-cover"
               placeholder="blur"
-              blurDataURL={data.image}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                                
+              blurDataURL={data.image}                             
               quality={100}
             />
           </div>

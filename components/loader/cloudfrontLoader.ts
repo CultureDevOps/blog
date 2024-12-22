@@ -5,8 +5,10 @@ export interface CloudfrontLoaderProps {
 }
 
 export default function cloudfrontLoader({ src, width, quality }: CloudfrontLoaderProps): string {
-  const url = new URL(`https://d2mezi5ylxaxvl.cloudfront.net${src}`);
-  url.searchParams.set('format', 'auto'); // Format automatique (WebP, PNG, etc.)
+  const url = new URL(`${process.env.CLOUD_FRONT_URL}${src}`);
+  if (!url.searchParams.has('format')) {
+    url.searchParams.set('format', 'auto'); // Format automatique (WebP, PNG, etc.)
+  }
   url.searchParams.set('width', (width || 800).toString()); // Largeur par défaut
   url.searchParams.set('quality', (quality || 75).toString()); // Qualité par défaut
   return url.href;

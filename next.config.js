@@ -46,6 +46,9 @@ const securityHeaders = [
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  env: {
+    CLOUD_FRONT_URL: 'https://d2mezi5ylxaxvl.cloudfront.net',
+  },  
   reactStrictMode: true,
   // assetPrefix: "https://d2mezi5ylxaxvl.cloudfront.net/assets/",
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],

@@ -12,7 +12,7 @@ import tagData from 'app/[locale]/tag-data.json'
 import { POSTS_PER_PAGE } from '@/data/postsPerPage'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
-import Image from 'next/image';
+import Image from '@/components/mdxcomponents/Image'
 
 interface PaginationProps {
   totalPages: number

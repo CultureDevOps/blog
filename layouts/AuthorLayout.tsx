@@ -37,8 +37,7 @@ export default async function AuthorLayout({
                 title="avatar"
                 width={192}
                 height={192}
-                className="h-48 w-48 rounded-full"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                                
+                className="h-48 w-48 rounded-full"                            
                 quality={80}                
               />
             )}
