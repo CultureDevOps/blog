@@ -10,6 +10,6 @@ export default function cloudfrontLoader({ src, width, quality }: CloudfrontLoad
     url.searchParams.set('format', 'auto'); // Format automatique (WebP, PNG, etc.)
   }
   url.searchParams.set('width', (width || 800).toString()); // Largeur par défaut
-  url.searchParams.set('quality', (quality || 75).toString()); // Qualité par défaut
+  url.searchParams.set('quality', (quality || 90).toString()); // Qualité par défaut
   return url.href;
 }
