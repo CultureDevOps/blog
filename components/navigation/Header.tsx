@@ -48,7 +48,15 @@ const Header = () => {
             <div className="flex items-center justify-between">
               <div className="mr-3">
                 {/* <Logo /> */}
-                <Image alt="logo" src={siteMetadata.siteLogo ?? ''} width={180} height={180} priority={true}/>
+                <Image 
+                  alt="logo" 
+                  src={siteMetadata.siteLogo ?? ''} 
+                  width={180} 
+                  height={180} 
+                  priority={true}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                                
+                  quality={100}                  
+                />
               </div>
               {typeof siteMetadata.headerTitle === 'string' ? (
                 <div className="hidden h-6 text-2xl sm:block font-logo antialiased">

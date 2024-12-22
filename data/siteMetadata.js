@@ -8,7 +8,7 @@ const siteMetadata = {
   theme: 'system', // system, dark or light
   siteUrl: 'https://culturedevops.com',
   siteRepo: 'https://github.com/CultureDevOps/blog',
-  siteLogo: '/static/images/logo-small-cp.png',
+  siteLogo: 'https://d2mezi5ylxaxvl.cloudfront.net/blog/site/images/logo.png?format=auto',
   socialBanner: '/static/images/x-card-02.png',
   mastodon: 'https://mastodon.social/@mastodonuser',
   email: 'culturedevops@gmail.com',
@@ -22,6 +22,7 @@ const siteMetadata = {
   instagram: 'https://www.instagram.com',
   locale: 'en',
   multiauthors: false,
+  cdn: 'https://d2mezi5ylxaxvl.cloudfront.net',
   analytics: {
     // If you want to use an analytics provider you have to add it to the
     // content security policy in the `next.config.js` file.

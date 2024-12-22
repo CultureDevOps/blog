@@ -1,8 +1,3 @@
-import benefitOneImg from '../public/static/images/devops-team-01.png'
-import benefitTwoImg from '../public/static/images/infra-01.png'
-import benefitThreeImg from '../public/static/images/freelance-developper-05.png'
-import benefitFourImg from '../public/static/images/freelance-developper-04.png'
-
 import {
   CheckBadgeIcon,
   RocketLaunchIcon,
@@ -12,6 +7,11 @@ import {
 } from '@heroicons/react/24/solid'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsSpin, faHandshake, faSackDollar } from '@fortawesome/free-solid-svg-icons'
+
+const benefitOneImg = 'https://d2mezi5ylxaxvl.cloudfront.net/blog/site/images/devops-team-01.png?format=auto'
+const benefitTwoImg = 'https://d2mezi5ylxaxvl.cloudfront.net/blog/site/images/infra-01.png?format=auto'
+const benefitThreeImg = 'https://d2mezi5ylxaxvl.cloudfront.net/blog/site/images/freelance-developper-05.png?format=auto'
+const benefitFourImg = 'https://d2mezi5ylxaxvl.cloudfront.net/blog/site/images/freelance-developper-04.png?format=auto'
 
 const devOps = {
   en: {
