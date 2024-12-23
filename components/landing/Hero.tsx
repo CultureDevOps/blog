@@ -18,17 +18,12 @@ export default async function Hero({ params: { locale } }: Props) {
       <Container className="flex flex-wrap ">
         <div className="flex w-full items-center lg:w-1/2">
           <div className="mb-8 max-w-2xl font-headings">
-            {/* <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">
-              {siteMetadata.headerTitle}
-            </h1> */}
             <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">
-              {t('title_1')}
-            </h1>
-            <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">
-              {t('title_2')}
-            </h1>
-            <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 dark:text-white lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight">
-              {t('title_3')}
+              <span>{t('title_1')}</span>
+              <br />
+              <span>{t('title_2')}</span>
+              <br />
+              <span>{t('title_3')}</span>
             </h1>
             <p className="py-5 text-xl leading-normal text-gray-600 dark:text-gray-300 lg:text-xl xl:text-2xl">
               {t('title_description')}

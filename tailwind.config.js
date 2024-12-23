@@ -51,10 +51,10 @@ module.exports = {
               fontFamily: theme('fontFamily.headings'), 
             },
             code: {
-              color: theme('colors.indigo.500'),
+              color: theme('colors.indigo.600'),
             },
             hr: {
-              borderColor: theme('colors.gray-300'), // Séparateur en mode clair
+              borderColor: theme('colors.gray.200'), // Séparateur en mode clair
               borderTopWidth: '2px',
             },
             'ul li::marker': {
@@ -76,7 +76,7 @@ module.exports = {
               fontFamily: theme('fontFamily.headings'), 
             },
             hr: {
-              borderColor: theme('colors.gray-700'), // Séparateur en mode sombre
+              borderColor: theme('colors.gray.700'), // Séparateur en mode sombre
               borderTopWidth: '1px',
             },
             'ul li::marker': {
