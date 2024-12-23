@@ -51,7 +51,7 @@
 .token.comment,
 .token.prolog,
 .token.cdata {
-  color: rgb(99, 119, 119);
+  color: rgb(156, 163, 175);
   font-style: italic;
 }
 
