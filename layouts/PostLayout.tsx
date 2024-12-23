@@ -2,10 +2,8 @@ import { ReactNode } from 'react'
 import { CoreContent } from 'pliny/utils/contentlayer'
 import type { Blog, Authors } from 'contentlayer/generated'
 import Comments from '@/components/comments/Comments'
-import WalineComments from '@/components/comments/walinecomponents/walineComments'
 import Link from '@/components/mdxcomponents/Link'
 import PageTitle from '@/components/PageTitle'
-import SectionContainer from '@/components/SectionContainer'
 import Image from '@/components/mdxcomponents/Image'
 import Tag from '@/components/tag'
 import siteMetadata from '@/data/siteMetadata'
@@ -135,7 +133,6 @@ export default async function PostLayout({
                   </Link>
                 </div>
                 <div className="pt-6 text-center" id="comment">
-                  {siteMetadata.iswaline === true && <WalineComments />}
                   {siteMetadata.comments && siteMetadata.iscomments === true && (
                     <Comments slug={slug} />
                   )}
