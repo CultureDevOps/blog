@@ -90,7 +90,7 @@ const Header = () => {
                         : 'text-black hover:text-blue-900 dark:text-white dark:hover:text-blue-300'
                     } relative rounded-md px-2 py-2 font-medium transition-colors sm:block`}
                   >
-                    <span className="relative z-10">{t(`${link.title.toLowerCase()}`)}</span>
+                    <span className="relative z-10 font-bold">{t(`${link.title.toLowerCase()}`)}</span>
                     {isSelected && (
                       <motion.div
                         layoutId="tab"
