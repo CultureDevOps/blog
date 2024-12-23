@@ -46,9 +46,9 @@ export default async function Hero({ params: { locale } }: Props) {
               blurDataURL={heroImg}
               loading="eager"
               priority
-              width={500}
-              height={500}                     
-              quality={100}              
+              width={1800}
+              height={1530}                     
+              quality={80}              
             />
           </div>
         </div>

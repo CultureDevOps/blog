@@ -54,8 +54,8 @@ const Header = () => {
                   width={180} 
                   height={180} 
                   priority={true}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                                
-                  quality={100}                  
+                  sizes="180px"                                
+                  quality={80}                  
                 />
               </div>
               {typeof siteMetadata.headerTitle === 'string' ? (

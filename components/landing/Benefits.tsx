@@ -18,13 +18,13 @@ const Benefits = (props) => {
           <div>
             <Image
               src={data.image}
-              width={500}
-              height={500}
+              width={2048}
+              height={2048}
               alt="Benefits"
               className="object-cover"
               placeholder="blur"
               blurDataURL={data.image}                             
-              quality={100}
+              quality={80}
             />
           </div>
         </div>
