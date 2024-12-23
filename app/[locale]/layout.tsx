@@ -16,6 +16,7 @@ import { Metadata } from 'next'
 import { dir } from 'i18next'
 import { LocaleTypes, locales } from './i18n/settings'
 import TwSizeIndicator from '@/components/helper/TwSizeIndicator'
+import LayoutWrapper from '@/components/LayoutWrapper'
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
@@ -98,7 +99,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
   params: { locale: LocaleTypes }
-}) {
+}) { 
   return (
     <html
       lang={locale}
@@ -122,15 +123,9 @@ export default function RootLayout({
         <TwSizeIndicator />
         <ThemeProvider>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-          <SectionContainer>
-            <div className="flex h-screen flex-col justify-between font-sans">
-              <SearchProvider>
-                <Header />
-                <main className="mb-auto">{children}</main>
-              </SearchProvider>
-              <Footer />
-            </div>
-          </SectionContainer>
+          <LayoutWrapper>
+              <main className="mb-auto">{children}</main>
+          </LayoutWrapper>
         </ThemeProvider>
       </body>
     </html>

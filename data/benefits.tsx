@@ -8,10 +8,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowsSpin, faHandshake, faSackDollar } from '@fortawesome/free-solid-svg-icons'
 
-const benefitOneImg = '/blog/site/images/devops-team-01.png'
-const benefitTwoImg = '/blog/site/images/infra-01.png'
-const benefitThreeImg = '/blog/site/images/freelance-developper-05.png'
-const benefitFourImg = '/blog/site/images/freelance-developper-04.png'
+const benefitOneImg = '/blog/site/images/team-meeting-06.png'
+const benefitTwoImg = '/blog/site/images/data-center-04.png'
+const benefitThreeImg = '/blog/site/images/developer-desktop-01.png'
+const benefitFourImg = '/blog/site/images/team-board-office-01-u02.png'
 
 const devOps = {
   en: {

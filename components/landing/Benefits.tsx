@@ -1,4 +1,4 @@
-import Image from '@/components/mdxcomponents/Image'
+import Image from 'next/image'
 import React from 'react'
 import Container from './Container'
 
@@ -15,18 +15,17 @@ const Benefits = (props) => {
             props.imgPos === 'right' ? 'lg:order-1' : ''
           }`}
         >
-          <div>
             <Image
               src={data.image}
               width={640}
               height={640}
               alt="Benefits"
-              className="object-cover"
+              className="object-cover rounded-xl w-full"
               placeholder="blur"
-              blurDataURL={data.image}                             
+              blurDataURL={data.image}   
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                          
               quality={80}
             />
-          </div>
         </div>
 
         <div
