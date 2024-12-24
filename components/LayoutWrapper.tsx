@@ -1,12 +1,12 @@
 
-// 'use client'
+'use client'
 
 import { Inter } from 'next/font/google'
 import SectionContainer from './SectionContainer'
 import Footer from './navigation/Footer'
 import { ReactNode } from 'react'
 import Header from './navigation/Header'
-// import { usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { SearchProvider } from './search/SearchProvider'
 import FullLayoutSectionContainer from './FullLayoutSectionContainer'
 
@@ -19,9 +19,9 @@ const inter = Inter({
 })
 
 const LayoutWrapper = ({ children }: LayoutWrapperProps) => {
-  // const pathname = usePathname();
-  // const isFullPageLayout = pathname === '/' || pathname.startsWith('/landing');
-  const isFullPageLayout = true;
+  const pathname = usePathname();
+  const isFullPageLayout = pathname === '/' || pathname.startsWith('/landing');
+  // const isFullPageLayout = true;
 
   return isFullPageLayout ? ( 
     <div className="h-screen">

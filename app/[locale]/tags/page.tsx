@@ -4,6 +4,7 @@ import tagData from 'app/[locale]/tag-data.json'
 import { genPageMetadata } from 'app/[locale]/seo'
 import { createTranslation } from '../i18n/server'
 import { LocaleTypes } from '../i18n/settings'
+import SectionContainer from '@/components/SectionContainer'
 
 type TagsProps = {
   params: { locale: LocaleTypes }
@@ -24,7 +25,7 @@ export default function Page({ params: { locale } }: TagsProps) {
   const sortedTags = tagKeys.sort((a, b) => tagCounts[b] - tagCounts[a])
 
   return (
-    <>
+    <SectionContainer>
       <div className="flex flex-col items-start justify-start divide-y divide-gray-200 dark:divide-gray-700 md:mt-24 md:flex-row md:items-center md:justify-center md:space-x-6 md:divide-y-0">
         <div className="space-x-2 pb-8 pt-6 md:space-y-5">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight 
@@ -45,6 +46,6 @@ export default function Page({ params: { locale } }: TagsProps) {
           ))}
         </div>
       </div>
-    </>
+    </SectionContainer>
   )
 }

@@ -5,6 +5,7 @@ import { allBlogs } from 'contentlayer/generated'
 import { genPageMetadata } from 'app/[locale]/seo'
 import { createTranslation } from '../i18n/server'
 import { LocaleTypes } from '../i18n/settings'
+import SectionContainer from '@/components/SectionContainer'
 
 type BlogPageProps = {
   params: { locale: LocaleTypes }
@@ -22,5 +23,9 @@ export default async function BlogPage({ params: { locale } }: BlogPageProps) {
   const posts = allCoreContent(sortPosts(allBlogs))
   const filteredPosts = posts.filter((post) => post.language === locale)
 
-  return <ListLayout params={{ locale: locale }} posts={filteredPosts} title={t('all')} />
+  return (
+    <SectionContainer>
+      <ListLayout params={{ locale: locale }} posts={filteredPosts} title={t('all')}/>
+    </SectionContainer>
+  ) 
 }

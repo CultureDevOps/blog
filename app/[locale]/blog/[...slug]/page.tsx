@@ -13,6 +13,7 @@ import siteMetadata from '@/data/siteMetadata'
 import { maintitle } from '@/data/localeMetadata'
 import { notFound } from 'next/navigation'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import SectionContainer from '@/components/SectionContainer'
 
 interface BlogPageProps {
   params: { slug: string[]; locale: LocaleTypes }
@@ -145,7 +146,7 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
   const Layout = layouts[post.layout || defaultLayout]
 
   return (
-    <>
+    <SectionContainer>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -159,6 +160,6 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
       >
         <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
       </Layout>
-    </>
+    </SectionContainer>
   )
 }

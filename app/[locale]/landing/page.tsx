@@ -3,6 +3,7 @@ import { LocaleTypes } from '../i18n/settings'
 import Hero from '@/components/landing/Hero'
 import Benefits from '@/components/landing/Benefits'
 import { devOps, cloud, services, experience } from '@/data/benefits'
+import FullLayoutSectionContainer from '@/components/FullLayoutSectionContainer'
 
 interface LandingProps {
   params: { locale: LocaleTypes }
@@ -11,7 +12,7 @@ interface LandingProps {
 export default async function Landing({ params: { locale } }: LandingProps) {
   const { t } = await createTranslation(locale, 'home')
   return (
-    <>
+    <FullLayoutSectionContainer>
       <div>
         <div>
           <Hero params={{ locale: locale }} />
@@ -29,6 +30,6 @@ export default async function Landing({ params: { locale } }: LandingProps) {
           <Benefits imgPos="right" data={experience[locale]} />
         </div>        
       </div>
-    </>
+    </FullLayoutSectionContainer>
   )
 }
