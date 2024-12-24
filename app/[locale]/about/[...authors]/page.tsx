@@ -7,6 +7,7 @@ import { genPageMetadata } from 'app/[locale]/seo'
 import { createTranslation } from 'app/[locale]/i18n/server'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { notFound } from 'next/navigation'
+import SectionContainer from '@/components/SectionContainer'
 
 type AboutProps = {
   params: { authors: string[]; locale: LocaleTypes }
@@ -38,8 +39,10 @@ export default async function Page({ params: { authors, locale } }: AboutProps) 
   const mainContent = coreContent(author)
 
   return (
-    <AuthorLayout params={{ locale: locale }} content={mainContent}>
-      <MDXLayoutRenderer code={author.body.code} />
-    </AuthorLayout>
+    <SectionContainer>
+      <AuthorLayout params={{ locale: locale }} content={mainContent}>
+        <MDXLayoutRenderer code={author.body.code} />
+      </AuthorLayout>
+    </SectionContainer>
   )
 }

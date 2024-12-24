@@ -7,7 +7,7 @@ authors: ['default']
 draft: false
 summary: A practical guide to combining AWS S3 and CloudFront to improve the speed and efficiency of your online images
 featured: true
-banner: '/blog/aws-s3-cloudfront-image-optimization/banner-aws-s3-cloudfront-image-optimization-03.png'
+banner: '/static/images/posts/aws-s3-cloudfront-image-optimization/banner-aws-s3-cloudfront-image-optimization-03.png'
 ---
 
 In today's web world, site speed and efficiency are essential factors for:  
@@ -33,7 +33,7 @@ This solution relies on **AWS Lambda**, which allows you to transform your image
 
 To better understand how the architecture works, here is a diagram illustrating the exchange between CloudFront, Lambda, and S3:
 
-<FancyBoxImage src="/blog/aws-s3-cloudfront-image-optimization/aws-s3-cloudfront-image-optimization.drawio.png" alt="S3, CloudFront, Lambda diagram" width={824} height={793}/>
+<FancyBoxImage src="/static/images/posts/aws-s3-cloudfront-image-optimization/aws-s3-cloudfront-image-optimization.drawio.png" alt="S3, CloudFront, Lambda diagram" width={824} height={793}/>
 ---
 
 ### Concept
@@ -144,7 +144,7 @@ By combining **AWS S3**, **CloudFront**, and **Lambda**, you can efficiently opt
 Take the example of the image below: it weighs 6.2 MB when stored in my **S3** bucket, but once optimized and served via **CloudFront** in the **WebP** format, it’s only 48 KB. This significant reduction in size, with no noticeable loss of quality, clearly shows the benefits of image optimization in a CDN environment.
 
 <FancyBoxImage 
-  src="/blog/aws-s3-cloudfront-image-optimization/chat-pc.png?format=webp" 
+  src="/static/images/posts/aws-s3-cloudfront-image-optimization/chat-pc.png?format=webp" 
   alt="Image Optimization with AWS" 
   width={2912}
   height={1632}  

@@ -50,7 +50,6 @@ const nextConfig = {
     CLOUD_FRONT_URL: 'https://d2mezi5ylxaxvl.cloudfront.net',
   },  
   reactStrictMode: true,
-  // assetPrefix: "https://d2mezi5ylxaxvl.cloudfront.net/assets/",
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   eslint: {
     dirs: ['app', 'components', 'layouts', 'scripts'],
@@ -63,10 +62,10 @@ const nextConfig = {
         pathname: '**',
       },
     ],
-    loader: 'custom',
-    loaderFile: './components/loader/cloudfrontLoader.ts',
+    loader: process.env.NODE_ENV==="development" ? 'default' : 'custom',
+    loaderFile: process.env.NODE_ENV==="development" ? '' : './components/loader/cloudfrontLoader.ts',
     formats: ['image/avif', 'image/webp'],
-    domains: ['d2mezi5ylxaxvl.cloudfront.net'],    
+    domains: ['d2mezi5ylxaxvl.cloudfront.net'],
   },
   async headers() {
     return [
@@ -87,7 +86,7 @@ const nextConfig = {
         poll: 1000,
         aggregateTimeout: 300,
         ignored: '**/node_modules',
-      };
+      };    
     }
 
     return config;
