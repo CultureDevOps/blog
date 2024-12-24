@@ -7,8 +7,15 @@ authors: ['default']
 draft: false
 summary: Découvrez comment configurer un agent auto-hébergé dans Azure Pipelines pour automatiser la construction d'images Docker et leur déploiement sur Azure Container Registry.
 featured: true
-banner: '/static/images/posts/simple-azp-agent-dind/simple-azp-agent-dind-02.png'
+banner: '/static/images/posts/simple-azp-agent-dind/simple-azp-agent-dind-banner.png'
 ---
+
+<FancyBoxImage 
+  src="/static/images/posts/simple-azp-agent-dind/simple-azp-agent-dind.png" 
+  alt="Banner" 
+  width={2912}
+  height={1632}
+/>
 
 Lorsque vous réalisez des builds Docker dans une pipeline CI/CD, il est souvent nécessaire d'utiliser des images Docker capables de lancer elles-mêmes des commandes Docker.  
 Dans certains cas, comme pour une utilisation personnelle, il est souvent plus avantageux d'utiliser un agent auto-hébergé, que ce soit sur un serveur tiers ou sur votre machine personnelle, plutôt que de recourir aux agents proposés par Azure.

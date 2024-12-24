@@ -7,8 +7,15 @@ authors: ['default']
 draft: false
 summary: Learn how to configure a self-hosted agent in Azure Pipelines to automate the building of Docker images and their deployment to Azure Container Registry.
 featured: true
-banner: '/static/images/posts/simple-azp-agent-dind/simple-azp-agent-dind-02.png'
+banner: '/static/images/posts/simple-azp-agent-dind/simple-azp-agent-dind-banner.png'
 ---
+
+<FancyBoxImage 
+  src="/static/images/posts/simple-azp-agent-dind/simple-azp-agent-dind.png" 
+  alt="Banner" 
+  width={2912}
+  height={1632}
+/>
 
 When building Docker images in a CI/CD pipeline, it's often necessary to use Docker images that can run Docker commands themselves.  
 In some cases, such as for personal use, it’s often more advantageous to use a self-hosted agent, whether on a third-party server or on your own machine, rather than relying on the agents provided by Azure.
