@@ -1,0 +1,46 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main      # Déclenche la production sur CloudFront
+
+jobs:
+  deploy-to-cloudfront:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE }}
+        aws-region: us-west-3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: "yarn"
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Build Next.js app
+      run: yarn build
+
+    - name: Sync Next.js assets to S3
+      run: aws s3 sync .next/static/ s3://culturedevops/blog/assets/ --delete
+
+    # - name: Sync images to S3
+    #   run: aws s3 sync public/images/ s3://culturedevops/blog/images/ --acl public-read
+    #   env:
+    #     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    #     AWS_REGION: "your-region"
+
+    - name: Invalidate CloudFront cache
+      run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
