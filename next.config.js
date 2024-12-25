@@ -49,6 +49,11 @@ const nextConfig = {
   env: {
     CLOUD_FRONT_URL: process.env.NODE_ENV==="development" ? '' : 'https://d2mezi5ylxaxvl.cloudfront.net',
   },  
+  experimental: {
+    scrollRestoration: true,
+    optimizeCss: true,
+  },
+  compress: true,  
   reactStrictMode: true,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   eslint: {
@@ -79,6 +84,12 @@ const nextConfig = {
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+    config.optimization.splitChunks = {
+      cacheGroups: {
+        default: false,
+        vendors: false,
+      },
+    };    
 
     if (process.env.NODE_ENV === 'development') {
       config.watchOptions = {

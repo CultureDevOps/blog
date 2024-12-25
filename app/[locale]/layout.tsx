@@ -16,7 +16,6 @@ import { Metadata } from 'next'
 import { dir } from 'i18next'
 import { LocaleTypes, locales } from './i18n/settings'
 import TwSizeIndicator from '@/components/helper/TwSizeIndicator'
-import LayoutWrapper from '@/components/LayoutWrapper'
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }))
