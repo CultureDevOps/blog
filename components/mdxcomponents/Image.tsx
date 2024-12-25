@@ -1,9 +1,13 @@
 import NextImage, { ImageProps } from 'next/image'
 
-const Image = ({ ...rest }: ImageProps) => {
+interface CustomImageProps extends ImageProps {
+  sizes?: string; 
+}
+
+const Image = ({ sizes, ...rest }: CustomImageProps) => {
   return (
     <NextImage 
-    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    sizes= {sizes ? sizes : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
     {...rest}
     />
   )

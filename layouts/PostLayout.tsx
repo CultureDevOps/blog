@@ -88,6 +88,7 @@ export default async function PostLayout({
                             alt="avatar"
                             title="avatar"
                             className="h-10 w-10 rounded-full"
+                            sizes="38px"
                           />
                         </Link>
                       )}
