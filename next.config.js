@@ -49,10 +49,10 @@ const nextConfig = {
   env: {
     CLOUD_FRONT_URL: process.env.NODE_ENV==="development" ? '' : 'https://d2mezi5ylxaxvl.cloudfront.net',
   },  
-  experimental: {
-    scrollRestoration: true,
-    optimizeCss: true,
-  },
+  // experimental: {
+  //   scrollRestoration: true,
+  //   optimizeCss: true,
+  // },
   compress: true,  
   reactStrictMode: true,
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
