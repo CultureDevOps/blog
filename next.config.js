@@ -84,12 +84,12 @@ const nextConfig = {
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
-    config.optimization.splitChunks = {
-      cacheGroups: {
-        default: false,
-        vendors: false,
-      },
-    };    
+    // config.optimization.splitChunks = {
+    //   cacheGroups: {
+    //     default: false,
+    //     vendors: false,
+    //   },
+    // };    
 
     if (process.env.NODE_ENV === 'development') {
       config.watchOptions = {
