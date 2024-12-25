@@ -70,6 +70,7 @@
     "@typescript-eslint/eslint-plugin": "^7.7.1",
     "@typescript-eslint/parser": "^7.7.1",
     "cross-env": "^7.0.3",
+    "cssnano": "^7.0.6",
     "eslint": "^9.1.1",
     "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",

@@ -86,10 +86,13 @@ const nextConfig = {
     });
     config.optimization.splitChunks = {
       cacheGroups: {
-        default: false,
-        vendors: false,
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
       },
-    };    
+    };
 
     if (process.env.NODE_ENV === 'development') {
       config.watchOptions = {
