@@ -120,34 +120,25 @@ html.dark body {
 /* Pour mobile et écrans étroits */
 @media (max-width: 768px) {
   .overflow-y-auto::-webkit-scrollbar {
-    width: 2px; /* Réduire la largeur sur mobile */
+    width: 2px;
     height: 2px;
   }
 }
 
 /* La piste de la barre de défilement */
 .overflow-y-auto::-webkit-scrollbar-track {
-  background: transparent; /* Laisser la piste transparente pour qu'elle suive le thème */
+  background: transparent;
 }
 
 /* Le "pouce" de la barre de défilement (partie déplaçable) */
 .overflow-y-auto::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3);  /* Couleur pour le thème sombre, ajustable */
+  background-color: rgba(37, 99, 235, 0.5);
   border-radius: 5px;
 }
 
-/* Option pour un thème clair */
-@media (prefers-color-scheme: light) {
-  .overflow-y-auto::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);  /* Couleur pour le thème clair */
-  }
-}
-
 /* Option pour un thème sombre */
-@media (prefers-color-scheme: dark) {
-  .overflow-y-auto::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.5); /* Couleur du pouce en mode sombre */
-  }
+html.dark .overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 /* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
