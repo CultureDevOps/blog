@@ -11,6 +11,7 @@
 
 body {
   background-color: var(--background-color-light);
+  overflow-y: hidden;
 }
 
 html.dark body {
@@ -84,7 +85,7 @@ html.dark body {
   @apply my-5;
 }
 
-.overflow-y-auto::-webkit-scrollbar {
+/* .overflow-y-auto::-webkit-scrollbar {
   width: 2px;
 }
 
@@ -95,7 +96,7 @@ html.dark body {
 .overflow-y-auto::-webkit-scrollbar-thumb {
   background-color: #9c9c9c;
   border-radius: 5px;
-}
+} */
 
 /* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
 input:-webkit-autofill,
