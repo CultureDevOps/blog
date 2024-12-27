@@ -116,26 +116,28 @@ export default function RootLayout({
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       </head>
-      <body className="pl-[calc(100vw-100%)] text-black antialiased dark:text-white 
+      <body className=" text-black antialiased dark:text-white 
                       bg-gradient-to-r from-blue-300 via-blue-200 via-20% to-stone-100 
                       dark:from-blue-800 dark:via-blue-950 dark:via-40% dark:via-slate-900 dark:via-75% dark:to-slate-900">
         <TwSizeIndicator />
         <ThemeProvider>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <div className="h-screen">
-            <SearchProvider>
-              <SectionContainer>
+            <div className="bg-image bg-no-repeat bg-cover bg-fixed w-full">
+              <SearchProvider>
+                <SectionContainer>
+                  <div className="flex flex-col justify-between font-sans">
+                    <Header />  
+                  </div>
+                </SectionContainer>
                 <div className="flex flex-col justify-between font-sans">
-                  <Header />  
+                  <main className="mb-auto">{children}</main>
                 </div>
-              </SectionContainer>
+              </SearchProvider>
               <div className="flex flex-col justify-between font-sans">
-                <main className="mb-auto">{children}</main>
-              </div>
-            </SearchProvider>
-            <div className="flex flex-col justify-between font-sans">
-              <Footer />
-            </div>          
+                <Footer />
+              </div>          
+            </div>
           </div>
         </ThemeProvider>
       </body>

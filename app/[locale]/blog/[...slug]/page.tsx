@@ -146,20 +146,26 @@ export default async function Page({ params: { slug, locale } }: BlogPageProps) 
   const Layout = layouts[post.layout || defaultLayout]
 
   return (
-    <SectionContainer>
+    <SectionContainer>      
+      <div className="mb-6 flex-grow 
+                      bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
+                      dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
+                      backdrop-blur-sm rounded-lg p-8 shadow-lg 
+                      border border-white/20 dark:border-gray-700/20 h-fit">        
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <Layout
-        content={mainContent}
-        authorDetails={authorDetails}
-        next={next}
-        prev={prev}
-        params={{ locale: locale }}
-      >
-        <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
-      </Layout>
+      />        
+        <Layout
+          content={mainContent}
+          authorDetails={authorDetails}
+          next={next}
+          prev={prev}
+          params={{ locale: locale }}
+        >
+          <MDXLayoutRenderer code={post.body.code} components={components} toc={post.toc} />
+        </Layout>
+      </div>
     </SectionContainer>
   )
 }

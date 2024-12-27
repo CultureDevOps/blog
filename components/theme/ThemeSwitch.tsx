@@ -41,7 +41,10 @@ const ThemeSwitch = () => {
 
   return (
     <div ref={menubarRef} className="mr-5">
-      <Menu as="div" className="relative mt-1 inline-block text-left">
+      <Menu 
+        as="div" 
+        className="relative mt-1 inline-block text-left"
+      >
         <MenuButton aria-label={t('theme')}>
           <DarkModeSwitch
             checked={darkModeChecked}
@@ -61,8 +64,10 @@ const ThemeSwitch = () => {
           leaveFrom="opacity-100 scale-100 translate-y-0"
           leaveTo="opacity-0 scale-95 translate-y-[10px]"
         >
-          <MenuItems className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md 
-                                shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <MenuItems 
+            modal={false}
+            className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md 
+                      shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <RadioGroup value={theme} onChange={handleThemeChange}>
               <div className="p-1 rounded-md 
                               bg-gradient-to-br from-white/80 via-blue-200/60 to-white/60

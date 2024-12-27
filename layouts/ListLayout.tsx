@@ -142,31 +142,34 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
     <>
       <div>
         <div className="pb-6 pt-6">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight 
+          text-gray-900 dark:text-gray-100 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {title}
           </h1>
         </div>
-        <div className="flex sm:space-x-24">
-        <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded 
-            bg-gradient-to-tr from-white/60 via-blue-200/30 to-white/30 backdrop-blur-md border border-white/10 
-            pt-5 shadow-md dark:bg-gradient-to-tr dark:from-slate-900/60 dark:via-blue-950/40 dark:to-slate-900/30 
-            dark:shadow-slate-700/40 sm:flex">
-            <div className="px-6 py-4">
-                <button
-                    onClick={() => setSelectedTag('')}
-                    className={`${
-                        useTagStore.getState().selectedTag === ''
-                            ? 'text-blue-600 dark:text-blue-300'  /* Couleur de texte plus douce */
-                            : 'text-gray-900 dark:text-gray-200'
-                    } font-bold uppercase transition-colors duration-300`}
-                >
-                    {t('all')}
-                </button>
-                <ul className="mt-4 space-y-2">
-                    {filteredTags}
-                </ul>
-            </div>
-        </div>
+        <div className="flex space-x-6 p-4 lg:space-x-8">
+          <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded-lg 
+                          pt-5 shadow-lg 
+                          backdrop-blur-sm border border-white/20 dark:border-gray-700/20                          
+                          bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
+                          dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
+                          dark:shadow-slate-700/40 sm:flex">
+              <div className="px-6 py-4">
+                  <button
+                      onClick={() => setSelectedTag('')}
+                      className={`${
+                          useTagStore.getState().selectedTag === ''
+                              ? 'text-blue-600 dark:text-blue-300'  /* Couleur de texte plus douce */
+                              : 'text-gray-900 dark:text-gray-200'
+                      } font-bold uppercase transition-colors duration-300`}
+                  >
+                      {t('all')}
+                  </button>
+                  <ul className="mt-4 space-y-2">
+                      {filteredTags}
+                  </ul>
+              </div>
+          </div>
 
           <div>
             {/* <motion.ul
@@ -174,88 +177,113 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
               initial={isHydrated ? "hidden" : false} // Désactive l'animation si pas hydraté
               animate={isHydrated ? "show" : false}
             > */}
-            <ul>
-              {displayPosts.map((post) => {
-                const { slug, date, title, summary, tags, language } = post
-                if (language === locale) {
-                  return (
-                    // <motion.li variants={isHydrated ? item : undefined} key={slug} initial="hidden" animate="show" exit="hidden" className="py-5">
-                    <li key={slug} className="py-5">
-                      <article className="flex flex-col space-y-2 xl:space-y-0">
-                        {post.banner && (
+            <div className="flex-grow relative 
+                            bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
+                            dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
+                            backdrop-blur-sm rounded-lg p-8 shadow-lg 
+                            border border-white/20 dark:border-gray-700/20">
+              <ul>
+                {displayPosts.map((post) => {
+                  const { slug, date, title, summary, tags, language } = post;
+                  if (language === locale) {
+                    return (
+                      <li
+                        key={slug}
+                        className="p-5 mb-6 rounded-2xl shadow-md 
+                        hover:bg-gradient-to-tr hover:from-white/20 hover:via-blue-300/30 hover:to-white/20
+                        dark:hover:bg-gradient-to-tr dark:hover:from-slate-900/20 dark:hover:via-blue-900/30 
+                        dark:hover:via-blue-800/30 dark:hover:to-slate-800/20 
+                        transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg w-full
+                        hover:border hover:border-white/20 dark:hover:border-gray-600/40 group"
+                      >
+                        <article className="flex flex-col space-y-2 xl:space-y-0">
                           <Link
                             href={`/${locale}/blog/${slug}`}
                             className="text-gray-900 dark:text-gray-100"
                             aria-labelledby={title}
                           >
-                            <Image
-                                width={800}
-                                height={200}
-                                src={post.banner}
-                                alt={`${post.title} banner`}
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"                                
-                                quality={100}
-                                className="w-full h-auto rounded-lg border border-gray-200 shadow-md dark:border-gray-700"
-                                priority
-                            />
-                          </Link>
-                        )}
-                        <dl>
-                          <dt className="sr-only">{t('pub')}</dt>
-                          <dd className="text-base font-medium leading-6 text-gray-700 dark:text-gray-400">
-                            <time dateTime={date}>{formatDate(date, language)}</time>
-                          </dd>
-                        </dl>
-                        <div className="space-y-3">
-                          <div>
-                            <div className="text-2xl font-bold leading-8 tracking-tight font-headings antialiased">
-                              <Link
-                                href={`/${locale}/blog/${slug}`}
-                                className="text-gray-900 dark:text-gray-100"
-                                aria-labelledby={title}
+                            {post.banner && (
+                              <div
+                                className="relative w-full h-auto overflow-hidden rounded-lg 
+                                border border-gray-200 shadow-md dark:border-gray-700 
+                                bg-gradient-to-tl from-gray-200 via-gray-100 to-gray-300 
+                                dark:from-gray-800 dark:via-gray-900 dark:to-gray-700 
+                                transition-shadow duration-300 group-hover:shadow-2xl"
                               >
-                                <h2>{title}</h2>
-                              </Link>
+                                <Image
+                                  width={800}
+                                  height={200}
+                                  src={post.banner}
+                                  alt={`${post.title} banner`}
+                                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                  quality={100}
+                                  className="rounded-lg"
+                                  priority
+                                />
+                                {/* <GlassEffect className="absolute top-0 left-0 w-full h-full inset-0 pointer-events-none opacity-0 transition-opacity duration-500 group-hover:opacity-100" /> */}
+                              </div>
+                            )}
+                            <dl>
+                              <dt className="sr-only">{t('pub')}</dt>
+                              <dd className="text-base font-medium leading-6 text-gray-700 dark:text-gray-400">
+                                <time dateTime={date}>{formatDate(date, language)}</time>
+                              </dd>
+                            </dl>
+
+                            <div className="space-y-3">
+                              <h2
+                                className="text-2xl font-bold leading-8 tracking-tight font-headings antialiased
+                                          text-gray-900 dark:text-gray-100 group-hover:text-primary-700 
+                                          dark:group-hover:text-primary-500 transition-colors duration-300"
+                              >
+                                {title}
+                              </h2>
                             </div>
-                            <ul className="flex flex-wrap">
-                              {tags.map((t) => (
-                                <li key={t} className="my-3">
-                                  <button
-                                    onClick={() => handleTagClick(t)}
-                                    className={`${
-                                      useTagStore.getState().selectedTag === t
-                                        ? 'text-heading-700 dark:text-heading-400'
-                                        : 'text-primary-700 hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-500'
-                                    } mr-3 text-sm font-medium uppercase`}
-                                    aria-label={`View posts tagged ${t}`}
-                                  >
-                                    {`${t}`}
-                                  </button>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
+                          
+                          <ul 
+                            className="flex flex-wrap cursor-default group-hover:cursor-default" 
+                            onClick={(e) => e.preventDefault()}>
+                            {tags.map((t) => (
+                              <li key={t} className="my-3">
+                                <button
+                                  onClick={(e) => {
+                                    // e.preventDefault(); // Empêche la propagation vers le Link
+                                    handleTagClick(t);
+                                  }}
+                                  className={`${
+                                    useTagStore.getState().selectedTag === t
+                                      ? 'text-heading-700 dark:text-heading-400'
+                                      : 'text-primary-700 hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-500'
+                                  } mr-3 text-sm font-medium uppercase cursor-pointer`}
+                                  aria-label={`View posts tagged ${t}`}
+                                >
+                                  {`${t}`}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
                           <div className="prose max-w-none text-gray-700 dark:text-gray-400">
                             {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
                           </div>
-                        </div>
-                      </article>
-                    </li>
-                    // </motion.li>
-                  )
-                }
-              })}
-            </ul>
-            {/* </motion.ul> */}
-            {totalPages > 1 && (
-              <Pagination
-                totalPages={totalPages}
-                currentPage={currentPage}
-                onPageChange={onPageChange}
-                params={{ locale: locale }}
-              />
-            )}
+                          </Link>
+                        </article>
+                      </li>
+                    );
+                  }
+                })}
+              </ul>
+
+            </div>
           </div>
+          {/* </motion.ul> */}
+          {totalPages > 1 && (
+            <Pagination
+              totalPages={totalPages}
+              currentPage={currentPage}
+              onPageChange={onPageChange}
+              params={{ locale: locale }}
+            />
+          )}
         </div>
       </div>
     </>

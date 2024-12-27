@@ -14,6 +14,9 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      backgroundImage: {
+        'image': "url('/static/images/assets/background-hexagonal-01-light.svg')",
+      },      
       lineHeight: {
         11: '2.75rem',
         12: '3rem',

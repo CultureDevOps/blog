@@ -79,6 +79,7 @@ const LangSwitch = () => {
               leaveTo="opacity-0 scale-95 translate-y-[10px]"
             >
               <MenuItems
+                modal={false}
                 className="absolute right-0 z-50 mt-4 w-22 origin-top-right divide-y divide-gray-100 rounded-md 
                           backdrop-blur-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none 
                           dark:border-gray-700 dark:border/10"

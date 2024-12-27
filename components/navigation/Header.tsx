@@ -32,9 +32,9 @@ const Header = () => {
   const onToggleNav = () => {
     setNavShow((prev) => {
       if (prev) {
-        document.body.style.overflow = 'auto'
-      } else {
         document.body.style.overflow = 'hidden'
+      } else {
+        document.body.style.overflow = ''
       }
       return !prev
     })
