@@ -113,8 +113,16 @@ html.dark body {
 
 /* La barre de défilement elle-même */
 .overflow-y-auto::-webkit-scrollbar {
-  width: 8px;  /* Largeur de la barre */
-  height: 8px; /* Hauteur si la barre est horizontale */
+  width: 8px;  
+  height: 8px;
+}
+
+/* Pour mobile et écrans étroits */
+@media (max-width: 768px) {
+  .overflow-y-auto::-webkit-scrollbar {
+    width: 2px; /* Réduire la largeur sur mobile */
+    height: 2px;
+  }
 }
 
 /* La piste de la barre de défilement */
