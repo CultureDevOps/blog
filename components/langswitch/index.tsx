@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useMemo } from 'react'
+import { useState, useRef, useCallback, useMemo, useEffect } from 'react'
 import { usePathname, useParams, useRouter } from 'next/navigation'
 import { useOuterClick } from '../util/useOuterClick'
 import { useTagStore } from '@/components/util/useTagStore'
@@ -50,6 +50,13 @@ const LangSwitch = () => {
     [handleLocaleChange, router, setSelectedTag]
   )
 
+  useEffect(() => {
+    const backgroundElement = document.getElementById("background-image");
+    if (backgroundElement) {
+      backgroundElement.style.overflow = isMenuOpen ? 'hidden' : 'auto';
+    }
+  }, [isMenuOpen]);
+
   const currentLocale = useMemo(() => locale.charAt(0).toUpperCase() + locale.slice(1), [locale])
 
   return (
@@ -84,7 +91,6 @@ const LangSwitch = () => {
                           backdrop-blur-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none 
                           dark:border-gray-700 dark:border/10"
                 aria-orientation="vertical"
-                onBlur={() => setIsMenuOpen(false)}
               >
                 <RadioGroup>
                   <div

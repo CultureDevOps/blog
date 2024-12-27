@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+#background-image {
+  scrollbar-gutter: stable both-edges;
+}
+
 :root {
   --background-color-light: #f5f5f4; /* Fond clair stone-100 */
   --background-color-dark: #0f172a; /* Fond sombre slate-900 */
@@ -97,6 +102,45 @@ html.dark body {
   background-color: #9c9c9c;
   border-radius: 5px;
 } */
+
+/* Personnalise la barre de défilement uniquement pour la div contenant le contenu défilant */
+.overflow-y-auto {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Optimise le défilement pour mobile */
+}
+
+/* Personnalisation de la scrollbar pour qu'elle suive le thème du navigateur */
+
+/* La barre de défilement elle-même */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 8px;  /* Largeur de la barre */
+  height: 8px; /* Hauteur si la barre est horizontale */
+}
+
+/* La piste de la barre de défilement */
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: transparent; /* Laisser la piste transparente pour qu'elle suive le thème */
+}
+
+/* Le "pouce" de la barre de défilement (partie déplaçable) */
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);  /* Couleur pour le thème sombre, ajustable */
+  border-radius: 5px;
+}
+
+/* Option pour un thème clair */
+@media (prefers-color-scheme: light) {
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);  /* Couleur pour le thème clair */
+  }
+}
+
+/* Option pour un thème sombre */
+@media (prefers-color-scheme: dark) {
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.5); /* Couleur du pouce en mode sombre */
+  }
+}
 
 /* https://stackoverflow.com/questions/61083813/how-to-avoid-internal-autofill-selected-style-to-be-applied */
 input:-webkit-autofill,

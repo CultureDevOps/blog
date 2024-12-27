@@ -123,7 +123,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <div className="h-screen">
-            <div className="bg-image bg-no-repeat bg-cover bg-scroll h-full w-full overflow-y-auto">
+            <div id="background-image" className="bg-image bg-no-repeat bg-cover bg-scroll h-full w-full overflow-y-auto">
               <SearchProvider>
                 <SectionContainer>
                   <div className="flex flex-col justify-between font-sans">

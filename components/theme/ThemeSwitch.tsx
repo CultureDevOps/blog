@@ -37,6 +37,13 @@ const ThemeSwitch = () => {
     setMenuOpen(false)
   }
 
+  useEffect(() => {
+    const backgroundElement = document.getElementById("background-image");
+    if (backgroundElement) {
+      backgroundElement.style.overflow = menuOpen ? 'hidden' : '';
+    }
+  }, [menuOpen]);
+
   if (!mounted) return null
 
   return (
@@ -44,6 +51,7 @@ const ThemeSwitch = () => {
       <Menu 
         as="div" 
         className="relative mt-1 inline-block text-left"
+        data-open={menuOpen}
       >
         <MenuButton aria-label={t('theme')}>
           <DarkModeSwitch
@@ -65,7 +73,7 @@ const ThemeSwitch = () => {
           leaveTo="opacity-0 scale-95 translate-y-[10px]"
         >
           <MenuItems 
-            modal={false}
+            modal={true}
             className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md 
                       shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <RadioGroup value={theme} onChange={handleThemeChange}>
