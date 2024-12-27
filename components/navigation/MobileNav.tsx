@@ -129,7 +129,7 @@ const MobileNav = ({ navShow, onToggleNav }: { navShow: boolean, onToggleNav: ()
               </motion.div>
             </>
           )}
-          {siteMetadata.multiauthors === false && (
+          {/* {siteMetadata.multiauthors === false && (
             <div className="px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
               {mainAuthor.map((author) => {
                 const { name, language, slug } = author
@@ -143,7 +143,7 @@ const MobileNav = ({ navShow, onToggleNav }: { navShow: boolean, onToggleNav: ()
                 return null
               })}
             </div>
-          )}
+          )} */}
         </nav>
       </div>
     </>
