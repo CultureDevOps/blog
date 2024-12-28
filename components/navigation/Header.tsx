@@ -54,10 +54,10 @@ const Header = () => {
   return (
     <header>
       <div className="mb-8 backdrop-blur-sm 
-                      bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
+                      bg-gradient-to-tr from-blue-300/40 via-blue-100/50 to-blue-300/60 
                       dark:bg-gradient-to-tr dark:from-slate-900/60 dark:via-blue-950/60 dark:to-slate-900/60 
                       border-b border-white/40 dark:border-gray-700/40
-                      shadow-xl dark:shadow-slate-900 transition-shadow duration-300">
+                      shadow-xl shadow-blue-400/60 dark:shadow-slate-900 transition-shadow duration-300">
         <SectionContainer>
           <div className="flex justify-between items-center px-2 py-2">
               <Link 
@@ -65,7 +65,6 @@ const Header = () => {
                 aria-label={siteMetadata.headerTitle} 
                 className="flex items-center w-full space-x-3 flex-nowrap"
               >
-
                 <div className="hidden md:block">
                     <Image 
                       alt="logo" 
