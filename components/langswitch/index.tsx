@@ -65,7 +65,7 @@ const LangSwitch = () => {
         {({ open }) => (
           <>
             <MenuButton
-              className="inline-flex rounded-md px-1 py-2 font-bold leading-5 text-gray-700 shadow-sm dark:text-white"
+              className="inline-flex rounded-md px-1 py-2 font-bold leading-5 text-gray-700 dark:text-white"
               aria-haspopup="true"
               aria-expanded={open}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -87,20 +87,16 @@ const LangSwitch = () => {
             >
               <MenuItems
                 modal={false}
-                className="absolute right-0 z-50 mt-4 w-22 origin-top-right divide-y divide-gray-100 rounded-md 
-                          backdrop-blur-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none 
-                          dark:border-gray-700 dark:border/10"
+                className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md 
+                      shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                 aria-orientation="vertical"
               >
                 <RadioGroup>
                   <div
-                    className={`w-full 
-                                backdrop-blur-lg
-                                bg-gradient-to-br from-white/80 via-blue-200/60 to-white/60
-                                dark:bg-gradient-to-br dark:from-slate-900/60 dark:via-blue-900/20 dark:to-slate-900/30                                
-                                shadow-md shadow-gray-300/80 dark:shadow-slate-700/40
-                                rounded-md 
-                                overflow-hidden`}
+                    className="p-1 rounded-md 
+                              bg-gradient-to-br from-white/80 via-blue-200/60 to-white/60
+                              dark:bg-gradient-to-br dark:from-slate-900/60 dark:via-blue-900/20 dark:to-slate-900/30                                
+                              shadow-md shadow-gray-300/80 dark:shadow-slate-700/40"
                   >
                     {locales.map((newLocale: string) => (
                       <Radio key={newLocale} value={newLocale}>
@@ -113,10 +109,11 @@ const LangSwitch = () => {
                                   ? 'bg-blue-200/70 dark:bg-blue-900/30'
                                   : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
                               } 
-                              group flex w-full items-center rounded-md px-4 py-2 text-sm 
-                              text-gray-700  hover:text-primary-500
-                              dark:text-white dark:hover:text-primary-500                              
-                              transition-all duration-300 ease-in-out`}
+                              group flex w-full items-center rounded-md px-2 py-2 text-sm 
+                              text-gray-700 hover:text-primary-500
+                              hover:backdrop-blur-sm
+                              dark:text-white dark:hover:text-primary-500
+                              dark:hover:text-primary-500`}
                               role="menuitem"
                             >
                               <Flag locale={newLocale} />

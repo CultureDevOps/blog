@@ -91,6 +91,7 @@ const ThemeSwitch = () => {
                               ? 'bg-blue-200/70 dark:bg-blue-900/30'
                               : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm 
+                        hover:backdrop-blur-sm
                         text-gray-700 hover:text-primary-500
                         dark:text-white dark:hover:text-primary-500
                         dark:hover:text-primary-500`}
@@ -111,6 +112,7 @@ const ThemeSwitch = () => {
                               ? 'bg-blue-200/70 dark:bg-blue-900/30'
                               : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm 
+                        hover:backdrop-blur-sm
                         text-gray-700 hover:text-primary-500
                         dark:text-white dark:hover:text-primary-500
                         dark:hover:text-primary-500`}
@@ -132,6 +134,7 @@ const ThemeSwitch = () => {
                               : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm 
                         text-gray-700 hover:text-primary-500
+                        hover:backdrop-blur-sm
                         dark:text-white dark:hover:text-primary-500
                         dark:hover:text-primary-500`}
                       >
