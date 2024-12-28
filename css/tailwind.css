@@ -4,9 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
 #background-image {
-  scrollbar-gutter: stable both-edges;
+  scrollbar-gutter: stable;
+  width: 100vw; /* Fixe la largeur du conteneur */
+  max-width: 100%; /* Assure que le conteneur ne dépasse pas la largeur de la fenêtre */
+  overflow-x: hidden;
 }
 
 :root {
@@ -89,19 +91,6 @@ html.dark body {
 .csl-entry {
   @apply my-5;
 }
-
-/* .overflow-y-auto::-webkit-scrollbar {
-  width: 2px;
-}
-
-.overflow-y-auto::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
-}
-
-.overflow-y-auto::-webkit-scrollbar-thumb {
-  background-color: #9c9c9c;
-  border-radius: 5px;
-} */
 
 /* Personnalise la barre de défilement uniquement pour la div contenant le contenu défilant */
 .overflow-y-auto {

@@ -88,7 +88,7 @@ const LangSwitch = () => {
               <MenuItems
                 modal={false}
                 className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md 
-                      shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                      shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none backdrop-blur-sm"
                 aria-orientation="vertical"
               >
                 <RadioGroup>
@@ -111,7 +111,6 @@ const LangSwitch = () => {
                               } 
                               group flex w-full items-center rounded-md px-2 py-2 text-sm 
                               text-gray-700 hover:text-primary-500
-                              hover:backdrop-blur-sm
                               dark:text-white dark:hover:text-primary-500
                               dark:hover:text-primary-500`}
                               role="menuitem"

@@ -110,35 +110,32 @@ export default function RootLayout({
       <head>
         <script src="/static/js/theme-switcher.js" />     
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
-        <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       </head>
-      <body className=" text-black antialiased dark:text-white 
+      <body className="text-black antialiased dark:text-white 
                       bg-gradient-to-r from-blue-300 via-blue-200 via-20% to-stone-100 
-                      dark:from-blue-800 dark:via-blue-950 dark:via-40% dark:via-slate-900 dark:via-75% dark:to-slate-900">
-        <TwSizeIndicator />
+                      dark:from-blue-800/90 dark:via-blue-950 dark:via-40% dark:via-slate-900 dark:via-75% dark:to-slate-900">
         <ThemeProvider>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
-          <div className="h-screen">
-            <div id="background-image" className="bg-image bg-no-repeat bg-cover bg-scroll h-full w-full overflow-y-auto">
-              <SearchProvider>
-                <SectionContainer>
-                  <div className="flex flex-col justify-between font-sans">
+          <SearchProvider>
+            <div className="h-screen">
+              <div id="background-image" className="bg-image bg-no-repeat bg-cover bg-scroll h-screen w-full overflow-y-auto">                             
+                <div className="flex flex-col justify-between font-sans sticky top-0 z-50">
                     <Header />  
-                  </div>
-                </SectionContainer>
-                <div className="flex flex-col justify-between font-sans">
+                  </div> 
+                <div className="flex flex-col justify-between font-sans pt-24">
                   <main className="mb-auto">{children}</main>
-                </div>
-              </SearchProvider>
-              <div className="flex flex-col justify-between font-sans">
-                <Footer />
-              </div>          
+                </div>                
+                <div className="flex flex-col justify-between font-sans">
+                  <Footer />
+                </div>          
+              </div>
             </div>
-          </div>
+          </SearchProvider>
+          <TwSizeIndicator />
         </ThemeProvider>
       </body>
     </html>

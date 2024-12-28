@@ -75,7 +75,7 @@ const ThemeSwitch = () => {
           <MenuItems 
             modal={true}
             className="absolute right-0 z-50 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md 
-                      shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none backdrop-blur-sm">
             <RadioGroup value={theme} onChange={handleThemeChange}>
               <div className="p-1 rounded-md 
                               bg-gradient-to-br from-white/80 via-blue-200/60 to-white/60

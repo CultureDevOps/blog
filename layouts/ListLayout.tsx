@@ -141,19 +141,22 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
   return (
     <>
       <div>
-        <div className="pb-6 pt-6">
+        <div className="">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight 
           text-gray-900 dark:text-gray-100 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
             {title}
           </h1>
         </div>
-        <div className="flex space-x-6 p-4 lg:space-x-8">
-          <div className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded-lg 
-                          pt-5 shadow-lg 
-                          backdrop-blur-sm border border-white/20 dark:border-gray-700/20                          
-                          bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
-                          dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
-                          dark:shadow-slate-700/40 sm:flex">
+        <div className="flex space-x-6 lg:space-x-8">
+          <div 
+            className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded-lg 
+                      pt-5 shadow-lg 
+                      backdrop-blur-sm border border-white/20 dark:border-gray-700/20                          
+                      bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
+                      dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
+                      dark:shadow-slate-700/40 sm:flex"
+            // style={{ position: 'fixed', top: '5rem', left: '1rem', maxHeight: 'calc(100vh - 5rem)' }}
+          >
               <div className="px-6 py-4">
                   <button
                       onClick={() => setSelectedTag('')}
@@ -180,7 +183,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
             <div className="flex-grow relative 
                             bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
                             dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
-                            backdrop-blur-sm rounded-lg p-8 shadow-lg 
+                            backdrop-blur-sm rounded-lg p-8 shadow-lg dark:shadow-slate-700/40
                             border border-white/20 dark:border-gray-700/20">
               <ul>
                 {displayPosts.map((post) => {
@@ -211,13 +214,13 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                                 transition-shadow duration-300 group-hover:shadow-2xl"
                               >
                                 <Image
-                                  width={800}
-                                  height={200}
+                                  width={2400}
+                                  height={600}
                                   src={post.banner}
                                   alt={`${post.title} banner`}
-                                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                  sizes="100vw"
                                   quality={100}
-                                  className="rounded-lg"
+                                  className="rounded-lg object-cover"
                                   priority
                                 />
                                 {/* <GlassEffect className="absolute top-0 left-0 w-full h-full inset-0 pointer-events-none opacity-0 transition-opacity duration-500 group-hover:opacity-100" /> */}
