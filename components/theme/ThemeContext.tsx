@@ -23,15 +23,16 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   // Utilisation de useLayoutEffect pour appliquer le thème et fond immédiatement
   useLayoutEffect(() => {
+    const currentClassList = document.documentElement.classList;
     if (mounted) {
       const themeToApply = theme === 'dark' ||
         (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
         ? 'dark' : 'light'
 
       // Appliquer directement le fond via les styles CSS
-      if (themeToApply === 'dark') {
+      if (themeToApply === 'dark' && !currentClassList.contains('dark')) {
         document.documentElement.classList.add('dark')
-      } else {
+      } else if (themeToApply !== 'dark' && currentClassList.contains('dark')) {
         document.documentElement.classList.remove('dark')
       }
     }

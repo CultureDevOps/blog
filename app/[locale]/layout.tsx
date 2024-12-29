@@ -99,12 +99,13 @@ export default function RootLayout({
   children: React.ReactNode
   params: { locale: LocaleTypes }
 }) { 
+  const theme = siteMetadata.theme || 'system'
   return (
     <html
       lang={locale}
       dir={dir(locale)}
       className={`${open_sans.variable} ${robotoSlab.variable} ${alfaSlabOne.variable}
-      scroll-smooth`}
+      scroll-smooth ${theme}`}
       suppressHydrationWarning
     >
       <head>
