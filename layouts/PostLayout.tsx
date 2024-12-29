@@ -12,8 +12,6 @@ import { createTranslation } from 'app/[locale]/i18n/server'
 import { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { PostSeriesBox } from '@/components/seriescard'
 import Share from '@/components/share'
-import { Toc } from 'pliny/mdx-plugins'
-import Sidetoc from '@/components/sidetoc'
 import FancyboxWrapper from '@/components/mdxcomponents/FancyboxWrapper'
 import SocialIcon from '@/components/social-icons'
 
@@ -48,11 +46,11 @@ export default async function PostLayout({
   const { filePath, path, slug, date, title, tags, language, series, toc } = content
   const basePath = path.split('/')[0]
   const { t } = await createTranslation(locale, 'home')
-  const tableOfContents: Toc = toc as unknown as Toc
+  // const tableOfContents: Toc = toc as unknown as Toc
   return (
     <>
       <ScrollTopAndComment />
-      <Sidetoc toc={tableOfContents} />
+      {/* <Sidetoc toc={tableOfContents} /> */}
       <div className="mb-6
                       bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
                       dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
