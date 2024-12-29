@@ -17,14 +17,14 @@ const FancyBoxImage = ({ alt, src, ...rest }: ImageWithFancyboxProps) => {
 
   const imageContent = isExternal ? (
     // Si l'image est externe, on utilise une balise <img> standard
-    <img alt={alt} src={src} {...rest} />
+    <img alt={alt} src={src} {...rest} className="rounded-lg"/>
   ) : (
     <NextImage 
       {...rest} 
       src={src} 
       alt={alt} 
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      className="object-cover"       
+      className="object-cover rounded-lg"
       />
   );
   
