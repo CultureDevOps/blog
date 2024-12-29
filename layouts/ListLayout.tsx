@@ -214,8 +214,8 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                                 group-hover:shadow-2xl"
                               >
                                 <Image
-                                  width={2400}
-                                  height={600}
+                                  width={1600}
+                                  height={400}
                                   src={post.banner}
                                   alt={`${post.title} banner`}
                                   sizes="100vw"
