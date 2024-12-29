@@ -108,6 +108,13 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.siteMetadata = { theme: '${process.env.NEXT_PUBLIC_SITE_THEME}' };
+                `,
+              }}
+            />        
         <script src="/static/js/theme-switcher.js" />     
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#000000" />
