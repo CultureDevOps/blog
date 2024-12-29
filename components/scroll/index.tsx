@@ -14,19 +14,32 @@ const ScrollTopAndComment = () => {
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, 'common')
   const [show, setShow] = useState<boolean>(false)
+  const backgroundImage = document.getElementById('background-image')
 
   useEffect(() => {
-    const handleWindowScroll = () => {
-      if (window.scrollY > 50) setShow(true)
-      else setShow(false)
+    const handleScroll = () => {
+      if (backgroundImage && backgroundImage.scrollTop > 50) {
+        setShow(true)
+      } else {
+        setShow(false)
+      }
     }
 
-    window.addEventListener('scroll', handleWindowScroll)
-    return () => window.removeEventListener('scroll', handleWindowScroll)
+    if (backgroundImage) {
+      backgroundImage.addEventListener('scroll', handleScroll)
+    }
+
+    return () => {
+      if (backgroundImage) {
+        backgroundImage.removeEventListener('scroll', handleScroll)
+      }
+    }
   }, [])
 
   const handleScrollTop = () => {
-    window.scrollTo({ top: 0 })
+    if (document.getElementById('background-image')) {
+      document.getElementById('background-image')?.scrollTo({ top: 0 })
+    }
   }
   const handleScrollToComment = () => {
     document.getElementById('comment')?.scrollIntoView()
@@ -41,7 +54,7 @@ const ScrollTopAndComment = () => {
 
     return (
       <div
-        className={`fixed bottom-8 right-8 z-50 hidden flex-col gap-3 ${show ? 'md:flex' : 'md:hidden'}`}
+      className={`fixed bottom-8 right-8 z-50 ${show ? 'md:flex' : 'md:hidden'} transition-all`}
       >
         <SearchButtonWrapper aria-label="Search">
           <div className="rounded-full bg-gray-200 p-2 text-gray-600 transition-all hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600">
