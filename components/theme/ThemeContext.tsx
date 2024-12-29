@@ -1,6 +1,7 @@
 'use client'
 
 import React, { createContext, useState, useContext, useEffect, useLayoutEffect } from 'react'
+import siteMetadata from '@/data/siteMetadata'
 
 interface ThemeContextProps {
   theme: string
@@ -15,7 +16,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [mounted, setMounted] = useState<boolean>(false)
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'system'
+    const savedTheme = localStorage.getItem('theme') || siteMetadata.theme
     setTheme(savedTheme)
     setMounted(true)
   }, []) // Uniquement au montage initial
