@@ -220,6 +220,8 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                                   alt={`${post.title} banner`}
                                   sizes="100vw"
                                   quality={100}
+                                  placeholder="blur"
+                                  blurDataURL={post.banner}                                     
                                   className="rounded-lg object-cover"
                                   priority
                                 />
