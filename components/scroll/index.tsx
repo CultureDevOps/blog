@@ -11,45 +11,54 @@ import { CommentsIcon, ArrowTopIcon } from './icons'
 import { SearchIcon } from '../search/icons'
 
 const ScrollTopAndComment = () => {
-  const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, 'common')
-  const [show, setShow] = useState<boolean>(false)
-  const backgroundImage = document.getElementById('background-image')
+  const locale = useParams()?.locale as LocaleTypes;
+  const { t } = useTranslation(locale, 'common');
+  const [show, setShow] = useState<boolean>(false);
+  const [backgroundImage, setBackgroundImage] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (backgroundImage && backgroundImage.scrollTop > 50) {
-        setShow(true)
-      } else {
-        setShow(false)
-      }
-    }
+    // Définir l'élément `background-image` uniquement côté client
+    const element = document.getElementById('background-image');
+    setBackgroundImage(element);
 
-    if (backgroundImage) {
-      backgroundImage.addEventListener('scroll', handleScroll)
+    const handleScroll = () => {
+      if (element && element.scrollTop > 50) {
+        setShow(true);
+      } else {
+        setShow(false);
+      }
+    };
+
+    // Ajouter un écouteur de scroll sur l'élément trouvé
+    if (element) {
+      element.addEventListener('scroll', handleScroll);
     }
 
     return () => {
-      if (backgroundImage) {
-        backgroundImage.removeEventListener('scroll', handleScroll)
+      if (element) {
+        element.removeEventListener('scroll', handleScroll);
       }
-    }
-  }, [])
+    };
+  }, []);
 
   const handleScrollTop = () => {
-    if (document.getElementById('background-image')) {
-      document.getElementById('background-image')?.scrollTo({ top: 0 })
-    }
-  }
+    backgroundImage?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleScrollToComment = () => {
     const commentElement = document.getElementById('comment');
-    if (commentElement) {
-      commentElement.scrollIntoView({
-        behavior: 'smooth',  // Défilement fluide
-        block: 'nearest'     // S'assurer que l'élément ne dépasse pas la fenêtre
+    if (commentElement && backgroundImage) {
+      const offset = 50; // Ajuster si nécessaire
+      const elementPosition = commentElement.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + backgroundImage.scrollTop - offset;
+
+      backgroundImage.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
       });
     }
-  }
+  };
 
   if (
     siteMetadata.search &&
