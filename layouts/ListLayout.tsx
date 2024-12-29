@@ -208,10 +208,10 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                             {post.banner && (
                               <div
                                 className="relative w-full h-auto overflow-hidden rounded-lg 
-                                border border-gray-200 shadow-md dark:border-gray-700 
+                                border border-gray-200 dark:border-gray-700 
                                 bg-gradient-to-tl from-gray-200 via-gray-100 to-gray-300 
                                 dark:from-gray-800 dark:via-gray-900 dark:to-gray-700 
-                                transition-shadow duration-300 group-hover:shadow-2xl"
+                                group-hover:shadow-2xl"
                               >
                                 <Image
                                   width={2400}
@@ -237,7 +237,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                               <h2
                                 className="text-2xl font-bold leading-8 tracking-tight font-headings antialiased
                                           text-gray-900 dark:text-gray-100 group-hover:text-primary-700 
-                                          dark:group-hover:text-primary-500 transition-colors duration-300"
+                                          dark:group-hover:text-primary-500"
                               >
                                 {title}
                               </h2>
