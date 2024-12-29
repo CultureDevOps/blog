@@ -23,6 +23,12 @@ const Header = () => {
   const [selectedPath, setSelectedPath] = useState<string | null>(null)
   const [isSticky, setIsSticky] = useState(false);
 
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   // Mise à jour de l'état `selectedPath` uniquement côté client
   useEffect(() => {
     if (pathname) {
@@ -131,7 +137,12 @@ const Header = () => {
                 })}
               {/* <AuthorsMenu className="hidden sm:block" /> */}
               <SearchButton />
-              <ThemeSwitch />
+              {/* Espace réservé si React n'est pas encore monté */}
+              {!mounted ? (
+                <div className="w-6 h-6 rounded-full"></div> // Placeholder
+              ) : (
+                <ThemeSwitch />
+              )}
               <LangSwitch />
               {/* Mobile menu toggle button */}
               <button
