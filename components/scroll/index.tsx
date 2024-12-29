@@ -42,7 +42,13 @@ const ScrollTopAndComment = () => {
     }
   }
   const handleScrollToComment = () => {
-    document.getElementById('comment')?.scrollIntoView()
+    const commentElement = document.getElementById('comment');
+    if (commentElement) {
+      commentElement.scrollIntoView({
+        behavior: 'smooth',  // Défilement fluide
+        block: 'nearest'     // S'assurer que l'élément ne dépasse pas la fenêtre
+      });
+    }
   }
 
   if (
