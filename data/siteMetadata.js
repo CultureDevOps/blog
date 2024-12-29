@@ -5,7 +5,7 @@ const siteMetadata = {
   headerTitle: 'Culture DevOps',
   description: 'A blog created with Next.js, i18n and Tailwind.css',
   language: 'fr',
-  theme: 'system', // system, dark or light
+  theme: 'dark', // system, dark or light
   siteUrl: 'https://culturedevops.com',
   siteRepo: 'https://github.com/CultureDevOps/blog',
   siteLogo: '/static/images/assets/logo.png',
