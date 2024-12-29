@@ -208,24 +208,20 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                             {post.banner && (
                               <div
                                 className="relative w-full h-auto overflow-hidden rounded-lg 
-                                border border-gray-200 dark:border-gray-700 
-                                bg-gradient-to-tl from-gray-200 via-gray-100 to-gray-300 
-                                dark:from-gray-800 dark:via-gray-900 dark:to-gray-700 
-                                group-hover:shadow-2xl"
+                                border border-gray-200 dark:border-gray-700"
                               >
-                                <Image
-                                  width={1600}
-                                  height={400}
-                                  src={post.banner}
-                                  alt={`${post.title} banner`}
-                                  sizes="100vw"
-                                  quality={100}
-                                  placeholder="blur"
-                                  blurDataURL={post.banner}                                     
-                                  className="rounded-lg object-cover"
-                                  priority
-                                />
-                                {/* <GlassEffect className="absolute top-0 left-0 w-full h-full inset-0 pointer-events-none opacity-0 transition-opacity duration-500 group-hover:opacity-100" /> */}
+                                  <Image
+                                    width={1600}
+                                    height={400}
+                                    src={post.banner}
+                                    alt={`${post.title} banner`}
+                                    sizes="100vw"
+                                    quality={100}
+                                    placeholder="blur"
+                                    blurDataURL={post.banner}                                     
+                                    className="rounded-lg object-cover"
+                                    priority
+                                  />
                               </div>
                             )}
                             <dl>

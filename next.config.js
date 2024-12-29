@@ -69,7 +69,7 @@ const nextConfig = {
     ],
     loader: process.env.NODE_ENV==="development" ? 'default' : 'custom',
     loaderFile: process.env.NODE_ENV==="development" ? '' : './components/loader/cloudfrontLoader.ts',
-    formats: ['image/webp'],
+    formats: ['image/avif', 'image/webp'],
   },
   async headers() {
     return [
