@@ -16,7 +16,7 @@ const benefitFourImg = '/static/images/assets/team-board-office-01.png'
 const devOps = {
   en: {
     title: 'DevOps is about...',
-    desc: '',
+    desc: 'DevOps is a culture that brings together development and operations teams to deliver software faster, more reliably, and more efficiently.',
     image: benefitOneImg,
     bullets: [
       {
@@ -43,7 +43,7 @@ const devOps = {
   },
   fr: {
     title: 'Le DevOps c\'est...',
-    desc: '',
+    desc: 'Le DevOps, c’est une culture qui réunit les équipes de développement et d’exploitation pour livrer des logiciels plus rapidement, plus fiablement et de manière plus efficace.',
     image: benefitOneImg,
     bullets: [
       {
@@ -73,7 +73,7 @@ const devOps = {
 const cloud = {
   en: {
     title: 'DevOps is also...',
-    desc: '',
+    desc: 'DevOps helps optimize not only software development but also infrastructure management through automation and configuration management.',
     image: benefitTwoImg,
     bullets: [
       {
@@ -100,7 +100,7 @@ const cloud = {
   },
   fr: {
     title: 'Le DevOps, c’est aussi...',
-    desc: '',
+    desc: 'DevOps permet d’optimiser non seulement le développement logiciel, mais aussi la gestion des infrastructures grâce à l’automatisation et à la gestion des configurations.',
     image: benefitTwoImg,
     bullets: [
       {
@@ -130,7 +130,7 @@ const cloud = {
 const services = {
   en: {
     title: 'What I can do for you',
-    desc: '',
+    desc: 'I optimize your IT processes to make your teams more agile, collaborative, and efficient through a tailored DevOps approach.',
     image: benefitThreeImg,
     bullets: [
       {
@@ -157,7 +157,7 @@ const services = {
   },
   fr: {
     title: 'Ce que je peux faire pour vous',
-    desc: '',
+    desc: 'J’optimise vos processus IT pour rendre vos équipes plus agiles, collaboratives et performantes grâce à une approche DevOps sur-mesure.',
     image: benefitThreeImg,
     bullets: [
       {
@@ -167,7 +167,7 @@ const services = {
       },
       {
         title: 'Automatisation de vos infrastructures Cloud',
-        desc: 'Déployez des environnements reproductibles et scalables grâce à IaC.',
+        desc: 'Déployez des environnements reproductibles et scalables grâce à l\'Infrastructure As Code (IaC).',
         icon: <ServerStackIcon />, 
       },
       {
