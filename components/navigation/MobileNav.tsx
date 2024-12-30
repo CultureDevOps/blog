@@ -10,6 +10,9 @@ import { useParams } from 'next/navigation'
 import { useTranslation } from 'app/[locale]/i18n/client'
 import type { LocaleTypes } from 'app/[locale]/i18n/settings'
 import { motion } from 'framer-motion'
+import LangSwitch from '../langswitch'
+import SearchButton from '../search/SearchButton'
+import ThemeSwitch from '../theme/ThemeSwitch'
 
 export function ChevronDownIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
   return (
@@ -74,76 +77,6 @@ const MobileNav = ({ navShow, onToggleNav }: { navShow: boolean, onToggleNav: ()
               </Link>
             </div>
           ))}
-          {siteMetadata.multiauthors && (
-            <>
-              <div
-                className="flex cursor-pointer items-center justify-between px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
-                onClick={toggleAccordion}
-              >
-                <div>{t('about')}:</div>
-                <motion.div
-                  animate={{ rotate: accordionOpen ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <ChevronDownIcon
-                    className={`h-5 w-5 ${accordionOpen ? 'text-primary-500' : ''}`}
-                  />
-                </motion.div>
-              </div>
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: accordionOpen ? 'auto' : 0, opacity: accordionOpen ? 1 : 0 }}
-                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                className="overflow-hidden"
-              >
-                {authors.map((author) => {
-                  const { name, avatar, language, slug } = author
-                  if (language === locale) {
-                    return (
-                      <button
-                        key={name}
-                        className="group flex w-full items-center rounded-md px-12 py-4 text-sm"
-                      >
-                        <div className="mr-2">
-                          <Image
-                            className="rounded-full w-auto h-auto"
-                            src={avatar ?? ''}
-                            title="avatar"
-                            alt="avatar"
-                            width={25}
-                            height={25}
-                          />
-                        </div>
-                        <Link
-                          href={`/${locale}/about/${slug}`}
-                          onClick={onToggleNav}
-                          className="text-xl font-bold tracking-widest text-gray-900 dark:text-gray-100"
-                        >
-                          {name}
-                        </Link>
-                      </button>
-                    )
-                  }
-                  return null
-                })}
-              </motion.div>
-            </>
-          )}
-          {/* {siteMetadata.multiauthors === false && (
-            <div className="px-12 py-4 text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100">
-              {mainAuthor.map((author) => {
-                const { name, language, slug } = author
-                if (language === locale) {
-                  return (
-                    <Link href={`/${locale}/about/${slug}`} onClick={onToggleNav} key={name}>
-                      {t('about')}
-                    </Link>
-                  )
-                }
-                return null
-              })}
-            </div>
-          )} */}
         </nav>
       </div>
     </>

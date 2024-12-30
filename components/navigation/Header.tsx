@@ -65,25 +65,26 @@ const Header = () => {
                       border-b border-white/40 dark:border-gray-700/40
                       shadow-xl shadow-blue-400/60 dark:shadow-slate-900 transition-shadow duration-300">
         <SectionContainer>
-          <div className="flex justify-between items-center px-2 py-2">
+          <div className="flex justify-between items-center py-2">
               <Link 
                 href={`/${locale}/`} 
                 aria-label={siteMetadata.headerTitle} 
-                className="flex items-center w-full space-x-3 flex-nowrap"
+                className="flex items-center w-full space-x-3 flex-grow mr-4"
               >
-                <div className="hidden md:block">
+                <div className="block sm:hidden xl:block flex-shrink-0">
                     <Image 
                       alt="logo" 
                       src={siteMetadata.siteLogo ?? ''} 
                       width={40} 
                       height={40} 
                       priority={true}
-                      sizes="50px"                                
+                      sizes="(min-width: 768px) 60px, 40px" 
+                      className="object-contain"                                
                       quality={80}                  
                     />
                   </div>
                 {typeof siteMetadata.headerTitle === 'string' ? (
-                  <div className="text-xl sm:text-2xl font-logo antialiased">
+                  <div className="text-xl md:text-md font-logo antialiased whitespace-nowrap hidden md:block max-w-xs lg:max-w-sm">
                     {siteMetadata.headerTitle}
                   </div>
                 ) : (
@@ -136,6 +137,7 @@ const Header = () => {
                   )
                 })}
               {/* <AuthorsMenu className="hidden sm:block" /> */}
+              {/* <div className="hidden md:flex items-center space-x-4"> */}
               <SearchButton />
               {/* Espace réservé si React n'est pas encore monté */}
               {!mounted ? (
@@ -144,6 +146,7 @@ const Header = () => {
                 <ThemeSwitch />
               )}
               <LangSwitch />
+              {/* </div> */}
               {/* Mobile menu toggle button */}
               <button
                 className="sm:hidden z-50 text-gray-900 dark:text-gray-100"
