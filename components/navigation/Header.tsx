@@ -128,7 +128,7 @@ const Header = () => {
                             className="absolute inset-0 z-0 rounded-md shadow-md border border-white/10  
                             bg-gradient-to-b from-blue-200/60 via-white/40 to-blue-200/30 backdrop-blur-md 
                             dark:bg-gradient-to-b dark:from-slate-900/60 dark:via-blue-900/30 dark:to-slate-900/30 
-                            dark:shadow-slate-700/40"
+                            shadow-lg shadow-blue-400/60 dark:shadow-slate-950"
                           ></motion.div>
                         )}
                       </div>
