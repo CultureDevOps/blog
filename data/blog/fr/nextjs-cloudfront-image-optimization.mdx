@@ -1,0 +1,118 @@
+---
+title: 'Paramétrer Next.js pour utiliser les images stockées dans CloudFront'
+date: '2024-12-26'
+language: fr
+tags: ['aws', 'cloudfront', 'aws S3', 'docker', 'cdn', 'image-optimization', 'lambda']
+authors: ['default']
+draft: false
+summary: Paramétrer Next.js pour utiliser les images stockées dans CloudFront
+featured: true
+banner: '/static/images/posts/aws-s3-cloudfront-image-optimization/banner-aws-s3-cloudfront-image-optimization-03.png'
+---
+
+# Paramétrer Next.js pour utiliser les images stockées dans CloudFront
+
+Dans un précédent article, nous avons vu comment utiliser **AWS S3** et **CloudFront** pour optimiser et diffuser des images à travers un CDN. Nous avons exploré l'architecture permettant de stocker les images dans un **bucket S3**, de les transformer à la volée avec **AWS Lambda**, puis de les diffuser via **CloudFront**. Cette solution permet de réduire les temps de chargement des images tout en garantissant une haute qualité, ce qui améliore l'expérience utilisateur et le référencement.
+
+Dans cet article, nous allons nous concentrer sur la configuration de **Next.js** pour tirer parti de CloudFront comme source d'images, afin de bénéficier des optimisations réalisées par AWS tout en intégrant ces images dans votre projet web.
+
+## Pourquoi Vercel est une bonne option, mais CloudFront reste plus performant pour certains cas
+
+**Vercel** est un choix populaire pour les projets Next.js grâce à sa facilité d'utilisation, sa simplicité de déploiement, et ses optimisations automatiques des images. Lors de l'utilisation de **Next.js** sur Vercel, l'optimisation des images, la gestion du cache, et la distribution des ressources statiques sont gérées de manière transparente. Cela permet aux développeurs de se concentrer sur le code sans se soucier de l'infrastructure.
+
+Cependant, **CloudFront** a des avantages indéniables dans des scénarios où le contrôle précis de la performance est essentiel :
+
+### 1. **Contrôle total sur la gestion des caches**
+- **Vercel** optimise automatiquement le cache pour les images et les ressources statiques, mais cette gestion est assez générique. Vous avez moins de contrôle sur la manière dont les ressources sont mises en cache et distribuées.
+- Avec **CloudFront**, vous pouvez personnaliser en profondeur la gestion des caches. Par exemple, vous pouvez configurer des politiques de cache spécifiques pour chaque type de contenu, ou utiliser **Lambda@Edge** pour exécuter des fonctions au niveau des points de présence (PoPs) de CloudFront, ce qui peut améliorer la vitesse de réponse.
+
+### 2. **Personnalisation des transformations d’images**
+- Sur **Vercel**, l'optimisation d'images est également automatisée, mais elle peut être limitée en termes de formats supportés ou de transformations complexes.
+- **CloudFront** permet de spécifier des transformations d'images plus avancées, telles que la conversion en **WebP** ou **AVIF**, et la gestion des tailles d'images avec des paramètres comme la largeur et la qualité. Vous avez également la possibilité de gérer plusieurs versions d’une image optimisée en fonction des spécifications du navigateur ou des besoins de l’utilisateur.
+
+### 3. **Performance à grande échelle**
+- **Vercel** est conçu pour être simple à utiliser, et il est bien optimisé pour les projets de petite à moyenne envergure. Cependant, pour des sites web avec un trafic élevé ou des exigences de latence très faible, **CloudFront** offre des **points de présence (PoPs)** dans plus de 200 villes à travers le monde, permettant une distribution encore plus rapide des ressources.
+- En termes de **scalabilité**, **CloudFront** offre une meilleure flexibilité et permet de mieux gérer les pics de trafic grâce à ses nombreuses régions. Si votre site doit supporter une audience mondiale importante, la gestion du trafic via CloudFront vous donnera un contrôle accru sur la performance et les coûts associés à la distribution des ressources.
+
+### 4. **Coût et flexibilité**
+- **Vercel** inclut des optimisations automatiques pour les images dans ses plans d'hébergement, mais le prix peut augmenter à mesure que votre trafic et la quantité de ressources statiques augmentent.
+- **CloudFront**, quant à lui, peut offrir une solution plus économique pour les projets ayant un grand volume de contenu statique, grâce à sa tarification à l’usage et ses options de mise en cache plus avancées.
+
+### Conclusion
+
+**Vercel** est une solution fantastique pour les développeurs qui cherchent à déployer rapidement une application Next.js avec des optimisations automatiques des images. Cependant, pour des sites nécessitant un contrôle plus fin sur les performances, la distribution globale et l'optimisation avancée des images, **CloudFront** est une option plus puissante et personnalisable.
+
+En combinant **Next.js** avec **CloudFront**, vous pouvez exploiter la flexibilité et la puissance d'un CDN mondial tout en optimisant la gestion des ressources statiques de manière fine et détaillée. Cette approche est particulièrement adaptée pour les projets à fort trafic et ceux qui ont des besoins de performance spécifiques.
+
+## Configurer Next.js pour CloudFront
+
+Pour intégrer **CloudFront** dans un projet **Next.js**, il faut configurer un loader personnalisé. Ce loader permettra de servir les images via CloudFront tout en appliquant les transformations nécessaires (comme la compression en WebP ou AVIF) directement depuis CloudFront.
+
+### Étapes de configuration
+
+1. **Créer un fichier pour le loader personnalisé** : Ce fichier va spécifier l'URL du CDN et les paramètres d'optimisation des images. Créez un fichier `cloudfrontLoader.ts` dans le dossier `components/loader/`.
+
+```typescript
+// cloudfrontLoader.ts
+export interface CloudfrontLoaderProps {
+  src: string;
+  width: number;
+  quality?: number;
+}
+
+export default function cloudfrontLoader({ src, width, quality }: CloudfrontLoaderProps): string {
+  const url = new URL(`${process.env.CLOUD_FRONT_URL}${src}`);
+  if (!url.searchParams.has('format')) {
+    url.searchParams.set('format', 'auto'); // Format automatique (WebP, PNG, etc.)
+  }
+  url.searchParams.set('width', (width || 800).toString()); // Largeur par défaut
+  url.searchParams.set('quality', (quality || 90).toString()); // Qualité par défaut
+  return url.href;
+}
+```
+
+2. **Configurer Next.js pour utiliser le loader** : Ajoutez ce loader à votre fichier de configuration `next.config.js`.
+
+```javascript
+// next.config.js
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '<CloudFront Domain>', // Remplacez par votre domaine CloudFront
+        pathname: '**',
+      },
+    ],
+    loader: 'custom',
+    loaderFile: './components/loader/cloudfrontLoader.ts',
+    formats: ['image/avif', 'image/webp'],
+  },
+};
+```
+
+3. **Utiliser le composant `<Image>` dans votre projet Next.js** : Vous pouvez maintenant utiliser la balise `<Image>` pour charger et afficher les images optimisées.
+
+```jsx
+<Image
+  src={data.image}
+  width={640}
+  height={640}
+  alt={data.title}
+  className="object-cover"
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  quality={80}
+/>
+```
+
+### Points clés à retenir
+
+- **Format automatique** : Le format des images (WebP, AVIF, etc.) est automatiquement choisi en fonction du navigateur, grâce à l'option `format=auto`.
+- **Optimisation de la taille et de la qualité** : L'option `quality` permet de définir le niveau de compression des images.
+- **Responsive** : Le paramètre `sizes` permet de définir différentes tailles d'images pour différents types d'écrans.
+
+### Conclusion
+
+En combinant **Next.js** et **CloudFront**, vous bénéficiez de la puissance d'un CDN pour servir des images optimisées tout en maintenant un contrôle total sur les transformations des fichiers. Cette solution vous permet de maximiser les performances de votre site tout en réduisant les coûts et la bande passante utilisée, tout comme l'optimisation que nous avons abordée avec **AWS S3** et **Lambda**.
+
+Vos images sont désormais servies plus rapidement et de manière plus efficace, tout en offrant une meilleure expérience utilisateur grâce à une gestion fine des formats et des tailles d'images.
