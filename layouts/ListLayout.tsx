@@ -154,7 +154,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                       backdrop-blur-sm border border-white/20 dark:border-gray-700/20                          
                       bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
                       dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
-                      shadow-xl shadow-blue-400/60 dark:shadow-slate-950 "
+                      shadow-xl shadow-blue-400 dark:shadow-slate-950 "
             // style={{ position: 'fixed', top: '5rem', left: '1rem', maxHeight: 'calc(100vh - 5rem)' }}
           >
               <div className="px-6 py-4">
@@ -184,7 +184,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                             bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
                             dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
                             backdrop-blur-sm rounded-lg p-8 
-                            shadow-xl shadow-blue-400/60 dark:shadow-slate-950
+                            shadow-xl shadow-blue-400 dark:shadow-slate-950
                             border border-white/20 dark:border-gray-700/20">
               <ul>
                 {displayPosts.map((post) => {

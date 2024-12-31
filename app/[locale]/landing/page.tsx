@@ -18,7 +18,7 @@ export default async function Landing({ params: { locale } }: LandingProps) {
                    dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
                    backdrop-blur-sm rounded-lg p-8 shadow-lg 
                    border border-white/20 dark:border-gray-700/20
-                   shadow-xl shadow-blue-400/60 dark:shadow-slate-950">
+                   shadow-xl shadow-blue-400 dark:shadow-slate-950">
             <Hero params={{ locale: locale }} />
           </div>
           <div className="mb-6 flex-grow 
@@ -26,7 +26,7 @@ export default async function Landing({ params: { locale } }: LandingProps) {
                    dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
                    backdrop-blur-sm rounded-lg p-8 shadow-lg 
                    border border-white/20 dark:border-gray-700/20
-                   shadow-xl shadow-blue-400/60 dark:shadow-slate-950">
+                   shadow-xl shadow-blue-400 dark:shadow-slate-950">
             <Benefits data={devOps[locale]} />
           </div>
           <div className="mb-6 flex-grow 
@@ -34,7 +34,7 @@ export default async function Landing({ params: { locale } }: LandingProps) {
                    dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
                    backdrop-blur-sm rounded-lg p-8 shadow-lg 
                    border border-white/20 dark:border-gray-700/20
-                   shadow-xl shadow-blue-400/60 dark:shadow-slate-950">
+                   shadow-xl shadow-blue-400 dark:shadow-slate-950">
             <Benefits imgPos="right" data={cloud[locale]} />
           </div>
           <div className="mb-6 flex-grow 
@@ -42,7 +42,7 @@ export default async function Landing({ params: { locale } }: LandingProps) {
                    dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
                    backdrop-blur-sm rounded-lg p-8 shadow-lg 
                    border border-white/20 dark:border-gray-700/20
-                   shadow-xl shadow-blue-400/60 dark:shadow-slate-950">
+                   shadow-xl shadow-blue-400 dark:shadow-slate-950">
             <Benefits data={services[locale]} />
           </div>        
           <div className="mb-6 flex-grow 
@@ -50,7 +50,7 @@ export default async function Landing({ params: { locale } }: LandingProps) {
                    dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
                    backdrop-blur-sm rounded-lg p-8 shadow-lg 
                    border border-white/20 dark:border-gray-700/20
-                   shadow-xl shadow-blue-400/60 dark:shadow-slate-950">
+                   shadow-xl shadow-blue-400 dark:shadow-slate-950">
             <Benefits imgPos="right" data={experience[locale]} />
           </div>        
     </FullLayoutSectionContainer>
