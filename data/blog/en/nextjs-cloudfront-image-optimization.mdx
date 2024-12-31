@@ -1,0 +1,140 @@
+---
+title: 'Paramétrer Next.js pour utiliser les images stockées dans CloudFront'
+date: '2024-12-26'
+language: en
+tags: ['aws', 'cloudfront', 'aws S3', 'docker', 'cdn', 'image-optimization', 'lambda']
+authors: ['default']
+draft: false
+summary: Paramétrer Next.js pour utiliser les images stockées dans CloudFront
+featured: true
+banner: '/static/images/posts/aws-s3-cloudfront-image-optimization/banner-aws-s3-cloudfront-image-optimization-03.png'
+---
+
+# Paramétrer Next.js pour utiliser les images stockées dans CloudFront
+
+Un des atouts majeurs de Next.js, couplé à Vercel, est sa gestion native de l'optimisation des images.
+
+### Les avantages et inconvénients de l'optimisation d'images avec Vercel
+
+**Avantages :**
+
+- **Simplicité** : Avec la balise `<Image>`, Vercel applique automatiquement plusieurs optimisations sans configuration supplémentaire.
+- **Compression efficace** : Les images sont compressées aux formats WebP ou AVIF et mises en cache. Ces formats offrent un excellent taux de compression tout en préservant une qualité optimale.
+- **Adaptabilité** : Vercel génère plusieurs versions d’une image pour s’adapter aux différentes résolutions d’écran, garantissant ainsi une meilleure expérience utilisateur.
+- **Bonnes pratiques par défaut** : Le chargement paresseux (*lazy loading*) et d'autres optimisations sont activés automatiquement.
+- **Intégration native** : La configuration de Vercel avec Next.js est fluide et simplifie le déploiement.
+
+**Inconvénients :**
+
+- **Performance limitée dans la version gratuite** : Bien que la solution soit efficace, les performances peuvent être insuffisantes pour des projets nécessitant une haute disponibilité ou un trafic élevé.
+- **Moins de contrôle** : Les développeurs ont peu de marge de manœuvre pour personnaliser la gestion des images ou les politiques de mise en cache.
+- **Coût** : Les versions payantes peuvent rapidement devenir coûteuses pour les projets avec un grand volume d'images.
+
+### Pourquoi choisir CloudFront ?
+
+CloudFront, le CDN (Content Delivery Network) proposé par AWS, apporte plusieurs avantages clés pour la gestion des ressources, en particulier les images :
+
+**Avantages :**
+
+- **Performance mondiale** : Grâce à son réseau de points de présence (PoPs) répartis à l'échelle mondiale, CloudFront réduit considérablement la latence en servant les images depuis le serveur le plus proche de l'utilisateur.
+- **Contrôle avancé** : Avec CloudFront et S3, vous pouvez personnaliser les règles de cache, les politiques de sécurité, et bien plus encore, selon vos besoins.
+- **Coût évolutif** : La tarification basée sur l’utilisation permet de démarrer à moindre coût, tout en offrant une grande capacité d’évolutivité pour les projets à fort trafic.
+- **Sécurité renforcée** : CloudFront intègre des protections avancées comme AWS Shield contre les attaques DDoS et permet de restreindre l’accès aux fichiers via des signatures ou des restrictions géographiques.
+- **Flexibilité** : En combinaison avec des services comme Lambda@Edge, vous pouvez mettre en œuvre des transformations d'images, des ajustements de headers HTTP, ou d'autres optimisations à la volée.
+
+**Inconvénients :**
+
+- **Complexité de configuration** : Comparé à Vercel, CloudFront demande davantage de connaissances techniques pour être configuré et optimisé correctement.
+- **Coûts supplémentaires** : Bien que compétitifs, les coûts peuvent augmenter en fonction de l'utilisation, surtout si vous traitez un grand volume de données ou activez des services annexes.
+- **Intégration avec Next.js** : Une configuration spécifique est nécessaire pour tirer parti de CloudFront avec Next.js, ce qui peut augmenter la charge initiale de travail.
+
+En dépit de ces défis, CloudFront est particulièrement adapté pour les projets nécessitant une performance optimale et un contrôle total sur l'infrastructure.
+
+## Configurer un loader personnalisé dans Next.js
+
+Pour que Next.js utilise CloudFront comme source d'images, vous devez créer un loader personnalisé. Voici les étapes détaillées :
+
+1. **Créez un fichier pour le loader** : Placez ce fichier dans votre arborescence, par exemple dans `components/loader/cloudfrontLoader.ts`.
+
+```typescript
+// cloudfrontLoader.ts
+export interface CloudfrontLoaderProps {
+  src: string;
+  width: number;
+  quality?: number;
+}
+
+export default function cloudfrontLoader({ src, width, quality }: CloudfrontLoaderProps): string {
+  const url = new URL(`${process.env.CLOUD_FRONT_URL}${src}`);
+  if (!url.searchParams.has('format')) {
+    url.searchParams.set('format', 'auto'); // Format automatique (WebP, PNG, etc.)
+  }
+  url.searchParams.set('width', (width || 800).toString()); // Largeur par défaut
+  url.searchParams.set('quality', (quality || 90).toString()); // Qualité par défaut
+  return url.href;
+}
+```
+
+2. **Remplacez `<CloudFront Domain>`** dans le fichier de configuration par le domaine CloudFront que vous utilisez.
+
+3. **Ajoutez ce loader à la configuration de votre projet Next.js** :
+
+```javascript
+// next.config.js
+module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '<CloudFront Domain>', // Remplacez par votre domaine CloudFront
+        pathname: '**',
+      },
+    ],
+    loader: 'custom',
+    loaderFile: './components/loader/cloudfrontLoader.ts',
+    formats: ['image/avif', 'image/webp'],
+  },
+};
+```
+
+## Utilisation dans Next.js
+
+Voici un exemple d'utilisation du composant `<Image>` :
+
+```jsx
+<Image
+  src={data.image}
+  width={640}
+  height={640}
+  alt={data.title}
+  className="object-cover"
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+  quality={80}
+/>
+```
+
+### Points à noter :
+
+1. **Option `sizes`** : 
+   - Permet à Next.js de générer des images optimisées pour différentes tailles d'écran.
+   - Par exemple :
+     - 100% de la largeur de l'écran pour les mobiles (moins de 768px).
+     - 50% pour les tablettes (moins de 1200px).
+     - 33% pour les écrans plus grands.
+
+2. **Qualité (`quality`)** : 
+   - Régule la compression. Une valeur plus basse diminue la qualité mais réduit la taille des fichiers.
+
+3. **Formats d'image (`formats`)** : 
+   - L'ordre dans le tableau est important : Next.js privilégiera le premier format supporté par le navigateur (AVIF ici, puis WebP).
+
+4. **Dimensions (`width` et `height`)** : 
+   - Utilisées pour préserver le ratio de l'image, sans affecter sa taille rendue à l'écran.
+
+### Validation des résultats
+
+1. Ouvrez les outils de développement de votre navigateur et inspectez une image. Vous devriez voir qu'elle est maintenant servie depuis CloudFront.
+2. Consultez la console Amazon S3 pour vérifier que les images optimisées (WebP, AVIF, etc.) sont bien générées dans le bucket configuré.
+
+Et voilà ! Vos images sont maintenant gérées et servies directement via CloudFront, ce qui améliore les performances tout en gardant un contrôle total sur votre infrastructure.
+
