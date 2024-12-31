@@ -43,7 +43,7 @@ const devOps = {
   },
   fr: {
     title: 'Le DevOps c\'est...',
-    desc: 'Le DevOps, c’est une culture qui réunit les équipes de développement et d’exploitation pour livrer des logiciels plus rapidement, plus fiablement et de manière plus efficace.',
+    desc: 'Le DevOps, c\'est une culture qui réunit les équipes de développement et d\'exploitation pour livrer des logiciels plus rapidement, plus fiablement et de manière plus efficace.',
     image: benefitOneImg,
     bullets: [
       {
@@ -99,8 +99,8 @@ const cloud = {
     ],
   },
   fr: {
-    title: 'Le DevOps, c’est aussi...',
-    desc: 'DevOps permet d’optimiser non seulement le développement logiciel, mais aussi la gestion des infrastructures grâce à l’automatisation et à la gestion des configurations.',
+    title: 'Le DevOps, c\'est aussi...',
+    desc: 'DevOps permet d\'optimiser non seulement le développement logiciel, mais aussi la gestion des infrastructures grâce à l\'automatisation et à la gestion des configurations.',
     image: benefitTwoImg,
     bullets: [
       {
@@ -157,7 +157,7 @@ const services = {
   },
   fr: {
     title: 'Ce que je peux faire pour vous',
-    desc: 'J’optimise vos processus IT pour rendre vos équipes plus agiles, collaboratives et performantes grâce à une approche DevOps sur-mesure.',
+    desc: 'J\'optimise vos processus IT pour rendre vos équipes plus agiles, collaboratives et performantes grâce à une approche DevOps sur-mesure.',
     image: benefitThreeImg,
     bullets: [
       {
@@ -172,7 +172,7 @@ const services = {
       },
       {
         title: 'Formation DevOps pour vos équipes',
-        desc: 'Accompagnez vos équipes dans l’adoption des bonnes pratiques DevOps.',
+        desc: 'Accompagnez vos équipes dans l\'adoption des bonnes pratiques DevOps.',
         icon: <PresentationChartLineIcon />, 
       },
       {

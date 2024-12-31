@@ -44,7 +44,8 @@ export default async function Page({ params: { authors, locale } }: AboutProps) 
                 bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
                 dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
                 backdrop-blur-sm rounded-lg p-8 shadow-lg 
-                border border-white/20 dark:border-gray-700/20">
+                border border-white/20 dark:border-gray-700/20
+                shadow-xl shadow-blue-400/60 dark:shadow-slate-950">
         <AuthorLayout params={{ locale: locale }} content={mainContent}>
           <MDXLayoutRenderer code={author.body.code} />
         </AuthorLayout>

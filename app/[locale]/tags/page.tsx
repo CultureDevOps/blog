@@ -30,7 +30,8 @@ export default function Page({ params: { locale } }: TagsProps) {
                       bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
                       dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
                       backdrop-blur-sm rounded-lg p-8 shadow-lg 
-                      border border-white/20 dark:border-gray-700/20 h-fit">     
+                      border border-white/20 dark:border-gray-700/20
+                      shadow-xl shadow-blue-400/60 dark:shadow-slate-950">     
         <div className="flex flex-col items-start justify-start divide-y divide-gray-200 dark:divide-gray-700 md:mt-24 md:flex-row md:items-center md:justify-center md:space-x-6 md:divide-y-0">
           <div className="space-x-2 pb-8 pt-6 md:space-y-5">
             <h1 className="text-3xl font-extrabold leading-9 tracking-tight 

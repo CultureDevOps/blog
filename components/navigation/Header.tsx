@@ -63,7 +63,7 @@ const Header = () => {
                       bg-gradient-to-tr from-blue-300/40 via-blue-100/50 to-blue-300/60 
                       dark:bg-gradient-to-tr dark:from-slate-900/60 dark:via-blue-950/60 dark:to-slate-900/60 
                       border-b border-white/40 dark:border-gray-700/40
-                      shadow-xl shadow-blue-400/60 dark:shadow-slate-900 transition-shadow duration-300">
+                      shadow-xl shadow-blue-400/60 dark:shadow-slate-950 transition-shadow duration-300">
         <SectionContainer>
           <div className="flex justify-between items-center py-2">
               <Link 
