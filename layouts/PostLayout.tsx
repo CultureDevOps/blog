@@ -72,7 +72,7 @@ export default async function PostLayout({
                       </dd>
                     </div>
                   </dl>
-                  <div className="font-headings">
+                  <div className="font-headings text-shadow text-shadow-gray-400/80 dark:text-shadow-black">
                     <PageTitle>{title}</PageTitle>
                   </div>
                 </div>

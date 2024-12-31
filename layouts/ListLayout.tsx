@@ -237,7 +237,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                               <h2
                                 className="text-2xl font-bold leading-8 tracking-tight font-headings antialiased
                                           text-gray-900 dark:text-gray-100 group-hover:text-primary-700 
-                                          dark:group-hover:text-primary-500"
+                                          dark:group-hover:text-primary-500 text-shadow text-shadow-gray-400/80 dark:text-shadow-black"
                               >
                                 {title}
                               </h2>

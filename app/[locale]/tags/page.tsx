@@ -36,7 +36,8 @@ export default function Page({ params: { locale } }: TagsProps) {
           <div className="space-x-2 pb-8 pt-6 md:space-y-5">
             <h1 className="text-3xl font-extrabold leading-9 tracking-tight 
             text-heading-700 dark:text-white sm:text-4xl sm:leading-10 
-            md:border-r-2 md:px-6 md:text-6xl md:leading-14 font-headings antialiased">
+            md:border-r-2 md:px-6 md:text-6xl md:leading-14 font-headings antialiased
+            text-shadow text-shadow-gray-400/80 dark:text-shadow-black">
               Tags
             </h1>
           </div>

@@ -88,13 +88,14 @@ const ThemeSwitch = () => {
                         onClick={() => handleThemeChange('light')}
                         className={`${
                           focus
-                              ? 'bg-blue-200/70 dark:bg-blue-900/30'
-                              : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
+                              ? 'bg-blue-400/50 dark:bg-blue-500/30'
+                              : 'hover:bg-blue-400/50 dark:hover:bg-gray-600/40'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm 
                         hover:backdrop-blur-sm
                         text-gray-700 hover:text-primary-500
                         dark:text-white dark:hover:text-primary-500
-                        dark:hover:text-primary-500`}
+                        dark:hover:text-primary-500
+                        text-shadow text-shadow-gray-400/80 dark:text-shadow-black`}
                       >
                         <Sun className="h-6 w-6" />
                         <span className="ml-2">{t('light')}</span>
@@ -109,13 +110,14 @@ const ThemeSwitch = () => {
                         onClick={() => handleThemeChange('dark')}
                         className={`${
                           focus
-                              ? 'bg-blue-200/70 dark:bg-blue-900/30'
-                              : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
+                              ? 'bg-blue-400/50 dark:bg-blue-500/30'
+                              : 'hover:bg-blue-400/50 dark:hover:bg-gray-600/40'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm 
                         hover:backdrop-blur-sm
                         text-gray-700 hover:text-primary-500
                         dark:text-white dark:hover:text-primary-500
-                        dark:hover:text-primary-500`}
+                        dark:hover:text-primary-500
+                        text-shadow text-shadow-gray-400/80 dark:text-shadow-black`}
                       >
                         <Moon className="h-6 w-6" />
                         <span className="ml-2">{t('dark')}</span>
@@ -130,13 +132,14 @@ const ThemeSwitch = () => {
                         onClick={() => handleThemeChange('system')}
                         className={`${
                           focus
-                              ? 'bg-blue-200/70 dark:bg-blue-900/30'
-                              : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
+                              ? 'bg-blue-400/50 dark:bg-blue-500/30'
+                              : 'hover:bg-blue-400/50 dark:hover:bg-gray-600/40'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm 
                         text-gray-700 hover:text-primary-500
                         hover:backdrop-blur-sm
                         dark:text-white dark:hover:text-primary-500
-                        dark:hover:text-primary-500`}
+                        dark:hover:text-primary-500
+                        text-shadow text-shadow-gray-400/80 dark:text-shadow-black`}
                       >
                         <Monitor className="h-6 w-6" />
                         <span className="ml-2">{t('system')}</span>

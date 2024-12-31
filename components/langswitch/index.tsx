@@ -65,7 +65,9 @@ const LangSwitch = () => {
         {({ open }) => (
           <>
             <MenuButton
-              className="inline-flex rounded-md px-1 py-2 font-bold leading-5 text-gray-700 dark:text-white"
+              className="inline-flex rounded-md px-1 py-2 font-bold leading-5 
+                        text-gray-700 dark:text-white 
+                        text-shadow text-shadow-gray-400/80 dark:text-shadow-black"
               aria-haspopup="true"
               aria-expanded={open}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -106,13 +108,13 @@ const LangSwitch = () => {
                               onClick={() => handleLinkClick(newLocale)}
                               className={`${
                                 focus
-                                  ? 'bg-blue-200/70 dark:bg-blue-900/30'
-                                  : 'hover:bg-blue-200/50 dark:hover:bg-gray-600/40'
+                                  ? 'bg-blue-400/50 dark:bg-blue-500/30'
+                                  : 'hover:bg-blue-400/50 dark:hover:bg-gray-600/40'
                               } 
-                              group flex w-full items-center rounded-md px-2 py-2 text-sm 
+                              group flex w-full items-center rounded-md px-2 py-2 text-sm font-bold 
                               text-gray-700 hover:text-primary-500
                               dark:text-white dark:hover:text-primary-500
-                              dark:hover:text-primary-500`}
+                              text-shadow text-shadow-gray-400/80 dark:text-shadow-black`}
                               role="menuitem"
                             >
                               <Flag locale={newLocale} />

@@ -52,6 +52,7 @@ module.exports = {
             },
             'h1,h2,h3,h4,h5,h6': {
               fontFamily: theme('fontFamily.headings'), 
+              textShadow: '2px 2px 4px rgba(156, 163, 175, 0.8)',
             },
             code: {
               color: theme('colors.indigo.600'),
@@ -77,6 +78,7 @@ module.exports = {
             'h1,h2,h3,h4,h5,h6': {
               color: theme('colors.gray.100'),
               fontFamily: theme('fontFamily.headings'), 
+              textShadow: '2px 2px 4px rgba(0, 0, 0, 1)',
             },
             hr: {
               borderColor: theme('colors.gray.700'), // Séparateur en mode sombre
@@ -93,5 +95,14 @@ module.exports = {
       }),
     },
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+  plugins: [
+    require('@tailwindcss/forms'), 
+    require('@tailwindcss/typography'),
+    require("@designbycode/tailwindcss-text-shadow")({
+      shadowColor: "rgba(0, 0, 0, 0.8)",
+      shadowBlur: "3px",
+      shadowOffsetX: "2px",
+      shadowOffsetY: "2px",
+     }),
+  ],
 }

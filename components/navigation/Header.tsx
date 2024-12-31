@@ -84,7 +84,9 @@ const Header = () => {
                     />
                   </div>
                 {typeof siteMetadata.headerTitle === 'string' ? (
-                  <div className="text-xl md:text-md font-logo antialiased whitespace-nowrap hidden md:block max-w-xs lg:max-w-sm">
+                  <div className="text-xl md:text-md font-logo antialiased whitespace-nowrap 
+                                  hidden md:block max-w-xs lg:max-w-sm
+                                  text-shadow text-shadow-gray-400/80 dark:text-shadow-black">
                     {siteMetadata.headerTitle}
                   </div>
                 ) : (
@@ -115,7 +117,7 @@ const Header = () => {
                             : 'text-black hover:text-blue-900 dark:text-white dark:hover:text-blue-300'
                           } relative rounded-md px-2 py-2 font-medium transition-colors sm:block`}
                       >
-                        <span className="relative z-10 font-bold">{t(`${link.title.toLowerCase()}`)}</span>
+                        <span className="relative z-10 font-bold text-shadow text-shadow-gray-400/80 dark:text-shadow-black">{t(`${link.title.toLowerCase()}`)}</span>
                         {isSelected && (
                           <motion.div
                             layoutId="tab"
