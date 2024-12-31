@@ -197,8 +197,9 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                         hover:bg-gradient-to-tr hover:from-white/20 hover:via-blue-300/30 hover:to-white/20
                         dark:hover:bg-gradient-to-tr dark:hover:from-slate-900/20 dark:hover:via-blue-900/30 
                         dark:hover:via-blue-800/30 dark:hover:to-slate-800/20 
-                        transition-transform duration-200 hover:scale-[1.02] hover:shadow-lg w-full
-                        hover:border hover:border-white/20 dark:hover:border-gray-600/40 group"
+                        transition-transform duration-200 hover:scale-[1.02] w-full
+                        hover:border hover:border-white/20 dark:hover:border-gray-600/40 group
+                        hover:shadow-xl hover:shadow-blue-400 dark:hover:shadow-slate-950"
                       >
                         <article className="flex flex-col space-y-2 xl:space-y-0">
                           <Link
