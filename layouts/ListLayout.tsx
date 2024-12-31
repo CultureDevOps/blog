@@ -126,8 +126,8 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
           <h3
             className={`inline px-3 py-2 text-sm font-medium uppercase ${
               useTagStore.getState().selectedTag === postTag
-                ? 'text-primary-600'
-                : 'text-gray-600 hover:text-primary-700 dark:text-gray-300 dark:hover:text-primary-500'
+                ? 'text-heading-800 dark:text-heading-300'
+                : 'text-gray-600 hover:text-heading-800 dark:text-gray-300 dark:hover:text-heading-300'
             }`}
           >
             {' '}
