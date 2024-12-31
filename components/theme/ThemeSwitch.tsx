@@ -80,7 +80,7 @@ const ThemeSwitch = () => {
               <div className="p-1 rounded-md 
                               bg-gradient-to-br from-gray-200/95 via-blue-200/95 to-gray-200/95
                               dark:bg-gradient-to-br dark:from-slate-900/95 dark:via-blue-900/95 dark:to-slate-900/95                                
-                              shadow-md shadow-gray-300/80 dark:shadow-slate-700/40">
+                              shadow-xl shadow-slate-400 dark:shadow-slate-950">
                 <Radio value="light">
                   <MenuItem>
                     {({ focus }) => (
