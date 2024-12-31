@@ -257,7 +257,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                                     useTagStore.getState().selectedTag === t
                                       ? 'text-heading-700 dark:text-heading-400'
                                       : 'text-primary-700 hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-500'
-                                  } mr-3 text-sm font-medium uppercase cursor-pointer`}
+                                  } mr-3 py-2 text-sm font-medium uppercase cursor-pointer`}
                                   aria-label={`View posts tagged ${t}`}
                                 >
                                   {`${t}`}
