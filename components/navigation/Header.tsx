@@ -63,7 +63,7 @@ const Header = () => {
                       bg-gradient-to-tr from-blue-300/40 via-blue-100/50 to-blue-300/60 
                       dark:bg-gradient-to-tr dark:from-slate-900/60 dark:via-blue-950/60 dark:to-slate-900/60 
                       border-b border-white/40 dark:border-gray-700/40
-                      shadow-xl shadow-blue-400 dark:shadow-slate-950 transition-shadow duration-300">
+                      shadow-xl shadow-slate-400 dark:shadow-slate-950 transition-shadow duration-300">
         <SectionContainer>
           <div className="flex justify-between items-center py-2">
               <Link 
@@ -130,7 +130,7 @@ const Header = () => {
                             className="absolute inset-0 z-0 rounded-md shadow-md border border-white/10  
                             bg-gradient-to-b from-blue-200/60 via-white/40 to-blue-200/30 backdrop-blur-md 
                             dark:bg-gradient-to-b dark:from-slate-900/60 dark:via-blue-900/30 dark:to-slate-900/30 
-                            shadow-lg shadow-blue-400 dark:shadow-slate-950"
+                            shadow-lg shadow-slate-400 dark:shadow-slate-950"
                           ></motion.div>
                         )}
                       </div>

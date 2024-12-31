@@ -154,7 +154,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                       backdrop-blur-sm border border-white/20 dark:border-gray-700/20                          
                       bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
                       dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
-                      shadow-xl shadow-blue-400 dark:shadow-slate-950 "
+                      shadow-xl shadow-slate-400 dark:shadow-slate-950 "
             // style={{ position: 'fixed', top: '5rem', left: '1rem', maxHeight: 'calc(100vh - 5rem)' }}
           >
               <div className="px-6 py-4">
@@ -184,7 +184,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                             bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
                             dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
                             backdrop-blur-sm rounded-lg p-8 
-                            shadow-xl shadow-blue-400 dark:shadow-slate-950
+                            shadow-xl shadow-slate-400 dark:shadow-slate-950
                             border border-white/20 dark:border-gray-700/20">
               <ul>
                 {displayPosts.map((post) => {
@@ -199,7 +199,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                         dark:hover:via-blue-800/30 dark:hover:to-slate-800/20 
                         transition-transform duration-200 hover:scale-[1.02] w-full
                         hover:border hover:border-white/20 dark:hover:border-gray-600/40 group
-                        hover:shadow-xl hover:shadow-blue-400 dark:hover:shadow-slate-950"
+                        hover:shadow-xl hover:shadow-slate-400 dark:hover:shadow-slate-950"
                       >
                         <article className="flex flex-col space-y-2 xl:space-y-0">
                           <Link
