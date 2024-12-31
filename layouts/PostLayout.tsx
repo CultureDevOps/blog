@@ -97,20 +97,13 @@ export default async function PostLayout({
                               />
                             </Link>
                           )}
-                          <dl className="whitespace-nowrap text-sm font-medium leading-5">
+                          <dl className="whitespace-nowrap text-sm font-medium leading-5 font-headings
+                                        text-shadow text-shadow-gray-400/80 dark:text-shadow-black">
                             <dt className="sr-only">{t('name')}</dt>
                             <dd className="text-gray-900 dark:text-gray-100">{author.name}</dd>
                             <dt className="sr-only">Twitter</dt>
                             <dd>
-                              {/* {author.twitter && (
-                            <Link
-                              href={author.twitter}
-                              className="text-primary-700 hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400"
-                            >
-                              {author.twitter.replace('https://twitter.com/', '@')}
-                            </Link>
-                          )} */}
-                              <div className="flex space-x-3 justify-center">
+                              <div className="flex pt-2 space-x-3 justify-center">
                                 {/* Social icons */}
                                 {author.github && (
                                   <SocialIcon kind="github" href={author.github} size={5} />
