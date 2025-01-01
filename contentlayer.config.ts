@@ -150,9 +150,8 @@ export const Blog = defineDocumentType(() => ({
       resolve: (doc) => {
         const imageList = typeof doc.images === 'string' ? [doc.images] : doc.images;
         const imageUrl = imageList?.[0]
-          ? `${process.env.CLOUD_FRONT_URL}${imageList[0]}?format=auto&width=1200`
-          : `${process.env.CLOUD_FRONT_URL}${siteMetadata.socialBanner}?format=auto&width=1200`;
-        
+          ? `${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}${imageList[0]}?format=auto&width=1200`
+          : `${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}${siteMetadata.socialBanner}?format=auto&width=1200`;
         return {
           '@context': 'https://schema.org',
           '@type': 'BlogPosting',

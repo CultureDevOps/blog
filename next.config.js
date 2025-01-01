@@ -47,7 +47,7 @@ const securityHeaders = [
  */
 const nextConfig = {
   env: {
-    CLOUD_FRONT_URL: process.env.NODE_ENV==="development" ? '' : 'https://d2mezi5ylxaxvl.cloudfront.net',
+    CLOUD_FRONT_URL: process.env.NODE_ENV==="development" ? '' : process.env.NEXT_PUBLIC_CLOUD_FRONT_URL,
   },  
   // experimental: {
   //   scrollRestoration: true,
