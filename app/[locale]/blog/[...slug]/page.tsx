@@ -79,7 +79,7 @@ export async function generateMetadata({
   }
   const ogImages = imageList.map((img) => {
     return {
-      url: img.includes('http') ? img : process.env.CLOUD_FRONT_URL + img,
+      url: img.includes('http') ? img : process.env.CLOUD_FRONT_URL + img + '?format=auto&width=1200',
     }
   })
 
