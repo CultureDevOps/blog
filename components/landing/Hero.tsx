@@ -15,7 +15,7 @@ export default async function Hero({ params: { locale } }: Props) {
   const { t } = await createTranslation(locale, 'hero')
   return (
     <>
-      <Container className="flex flex-wrap flex-col-reverse lg:flex-row">
+      <Container className="flex flex-wrap flex-col-reverse lg:flex-row mb-16 mt-4">
         <div className="flex w-full items-center lg:w-1/2">
           <div className="mb-8 max-w-2xl font-headings">
             <h1 className="text-4xl font-bold leading-snug tracking-tight 
