@@ -147,16 +147,23 @@ export const Blog = defineDocumentType(() => ({
 
     structuredData: {
       type: 'json',
-      resolve: (doc) => ({
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: doc.title,
-        datePublished: doc.date,
-        dateModified: doc.lastmod || doc.date,
-        description: doc.summary,
-        image: doc.images ? doc.images[0] : siteMetadata.socialBanner,
-        url: `${siteMetadata.siteUrl}/${doc.language}/blog/${doc.slug}`,
-      }),
+      resolve: (doc) => {
+        const imageList = typeof doc.images === 'string' ? [doc.images] : doc.images;
+        const imageUrl = imageList?.[0]
+          ? `${process.env.CLOUD_FRONT_URL}${imageList[0]}?format=auto&width=1200`
+          : `${process.env.CLOUD_FRONT_URL}${siteMetadata.socialBanner}?format=auto&width=1200`;
+        
+        return {
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: doc.title,
+          datePublished: doc.date,
+          dateModified: doc.lastmod || doc.date,
+          description: doc.summary,
+          image: imageUrl,
+          url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+        };
+      },
     },
   },
 }))
