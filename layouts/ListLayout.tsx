@@ -62,26 +62,26 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
         }
       }
     );
-  
+
     return () => unsubscribe(); // Nettoie l'abonnement
   }, [selectedTag]); // Dépendance sur `selectedTag`
-  
+
   useEffect(() => {
     setIsHydrated(true);
   }, []);
 
   useEffect(() => {
     setCurrentPage(1); // Réinitialiser la pagination sur un changement de tag
-  }, [selectedTag]);  
+  }, [selectedTag]);
 
   const filteredPosts = selectedTag
-                        ? sortedPosts.filter((post) => post.tags.includes(selectedTag))
-                        : sortedPosts;
+    ? sortedPosts.filter((post) => post.tags.includes(selectedTag))
+    : sortedPosts;
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage)
   const startIndex = (currentPage - 1) * postsPerPage
   const endIndex = startIndex + postsPerPage
-  
+
   const displayPosts = useMemo(() => {
     const startIndex = (currentPage - 1) * postsPerPage;
     const endIndex = startIndex + postsPerPage;
@@ -106,13 +106,13 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
       },
     },
   };
-  
+
   const item = {
     hidden: { opacity: 0, x: -25, y: 0 }, // Initialement masqué
     show: { opacity: 1, x: 0, y: 0 },     // Devient visible
     exit: { opacity: 0, x: 25 },         // Pour les éléments retirés
   };
-  
+
 
   const tagCountMap = tagData[locale]
 
@@ -124,11 +124,10 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
           aria-labelledby={`${t('poststagged')} ${postTag}`}
         >
           <h3
-            className={`inline px-3 py-2 text-sm font-medium uppercase ${
-              useTagStore.getState().selectedTag === postTag
+            className={`inline px-3 py-2 text-sm font-medium uppercase ${useTagStore.getState().selectedTag === postTag
                 ? 'text-heading-800 dark:text-heading-300'
                 : 'text-gray-600 hover:text-heading-800 dark:text-gray-300 dark:hover:text-heading-300'
-            }`}
+              }`}
           >
             {' '}
             {postTag} ({tagCountMap[postTag]})
@@ -142,31 +141,30 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
     <>
       <div>
         <div className="flex space-x-6 lg:space-x-8">
-          <div 
+          <div
             className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded-2xl
                       pt-5 sm:flex
                       backdrop-blur-sm border border-white/20 dark:border-gray-700/20                          
                       bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
                       dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
                       shadow-xl shadow-slate-400 dark:shadow-slate-950 "
-            // style={{ position: 'fixed', top: '5rem', left: '1rem', maxHeight: 'calc(100vh - 5rem)' }}
+          // style={{ position: 'fixed', top: '5rem', left: '1rem', maxHeight: 'calc(100vh - 5rem)' }}
           >
-              <div className="px-6 py-4">
-                  <button
-                      onClick={() => setSelectedTag('')}
-                      className={`${
-                          useTagStore.getState().selectedTag === ''
-                              ? 'text-blue-600 dark:text-blue-300'  /* Couleur de texte plus douce */
-                              : 'text-gray-900 dark:text-gray-200'
-                      } font-bold uppercase transition-colors duration-300
+            <div className="px-6 py-4">
+              <button
+                onClick={() => setSelectedTag('')}
+                className={`${useTagStore.getState().selectedTag === ''
+                    ? 'text-blue-600 dark:text-blue-300'  /* Couleur de texte plus douce */
+                    : 'text-gray-900 dark:text-gray-200'
+                  } font-bold uppercase transition-colors duration-300
                       font-headings antialiased text-shadow text-shadow-gray-400/80 dark:text-shadow-black`}
-                  >
-                      {t('all')}
-                  </button>
-                  <ul className="mt-4 space-y-2">
-                      {filteredTags}
-                  </ul>
-              </div>
+              >
+                {t('all')}
+              </button>
+              <ul className="mt-4 space-y-2">
+                {filteredTags}
+              </ul>
+            </div>
           </div>
 
           <div>
@@ -181,11 +179,14 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                   const { slug, date, title, summary, tags, language } = post;
                   if (language === locale) {
                     return (
-                      <div key={`backdrop-${slug}`} className="backdrop-blur-sm
+
+                      <li
+                        key={slug}
+                        className="backdrop-blur-sm
                           bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
-                          dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30">
-                        <li
-                          key={slug}
+                          dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30"
+                      >
+                        <div
                           className="p-5 mb-6 rounded-2xl shadow-md  w-full
                           shadow-xl shadow-slate-400 dark:shadow-slate-950
                           border border-white/20 dark:border-gray-700/20                        
@@ -193,8 +194,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                           dark:hover:bg-gradient-to-tr dark:hover:from-slate-900/20 dark:hover:via-blue-900/30 
                           dark:hover:via-blue-800/30 dark:hover:to-slate-800/20 
                           hover:border hover:border-white/20 dark:hover:border-gray-600/40 group
-                          hover:shadow-xl hover:shadow-slate-400 dark:hover:shadow-slate-950"
-                        >
+                          hover:shadow-xl hover:shadow-slate-400 dark:hover:shadow-slate-950">
                           <article className="flex flex-col space-y-2 xl:space-y-0">
                             <Link
                               href={`/${locale}/blog/${slug}`}
@@ -206,26 +206,26 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                                   className="relative w-full h-auto overflow-hidden rounded-lg 
                                   border border-gray-200 dark:border-gray-700"
                                 >
-                                        <picture>
-                                          {/* Version mobile */}
-                                          <source
-                                            srcSet={`${process.env.CLOUD_FRONT_URL}${post.images}`}
-                                            media="(max-width: 768px)"
-                                          />
-                                          {/* Version desktop par défaut */}
-                                          <Image
-                                            width={1600}
-                                            height={400}
-                                            src={post.banner}
-                                            alt={`${post.title} banner`}
-                                            sizes="100vw"
-                                            quality={90}
-                                            placeholder="blur"
-                                            blurDataURL={post.banner}                                     
-                                            className="rounded-lg object-cover"
-                                            priority
-                                          />
-                                        </picture>
+                                  <picture>
+                                    {/* Version mobile */}
+                                    <source
+                                      srcSet={`${process.env.CLOUD_FRONT_URL}${post.images}`}
+                                      media="(max-width: 768px)"
+                                    />
+                                    {/* Version desktop par défaut */}
+                                    <Image
+                                      width={1600}
+                                      height={400}
+                                      src={post.banner}
+                                      alt={`${post.title} banner`}
+                                      sizes="100vw"
+                                      quality={90}
+                                      placeholder="blur"
+                                      blurDataURL={post.banner}
+                                      className="rounded-lg object-cover"
+                                      priority
+                                    />
+                                  </picture>
                                 </div>
                               )}
                               <dl>
@@ -244,36 +244,35 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                                   {title}
                                 </h2>
                               </div>
-                            
-                            <ul 
-                              className="flex flex-wrap cursor-default group-hover:cursor-default" 
-                              onClick={(e) => e.preventDefault()}>
-                              {tags.map((t) => (
-                                <li key={t} className="my-3">
-                                  <button
-                                    onClick={(e) => {
-                                      // e.preventDefault(); // Empêche la propagation vers le Link
-                                      handleTagClick(t);
-                                    }}
-                                    className={`${
-                                      useTagStore.getState().selectedTag === t
-                                        ? 'text-heading-700 dark:text-heading-400'
-                                        : 'text-primary-700 hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-500'
-                                    } mr-3 py-0.5 text-sm font-medium uppercase cursor-pointer`}
-                                    aria-label={`View posts tagged ${t}`}
-                                  >
-                                    {`${t}`}
-                                  </button>
-                                </li>
-                              ))}
-                            </ul>
-                            <div className="prose max-w-none text-gray-700 dark:text-gray-400">
-                              {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
-                            </div>
+
+                              <ul
+                                className="flex flex-wrap cursor-default group-hover:cursor-default"
+                                onClick={(e) => e.preventDefault()}>
+                                {tags.map((t) => (
+                                  <li key={t} className="my-3">
+                                    <button
+                                      onClick={(e) => {
+                                        // e.preventDefault(); // Empêche la propagation vers le Link
+                                        handleTagClick(t);
+                                      }}
+                                      className={`${useTagStore.getState().selectedTag === t
+                                          ? 'text-heading-700 dark:text-heading-400'
+                                          : 'text-primary-700 hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-500'
+                                        } mr-3 py-0.5 text-sm font-medium uppercase cursor-pointer`}
+                                      aria-label={`View posts tagged ${t}`}
+                                    >
+                                      {`${t}`}
+                                    </button>
+                                  </li>
+                                ))}
+                              </ul>
+                              <div className="prose max-w-none text-gray-700 dark:text-gray-400">
+                                {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
+                              </div>
                             </Link>
                           </article>
-                        </li>
-                      </div>
+                        </div>
+                      </li>
                     );
                   }
                 })}
