@@ -158,10 +158,10 @@ Replace `<DISTRIBUTION>` with the name of your CloudFront distribution (availabl
 
 By combining **AWS S3**, **CloudFront**, and **Lambda**, you can efficiently optimize your images, reduce loading times, and improve the user experience. With this architecture, your images are served in modern formats like **WebP**, **JPEG**, or **AVIF**, perfectly suited to different browsers.
 
-Take the example of the image below: it weighs 6.2 MB when stored in my **S3** bucket, but once optimized and served via **CloudFront** in the **WebP** format, it’s only 48 KB. This significant reduction in size, with no noticeable loss of quality, clearly shows the benefits of image optimization in a CDN environment.
+Take the example of the image below: it weighs 6.2 MB when stored in my **S3** bucket, but once optimized and served via **CloudFront** in the **AVIF** format, it’s only 521 KB at 2912x1632. This significant reduction in size, with no noticeable loss of quality, clearly shows the benefits of image optimization in a CDN environment.
 
 <FancyBoxImage 
-  src="/static/images/posts/aws-s3-cloudfront-image-optimization/aws-s3-cloudfront-image-optimization.png?format=webp"
+  src="/static/images/posts/aws-s3-cloudfront-image-optimization/aws-s3-cloudfront-image-optimization.png?format=avif"
   alt="Image Optimization with AWS" 
   width={2912}
   height={1632}  
