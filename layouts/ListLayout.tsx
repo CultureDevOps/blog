@@ -141,15 +141,9 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
   return (
     <>
       <div>
-        <div className="">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight 
-          text-gray-900 dark:text-gray-100 sm:hidden sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            {title}
-          </h1>
-        </div>
         <div className="flex space-x-6 lg:space-x-8">
           <div 
-            className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded-lg 
+            className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded-2xl
                       pt-5 sm:flex
                       backdrop-blur-sm border border-white/20 dark:border-gray-700/20                          
                       bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
@@ -164,7 +158,8 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                           useTagStore.getState().selectedTag === ''
                               ? 'text-blue-600 dark:text-blue-300'  /* Couleur de texte plus douce */
                               : 'text-gray-900 dark:text-gray-200'
-                      } font-bold uppercase transition-colors duration-300`}
+                      } font-bold uppercase transition-colors duration-300
+                      font-headings antialiased text-shadow text-shadow-gray-400/80 dark:text-shadow-black`}
                   >
                       {t('all')}
                   </button>
@@ -180,97 +175,105 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
               initial={isHydrated ? "hidden" : false} // Désactive l'animation si pas hydraté
               animate={isHydrated ? "show" : false}
             > */}
-            <div className="flex-grow relative 
-                            bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
-                            dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
-                            backdrop-blur-sm rounded-lg p-8 
-                            shadow-xl shadow-slate-400 dark:shadow-slate-950
-                            border border-white/20 dark:border-gray-700/20">
+            <div className="flex-grow relative">
               <ul>
                 {displayPosts.map((post) => {
                   const { slug, date, title, summary, tags, language } = post;
                   if (language === locale) {
                     return (
-                      <li
-                        key={slug}
-                        className="p-5 mb-6 rounded-2xl shadow-md 
-                        hover:bg-gradient-to-tr hover:from-white/20 hover:via-blue-300/30 hover:to-white/20
-                        dark:hover:bg-gradient-to-tr dark:hover:from-slate-900/20 dark:hover:via-blue-900/30 
-                        dark:hover:via-blue-800/30 dark:hover:to-slate-800/20 
-                        transition-transform duration-200 hover:scale-[1.02] w-full
-                        hover:border hover:border-white/20 dark:hover:border-gray-600/40 group
-                        hover:shadow-xl hover:shadow-slate-400 dark:hover:shadow-slate-950"
-                      >
-                        <article className="flex flex-col space-y-2 xl:space-y-0">
-                          <Link
-                            href={`/${locale}/blog/${slug}`}
-                            className="text-gray-900 dark:text-gray-100"
-                            aria-labelledby={title}
-                          >
-                            {post.banner && (
-                              <div
-                                className="relative w-full h-auto overflow-hidden rounded-lg 
-                                border border-gray-200 dark:border-gray-700"
-                              >
-                                  <Image
-                                    width={1600}
-                                    height={400}
-                                    src={post.banner}
-                                    alt={`${post.title} banner`}
-                                    sizes="100vw"
-                                    quality={90}
-                                    placeholder="blur"
-                                    blurDataURL={post.banner}                                     
-                                    className="rounded-lg object-cover"
-                                    priority
-                                  />
-                              </div>
-                            )}
-                            <dl>
-                              <dt className="sr-only">{t('pub')}</dt>
-                              <dd className="text-base font-medium leading-6 text-gray-700 dark:text-gray-400">
-                                <time dateTime={date}>{formatDate(date, language)}</time>
-                              </dd>
-                            </dl>
-
-                            <div className="space-y-3">
-                              <h2
-                                className="text-2xl font-bold leading-8 tracking-tight font-headings antialiased
-                                          text-gray-900 dark:text-gray-100 group-hover:text-primary-700 
-                                          dark:group-hover:text-primary-500 text-shadow text-shadow-gray-400/80 dark:text-shadow-black"
-                              >
-                                {title}
-                              </h2>
-                            </div>
-                          
-                          <ul 
-                            className="flex flex-wrap cursor-default group-hover:cursor-default" 
-                            onClick={(e) => e.preventDefault()}>
-                            {tags.map((t) => (
-                              <li key={t} className="my-3">
-                                <button
-                                  onClick={(e) => {
-                                    // e.preventDefault(); // Empêche la propagation vers le Link
-                                    handleTagClick(t);
-                                  }}
-                                  className={`${
-                                    useTagStore.getState().selectedTag === t
-                                      ? 'text-heading-700 dark:text-heading-400'
-                                      : 'text-primary-700 hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-500'
-                                  } mr-3 py-2 text-sm font-medium uppercase cursor-pointer`}
-                                  aria-label={`View posts tagged ${t}`}
+                      <div key={`backdrop-${slug}`} className="backdrop-blur-sm
+                          bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
+                          dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30">
+                        <li
+                          key={slug}
+                          className="p-5 mb-6 rounded-2xl shadow-md  w-full
+                          shadow-xl shadow-slate-400 dark:shadow-slate-950
+                          border border-white/20 dark:border-gray-700/20                        
+                          hover:bg-gradient-to-tr hover:from-white/20 hover:via-blue-300/30 hover:to-white/20
+                          dark:hover:bg-gradient-to-tr dark:hover:from-slate-900/20 dark:hover:via-blue-900/30 
+                          dark:hover:via-blue-800/30 dark:hover:to-slate-800/20 
+                          hover:border hover:border-white/20 dark:hover:border-gray-600/40 group
+                          hover:shadow-xl hover:shadow-slate-400 dark:hover:shadow-slate-950"
+                        >
+                          <article className="flex flex-col space-y-2 xl:space-y-0">
+                            <Link
+                              href={`/${locale}/blog/${slug}`}
+                              className="text-gray-900 dark:text-gray-100"
+                              aria-labelledby={title}
+                            >
+                              {post.banner && (
+                                <div
+                                  className="relative w-full h-auto overflow-hidden rounded-lg 
+                                  border border-gray-200 dark:border-gray-700"
                                 >
-                                  {`${t}`}
-                                </button>
-                              </li>
-                            ))}
-                          </ul>
-                          <div className="prose max-w-none text-gray-700 dark:text-gray-400">
-                            {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
-                          </div>
-                          </Link>
-                        </article>
-                      </li>
+                                        <picture>
+                                          {/* Version mobile */}
+                                          <source
+                                            srcSet={`${post.images}`}
+                                            media="(max-width: 768px)"
+                                          />
+                                          {/* Version desktop par défaut */}
+                                          <Image
+                                            width={1600}
+                                            height={400}
+                                            src={post.banner}
+                                            alt={`${post.title} banner`}
+                                            sizes="100vw"
+                                            quality={90}
+                                            placeholder="blur"
+                                            blurDataURL={post.banner}                                     
+                                            className="rounded-lg object-cover"
+                                            priority
+                                          />
+                                        </picture>
+                                </div>
+                              )}
+                              <dl>
+                                <dt className="sr-only">{t('pub')}</dt>
+                                <dd className="text-base font-medium leading-6 text-gray-700 dark:text-gray-400">
+                                  <time dateTime={date}>{formatDate(date, language)}</time>
+                                </dd>
+                              </dl>
+
+                              <div className="space-y-3">
+                                <h2
+                                  className="text-2xl font-bold leading-8 tracking-tight font-headings antialiased
+                                            text-gray-900 dark:text-gray-100 group-hover:text-primary-600 
+                                            dark:group-hover:text-primary-400 text-shadow text-shadow-gray-400/80 dark:text-shadow-black"
+                                >
+                                  {title}
+                                </h2>
+                              </div>
+                            
+                            <ul 
+                              className="flex flex-wrap cursor-default group-hover:cursor-default" 
+                              onClick={(e) => e.preventDefault()}>
+                              {tags.map((t) => (
+                                <li key={t} className="my-3">
+                                  <button
+                                    onClick={(e) => {
+                                      // e.preventDefault(); // Empêche la propagation vers le Link
+                                      handleTagClick(t);
+                                    }}
+                                    className={`${
+                                      useTagStore.getState().selectedTag === t
+                                        ? 'text-heading-700 dark:text-heading-400'
+                                        : 'text-primary-700 hover:text-primary-800 dark:text-primary-300 dark:hover:text-primary-500'
+                                    } mr-3 py-0.5 text-sm font-medium uppercase cursor-pointer`}
+                                    aria-label={`View posts tagged ${t}`}
+                                  >
+                                    {`${t}`}
+                                  </button>
+                                </li>
+                              ))}
+                            </ul>
+                            <div className="prose max-w-none text-gray-700 dark:text-gray-400">
+                              {summary!.length > 149 ? `${summary!.substring(0, 149)}...` : summary}
+                            </div>
+                            </Link>
+                          </article>
+                        </li>
+                      </div>
                     );
                   }
                 })}
