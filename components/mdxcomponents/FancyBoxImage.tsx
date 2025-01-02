@@ -30,6 +30,12 @@ const FancyBoxImage = ({ alt, src, noShadow, ...rest }: ImageWithFancyboxProps) 
       className={`object-cover rounded-lg ${shadow}`}
       />
   );
+
+  // Fonction pour enlever le focus du bouton avant d'ouvrir la modale
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const button = e.currentTarget as HTMLElement;
+    button.blur(); // Enlève le focus du bouton
+  };
   
   return (
     <div 
@@ -39,6 +45,7 @@ const FancyBoxImage = ({ alt, src, noShadow, ...rest }: ImageWithFancyboxProps) 
       aria-label={alt}
       role="button" // Indique qu'il s'agit d'un bouton pour l'accessibilité
       tabIndex={0}  // Rend focusable
+      onClick={handleClick}
     >
       {imageContent}
     </div>
