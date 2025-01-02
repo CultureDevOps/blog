@@ -92,8 +92,8 @@ export default async function PostLayout({
                                 height={80}
                                 alt="avatar"
                                 title="avatar"
-                                className="h-30 w-30 rounded-full"
-                                sizes="80px"
+                                className="h-16 w-16 rounded-full lg:h-30 lg:w-30"
+                                sizes="(max-width: 640px) 64px, 120px"
                               />
                             </Link>
                           )}
