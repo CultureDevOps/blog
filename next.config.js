@@ -6,11 +6,11 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // Définition des politiques de sécurité
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is statichunt.com http://www.youtube.com https://*.googletagmanager.com https://vercel.live/ https://vercel.com;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app analytics.umami.is statichunt.com http://www.youtube.com https://*.googletagmanager.com https://vercel.live/ https://vercel.com https://va.vercel-scripts.com;
   style-src 'self' 'unsafe-inline';
   img-src * blob: data: statichunt.com https://*.google-analytics.com https://*.googletagmanager.com https://vercel.live/ https://vercel.com *.pusher.com;
   media-src 'self' *.s3.amazonaws.com;
-  connect-src * statichunt.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://vercel.live/ https://vercel.com *.pusher.com *.pusherapp.com;
+  connect-src * statichunt.com https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://vercel.live/ https://vercel.com *.pusher.com *.pusherapp.com https://va.vercel-scripts.com;
   font-src 'self';
   frame-src giscus.app https://www.youtube.com/ https://www.youtube-nocookie.com/ https://vercel.live/ https://vercel.com;
 `;
