@@ -209,7 +209,7 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                                   <picture>
                                     {/* Version mobile */}
                                     <source
-                                      srcSet={`${process.env.CLOUD_FRONT_URL}${post.images}`}
+                                      srcSet={`${process.env.CLOUD_FRONT_URL}${post.images}?format=auto`}
                                       media="(max-width: 768px)"
                                     />
                                     {/* Version desktop par défaut */}
