@@ -32,7 +32,14 @@ const FancyBoxImage = ({ alt, src, noShadow, ...rest }: ImageWithFancyboxProps) 
   );
   
   return (
-    <div className="fancybox-wrapper" data-fancybox="gallery" data-src={href} aria-label={alt}>
+    <div 
+      className="fancybox-wrapper" 
+      data-fancybox="gallery" 
+      data-src={href} 
+      aria-label={alt}
+      role="button" // Indique qu'il s'agit d'un bouton pour l'accessibilité
+      tabIndex={0}  // Rend focusable
+    >
       {imageContent}
     </div>
   );
