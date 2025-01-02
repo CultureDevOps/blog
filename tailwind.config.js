@@ -54,6 +54,9 @@ module.exports = {
               fontFamily: theme('fontFamily.headings'), 
               textShadow: '2px 2px 4px rgba(156, 163, 175, 0.8)',
             },
+            strong: {
+              textShadow: '1px 1px 1px rgba(156, 163, 175, 0.8)',
+            },
             code: {
               color: theme('colors.indigo.600'),
             },
@@ -79,6 +82,9 @@ module.exports = {
               color: theme('colors.gray.100'),
               fontFamily: theme('fontFamily.headings'), 
               textShadow: '2px 2px 4px rgba(0, 0, 0, 1)',
+            },
+            strong: {
+              textShadow: '1px 1px 1px rgba(0, 0, 0, 1)',
             },
             hr: {
               borderColor: theme('colors.gray.700'), // Séparateur en mode sombre
