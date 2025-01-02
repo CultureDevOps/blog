@@ -4,9 +4,10 @@ import NextImage, { ImageProps } from "next/image";
 interface ImageWithFancyboxProps extends ImageProps {
   src: string; // Source obligatoire
   alt: string; // Texte alternatif obligatoire
+  noShadow?: boolean;
 }
 
-const FancyBoxImage = ({ alt, src, ...rest }: ImageWithFancyboxProps) => {
+const FancyBoxImage = ({ alt, src, noShadow, ...rest }: ImageWithFancyboxProps) => {
   const isExternal = src.startsWith('http'); // Vérifie si l'URL est externe
 
   const cloudFrontUrl = process.env.CLOUD_FRONT_URL;
@@ -15,17 +16,18 @@ const FancyBoxImage = ({ alt, src, ...rest }: ImageWithFancyboxProps) => {
     href += '?format=auto';
   }
 
+  const shadow = noShadow ? "" : "shadow-xl shadow-slate-400 dark:shadow-slate-950"
+
   const imageContent = isExternal ? (
     // Si l'image est externe, on utilise une balise <img> standard
-    <img alt={alt} src={src} {...rest} className="rounded-lg shadow-xl shadow-slate-400 dark:shadow-slate-950"/>
+    <img alt={alt} src={src} {...rest} className={`rounded-lg ${shadow}`}/>
   ) : (
     <NextImage 
       {...rest} 
       src={src} 
       alt={alt} 
       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      className="object-cover rounded-lg 
-                shadow-xl shadow-slate-400 dark:shadow-slate-950"
+      className={`object-cover rounded-lg ${shadow}`}
       />
   );
   
