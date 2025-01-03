@@ -55,10 +55,13 @@ export default function Footer() {
             <div>{` • `}</div>
             <Link href="/">{maintitle[locale]}</Link>
           </div>
-          <div className="mb-8 text-sm text-gray-700 dark:text-gray-300">
+          <div className="mb-2 text-sm text-gray-700 dark:text-gray-300">
             <Link href="https://github.com/PxlSyl/tailwind-nextjs-starter-blog-i18n">
               {t('theme')}
-            </Link>
+            </Link>                        
+          </div>
+          <div className="mb-8 text-sm text-gray-700 dark:text-gray-300">
+            <p>{t('background')} <Link href="http://www.freepik.com">starline / Freepik</Link></p>
           </div>
         </div>
       </footer>
