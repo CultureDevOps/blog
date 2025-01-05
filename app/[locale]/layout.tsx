@@ -44,6 +44,7 @@ const alfaSlabOne = Alfa_Slab_One({
 })
 
 export async function generateMetadata({ params: { locale } }): Promise<Metadata> {
+  const imageUrl = `${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}${siteMetadata.socialBanner}?format=auto&width=1200`;
   return {
     metadataBase: new URL(siteMetadata.siteUrl),
     title: {
@@ -56,7 +57,7 @@ export async function generateMetadata({ params: { locale } }): Promise<Metadata
       description: maindescription[locale],
       url: './',
       siteName: maintitle[locale],
-      images: [siteMetadata.socialBanner],
+      images: [imageUrl],
       locale: locale,
       type: 'website',
     },
@@ -83,7 +84,7 @@ export async function generateMetadata({ params: { locale } }): Promise<Metadata
       site: siteMetadata.siteUrl,
       creator: siteMetadata.author,
       card: 'summary_large_image',
-      images: [siteMetadata.socialBanner],
+      images: [imageUrl],
     },
     icons: {
       icon: '/static/favicons/favicon-32x32.png',
