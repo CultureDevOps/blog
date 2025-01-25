@@ -26,15 +26,10 @@ html.dark body {
 }
 
 .fancybox-wrapper {
-  cursor: pointer; /* Le curseur devient une main */
   position: relative; /* Nécessaire pour Next.js avec layout="intrinsic" */
   display: block; /* Évite les problèmes d'alignement */
   max-width: 100%; /* Empêche l'image de dépasser la largeur du conteneur */
   margin: 0 auto; /* Centrage si nécessaire */  
-}
-
-.fancybox-wrapper img {
-  pointer-events: none; /* Empêche l'image d'intercepter les événements, la gestion se fait par la div */
 }
 
 @media (max-width: 768px) {
