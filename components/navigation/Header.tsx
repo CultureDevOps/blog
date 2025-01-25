@@ -98,10 +98,13 @@ const Header = () => {
               {headerNavLinks
                 .filter((link) => !!link.href) // Vérifie que `link.href` est défini
                 .map((link) => {
-                  const isSelected =
-                    (selectedPath === `/${locale}` || selectedPath === '/') && link.href === '/landing'
-                      ? true
-                      : selectedPath?.includes(link.href as string)
+                  const normalizedPath = selectedPath
+                  ? selectedPath.replace(`/${locale}`, "") || "/"
+                  : "/"
+
+                  const isHome = normalizedPath === "/" && link.href === "/"
+                  const isExactMatch = normalizedPath === link.href // Vérifie une correspondance exacte
+                  const isSelected = isExactMatch || isHome
                   return (
                     <Link
                       key={link.title}
