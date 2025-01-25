@@ -99,9 +99,9 @@ export const KBarModal: React.FC<KBarModalProps> = ({ actions, isLoading }) => {
           <motion.div
             style={{ zIndex: "100" ,transformOrigin: "center center" }}
             className="overflow-hidden rounded-2xl border border-white/30 bg-gradient-to-b 
-                      from-white/70 via-blue-200/40 to-white/30 backdrop-blur-lg 
+                      from-white/70 via-primary-200/40 to-white/30 backdrop-blur-lg 
                       shadow-2xl dark:border-gray-800 dark:bg-gradient-to-b 
-                      dark:from-slate-900/70 dark:via-blue-950/50 dark:to-slate-900/40 dark:shadow-slate-900/70"
+                      dark:from-gray-900/70 dark:via-primary-950/50 dark:to-gray-900/40 dark:shadow-gray-900/70"
             {...animationProps}
           >
               <div className="flex items-center space-x-4 p-4">

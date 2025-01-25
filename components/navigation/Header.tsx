@@ -60,10 +60,10 @@ const Header = () => {
   return (
     <header>
       <div className="mb-8 backdrop-blur-sm 
-                      bg-gradient-to-tr from-blue-300/40 via-blue-100/50 to-blue-300/60 
-                      dark:bg-gradient-to-tr dark:from-slate-900/60 dark:via-blue-950/60 dark:to-slate-900/60 
+                      bg-gradient-to-tr from-primary-300/40 via-primary-100/50 to-primary-300/60 
+                      dark:bg-gradient-to-tr dark:from-gray-900/60 dark:via-primary-950/60 dark:to-gray-900/60 
                       border-b border-white/40 dark:border-gray-700/40
-                      shadow-xl shadow-slate-400 dark:shadow-slate-950 transition-shadow duration-300">
+                      shadow-xl shadow-gray-400 dark:shadow-gray-950 transition-shadow duration-300">
         <SectionContainer>
           <div className="flex justify-between items-center py-2">
               <Link 
@@ -114,7 +114,7 @@ const Header = () => {
                       <div
                         className={`hidden font-medium ${isSelected
                             ? 'text-heading-800 dark:text-heading-300'
-                            : 'text-black hover:text-blue-900 dark:text-white dark:hover:text-blue-300'
+                            : 'text-black hover:text-primary-900 dark:text-white dark:hover:text-primary-300'
                           } relative rounded-md px-2 py-2 font-medium transition-colors sm:block`}
                       >
                         <span className="relative z-10 font-bold text-shadow text-shadow-gray-400/80 dark:text-shadow-black">{t(`${link.title.toLowerCase()}`)}</span>
@@ -128,9 +128,9 @@ const Header = () => {
                               stiffness: 300,
                             }}
                             className="absolute inset-0 z-0 rounded-md shadow-md border border-white/10  
-                            bg-gradient-to-b from-blue-200/60 via-white/40 to-blue-200/30 backdrop-blur-md 
-                            dark:bg-gradient-to-b dark:from-slate-900/60 dark:via-blue-900/30 dark:to-slate-900/30 
-                            shadow-lg shadow-slate-400 dark:shadow-slate-950"
+                            bg-gradient-to-b from-primary-200/60 via-white/40 to-primary-200/30 backdrop-blur-md 
+                            dark:bg-gradient-to-b dark:from-gray-900/60 dark:via-primary-900/30 dark:to-gray-900/30 
+                            shadow-lg shadow-gray-400 dark:shadow-gray-950"
                           ></motion.div>
                         )}
                       </div>

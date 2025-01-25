@@ -73,7 +73,7 @@ const NewsletterForm = ({ apiUrl = '/api/newsletter' }: NewsletterFormProps) => 
         </div>
         <div className="mt-2 flex w-full rounded-md shadow-sm sm:ml-3 sm:mt-0">
           <button
-            className={`group relative inline-flex items-center justify-center overflow-hidden rounded-md bg-primary-500 px-4 py-1.5 text-xs font-normal text-white transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30 dark:bg-primary-500 dark:hover:shadow-purple-500/30 ${subscribed ? 'cursor-default' : ''}`}
+            className={`group relative inline-flex items-center justify-center overflow-hidden rounded-md bg-primary-500 px-4 py-1.5 text-xs font-normal text-white transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg hover:shadow-primary-500/30 dark:bg-primary-500 dark:hover:shadow-purple-500/30 ${subscribed ? 'cursor-default' : ''}`}
             type="submit"
             disabled={subscribed}
           >

@@ -78,9 +78,9 @@ const ThemeSwitch = () => {
                       shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none backdrop-blur-sm">
             <RadioGroup value={theme} onChange={handleThemeChange}>
               <div className="p-1 rounded-md 
-                              bg-gradient-to-br from-gray-200/95 via-blue-200/95 to-gray-200/95
-                              dark:bg-gradient-to-br dark:from-slate-900/95 dark:via-blue-900/95 dark:to-slate-900/95                                
-                              shadow-xl shadow-slate-400 dark:shadow-slate-950">
+                              bg-gradient-to-br from-gray-200/95 via-primary-200/95 to-gray-200/95
+                              dark:bg-gradient-to-br dark:from-gray-900/95 dark:via-primary-900/95 dark:to-gray-900/95                                
+                              shadow-xl shadow-gray-400 dark:shadow-gray-950">
                 <Radio value="light">
                   <MenuItem>
                     {({ focus }) => (
@@ -88,8 +88,8 @@ const ThemeSwitch = () => {
                         onClick={() => handleThemeChange('light')}
                         className={`${
                           focus
-                              ? 'bg-blue-400/50 dark:bg-blue-500/30'
-                              : 'hover:bg-blue-400/50 dark:hover:bg-gray-600/40'
+                              ? 'bg-primary-400/50 dark:bg-primary-500/30'
+                              : 'hover:bg-primary-400/50 dark:hover:bg-gray-600/40'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm 
                         hover:backdrop-blur-sm
                         text-gray-700 hover:text-primary-500
@@ -110,8 +110,8 @@ const ThemeSwitch = () => {
                         onClick={() => handleThemeChange('dark')}
                         className={`${
                           focus
-                              ? 'bg-blue-400/50 dark:bg-blue-500/30'
-                              : 'hover:bg-blue-400/50 dark:hover:bg-gray-600/40'
+                              ? 'bg-primary-400/50 dark:bg-primary-500/30'
+                              : 'hover:bg-primary-400/50 dark:hover:bg-gray-600/40'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm 
                         hover:backdrop-blur-sm
                         text-gray-700 hover:text-primary-500
@@ -132,8 +132,8 @@ const ThemeSwitch = () => {
                         onClick={() => handleThemeChange('system')}
                         className={`${
                           focus
-                              ? 'bg-blue-400/50 dark:bg-blue-500/30'
-                              : 'hover:bg-blue-400/50 dark:hover:bg-gray-600/40'
+                              ? 'bg-primary-400/50 dark:bg-primary-500/30'
+                              : 'hover:bg-primary-400/50 dark:hover:bg-gray-600/40'
                         } group flex w-full items-center rounded-md px-2 py-2 text-sm 
                         text-gray-700 hover:text-primary-500
                         hover:backdrop-blur-sm

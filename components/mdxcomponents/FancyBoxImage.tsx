@@ -16,7 +16,7 @@ const FancyBoxImage = ({ alt, src, noShadow, ...rest }: ImageWithFancyboxProps) 
     href += '?format=auto';
   }
 
-  const shadow = noShadow ? "" : "shadow-xl shadow-slate-400 dark:shadow-slate-950"
+  const shadow = noShadow ? "" : "shadow-xl shadow-gray-400 dark:shadow-gray-950"
 
   const imageContent = isExternal ? (
     // Si l'image est externe, on utilise une balise <img> standard

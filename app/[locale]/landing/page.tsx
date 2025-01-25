@@ -14,43 +14,43 @@ export default async function Landing({ params: { locale } }: LandingProps) {
   return (
     <FullLayoutSectionContainer>
           <div className="mb-6 flex-grow 
-                   bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
-                   dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
+                   bg-gradient-to-tr from-white/40 via-primary-200/30 to-white/30 
+                   dark:bg-gradient-to-tr dark:from-gray-900/30 dark:via-primary-950/30 dark:to-gray-900/30 
                    backdrop-blur-sm rounded-lg p-8 shadow-lg 
                    border border-white/20 dark:border-gray-700/20
-                   shadow-xl shadow-slate-400 dark:shadow-slate-950">
+                   shadow-xl shadow-gray-400 dark:shadow-gray-950">
             <Hero params={{ locale: locale }} />
           </div>
           <div className="mb-6 flex-grow 
-                   bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
-                   dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
+                   bg-gradient-to-tr from-white/40 via-primary-200/30 to-white/30 
+                   dark:bg-gradient-to-tr dark:from-gray-900/30 dark:via-primary-950/30 dark:to-gray-900/30 
                    backdrop-blur-sm rounded-lg p-8 shadow-lg 
                    border border-white/20 dark:border-gray-700/20
-                   shadow-xl shadow-slate-400 dark:shadow-slate-950">
+                   shadow-xl shadow-gray-400 dark:shadow-gray-950">
             <Benefits data={devOps[locale]} />
           </div>
           <div className="mb-6 flex-grow 
-                   bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
-                   dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
+                   bg-gradient-to-tr from-white/40 via-primary-200/30 to-white/30 
+                   dark:bg-gradient-to-tr dark:from-gray-900/30 dark:via-primary-950/30 dark:to-gray-900/30 
                    backdrop-blur-sm rounded-lg p-8 shadow-lg 
                    border border-white/20 dark:border-gray-700/20
-                   shadow-xl shadow-slate-400 dark:shadow-slate-950">
+                   shadow-xl shadow-gray-400 dark:shadow-gray-950">
             <Benefits imgPos="right" data={cloud[locale]} />
           </div>
           <div className="mb-6 flex-grow 
-                   bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
-                   dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
+                   bg-gradient-to-tr from-white/40 via-primary-200/30 to-white/30 
+                   dark:bg-gradient-to-tr dark:from-gray-900/30 dark:via-primary-950/30 dark:to-gray-900/30 
                    backdrop-blur-sm rounded-lg p-8 shadow-lg 
                    border border-white/20 dark:border-gray-700/20
-                   shadow-xl shadow-slate-400 dark:shadow-slate-950">
+                   shadow-xl shadow-gray-400 dark:shadow-gray-950">
             <Benefits data={services[locale]} />
           </div>        
           <div className="mb-6 flex-grow 
-                   bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
-                   dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
+                   bg-gradient-to-tr from-white/40 via-primary-200/30 to-white/30 
+                   dark:bg-gradient-to-tr dark:from-gray-900/30 dark:via-primary-950/30 dark:to-gray-900/30 
                    backdrop-blur-sm rounded-lg p-8 shadow-lg 
                    border border-white/20 dark:border-gray-700/20
-                   shadow-xl shadow-slate-400 dark:shadow-slate-950">
+                   shadow-xl shadow-gray-400 dark:shadow-gray-950">
             <Benefits imgPos="right" data={experience[locale]} />
           </div>        
     </FullLayoutSectionContainer>

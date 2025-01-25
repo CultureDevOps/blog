@@ -81,11 +81,11 @@ const LangSwitch = () => {
             <Transition
               show={open}
               enter="transition-all ease-out duration-300"
-              enterFrom="opacity-0 scale-95 translate-y-[-10px]"
-              enterTo="opacity-100 scale-100 translate-y-0"
+              enterFrom="opacity-0 scale-95 trangray-y-[-10px]"
+              enterTo="opacity-100 scale-100 trangray-y-0"
               leave="transition-all ease-in duration-200"
-              leaveFrom="opacity-100 scale-100 translate-y-0"
-              leaveTo="opacity-0 scale-95 translate-y-[10px]"
+              leaveFrom="opacity-100 scale-100 trangray-y-0"
+              leaveTo="opacity-0 scale-95 trangray-y-[10px]"
             >
               <MenuItems
                 modal={false}
@@ -96,9 +96,9 @@ const LangSwitch = () => {
                 <RadioGroup>
                   <div
                     className="p-1 rounded-md
-                              bg-gradient-to-br from-gray-200/95 via-blue-200/95 to-gray-200/95
-                              dark:bg-gradient-to-br dark:from-slate-900/95 dark:via-blue-900/95 dark:to-slate-900/95                                
-                              shadow-xl shadow-slate-400 dark:shadow-slate-950"
+                              bg-gradient-to-br from-gray-200/95 via-primary-200/95 to-gray-200/95
+                              dark:bg-gradient-to-br dark:from-gray-900/95 dark:via-primary-900/95 dark:to-gray-900/95                                
+                              shadow-xl shadow-gray-400 dark:shadow-gray-950"
                   >
                     {locales.map((newLocale: string) => (
                       <Radio key={newLocale} value={newLocale}>
@@ -108,8 +108,8 @@ const LangSwitch = () => {
                               onClick={() => handleLinkClick(newLocale)}
                               className={`${
                                 focus
-                                  ? 'bg-blue-400/50 dark:bg-blue-500/30'
-                                  : 'hover:bg-blue-400/50 dark:hover:bg-gray-600/40'
+                                  ? 'bg-primary-400/50 dark:bg-primary-500/30'
+                                  : 'hover:bg-primary-400/50 dark:hover:bg-gray-600/40'
                               } 
                               group flex w-full items-center rounded-md px-2 py-2 text-sm font-bold 
                               text-gray-700 hover:text-primary-500

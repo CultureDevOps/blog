@@ -126,8 +126,8 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       </head>
       <body className="text-black antialiased dark:text-white 
-                      bg-gradient-to-r from-blue-300 via-blue-200 via-20% to-stone-100 
-                      dark:from-blue-800/90 dark:via-blue-950 dark:via-40% dark:via-slate-900 dark:via-75% dark:to-slate-900">
+                      bg-gradient-to-r from-primary-300 via-primary-200 via-20% to-stone-100 
+                      dark:from-primary-800/90 dark:via-primary-950 dark:via-40% dark:via-gray-900 dark:via-75% dark:to-gray-900">
         <ThemeProvider>
           <Analytics analyticsConfig={siteMetadata.analytics as AnalyticsConfig} />
           <SearchProvider>

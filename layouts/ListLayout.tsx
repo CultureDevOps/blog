@@ -145,16 +145,16 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
             className="hidden h-full max-h-screen min-w-[280px] max-w-[280px] flex-wrap overflow-auto rounded-2xl
                       pt-5 sm:flex
                       backdrop-blur-sm border border-white/20 dark:border-gray-700/20                          
-                      bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
-                      dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30 
-                      shadow-xl shadow-slate-400 dark:shadow-slate-950 "
+                      bg-gradient-to-tr from-white/40 via-primary-200/30 to-white/30 
+                      dark:bg-gradient-to-tr dark:from-gray-900/30 dark:via-primary-950/30 dark:to-gray-900/30 
+                      shadow-xl shadow-gray-400 dark:shadow-gray-950 "
           // style={{ position: 'fixed', top: '5rem', left: '1rem', maxHeight: 'calc(100vh - 5rem)' }}
           >
             <div className="px-6 py-4">
               <button
                 onClick={() => setSelectedTag('')}
                 className={`${useTagStore.getState().selectedTag === ''
-                    ? 'text-blue-600 dark:text-blue-300'  /* Couleur de texte plus douce */
+                    ? 'text-primary-600 dark:text-primary-300'  /* Couleur de texte plus douce */
                     : 'text-gray-900 dark:text-gray-200'
                   } font-bold uppercase transition-colors duration-300
                       font-headings antialiased text-shadow text-shadow-gray-400/80 dark:text-shadow-black`}
@@ -183,18 +183,18 @@ export default function ListLayoutWithTags({ params: { locale }, posts, title }:
                       <li
                         key={slug}
                         className="backdrop-blur-sm
-                          bg-gradient-to-tr from-white/40 via-blue-200/30 to-white/30 
-                          dark:bg-gradient-to-tr dark:from-slate-900/30 dark:via-blue-950/30 dark:to-slate-900/30"
+                          bg-gradient-to-tr from-white/40 via-primary-200/30 to-white/30 
+                          dark:bg-gradient-to-tr dark:from-gray-900/30 dark:via-primary-950/30 dark:to-gray-900/30"
                       >
                         <div
                           className="p-5 mb-6 rounded-2xl shadow-md  w-full
-                          shadow-xl shadow-slate-400 dark:shadow-slate-950
+                          shadow-xl shadow-gray-400 dark:shadow-gray-950
                           border border-white/20 dark:border-gray-700/20                        
-                          hover:bg-gradient-to-tr hover:from-white/20 hover:via-blue-300/30 hover:to-white/20
-                          dark:hover:bg-gradient-to-tr dark:hover:from-slate-900/20 dark:hover:via-blue-900/30 
-                          dark:hover:via-blue-800/30 dark:hover:to-slate-800/20 
+                          hover:bg-gradient-to-tr hover:from-white/20 hover:via-primary-300/30 hover:to-white/20
+                          dark:hover:bg-gradient-to-tr dark:hover:from-gray-900/20 dark:hover:via-primary-900/30 
+                          dark:hover:via-primary-800/30 dark:hover:to-gray-800/20 
                           hover:border hover:border-white/20 dark:hover:border-gray-600/40 group
-                          hover:shadow-xl hover:shadow-slate-400 dark:hover:shadow-slate-950">
+                          hover:shadow-xl hover:shadow-gray-400 dark:hover:shadow-gray-950">
                           <article className="flex flex-col space-y-2 xl:space-y-0">
                             <Link
                               href={`/${locale}/blog/${slug}`}
