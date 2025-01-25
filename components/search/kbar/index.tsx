@@ -1,20 +1,20 @@
-import { useState, useEffect, FC, ReactNode } from 'react'
-import type { Action } from 'kbar'
-import { KBarProvider } from 'kbar'
-import { useRouter } from 'next/navigation.js'
-import { KBarModal } from './KBarModal'
-import { CoreContent, MDXDocument } from 'pliny/utils/contentlayer'
-import { formatDate } from 'pliny/utils/formatDate'
+import { useState, useEffect, FC, ReactNode } from "react"
+import type { Action } from "kbar"
+import { KBarProvider } from "kbar"
+import { useRouter } from "next/navigation.js"
+import { KBarModal } from "./KBarModal"
+import { CoreContent, MDXDocument } from "pliny/utils/contentlayer"
+import { formatDate } from "pliny/utils/formatDate"
 
 export interface KBarSearchProps {
   searchDocumentsPath: string | false
   defaultActions?: Action[]
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   onSearchDocumentsLoad?: (json: any) => Action[]
 }
 
 export interface KBarConfig {
-  provider: 'kbar'
+  provider: "kbar"
   kbarConfig: KBarSearchProps
 }
 
@@ -51,10 +51,10 @@ export const KBarSearchProvider: FC<{
         actions.push({
           id: post.path,
           name: post.title,
-          keywords: post?.summary || '',
-          section: 'Content',
+          keywords: post?.summary || "",
+          section: "Content",
           subtitle: formatDate(post.date, post.language),
-          perform: () => router.push('/' + post.path),
+          perform: () => router.push("/" + post.path),
         })
       }
       return actions
@@ -62,7 +62,7 @@ export const KBarSearchProvider: FC<{
     async function fetchData() {
       if (searchDocumentsPath) {
         const url =
-          searchDocumentsPath.indexOf('://') > 0 || searchDocumentsPath.indexOf('//') === 0
+          searchDocumentsPath.indexOf("://") > 0 || searchDocumentsPath.indexOf("//") === 0
             ? searchDocumentsPath
             : new URL(searchDocumentsPath, window.location.origin)
         const res = await fetch(url)

@@ -1,5 +1,5 @@
-import { useTranslation } from 'app/[locale]/i18n/client'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import { useTranslation } from "app/[locale]/i18n/client"
+import { LocaleTypes } from "app/[locale]/i18n/settings"
 
 interface PaginationProps {
   totalPages: number
@@ -13,7 +13,7 @@ export default function Pagination({
   onPageChange,
   params: { locale },
 }: PaginationProps) {
-  const { t } = useTranslation(locale, 'home')
+  const { t } = useTranslation(locale, "home")
   const prevPage = currentPage - 1 > 0
   const nextPage = currentPage + 1 <= totalPages
 
@@ -34,19 +34,19 @@ export default function Pagination({
       <nav className="flex justify-between">
         {!prevPage && (
           <button className="cursor-auto disabled:opacity-50" disabled={!prevPage}>
-            {t('prevp')}
+            {t("prevp")}
           </button>
         )}
-        {prevPage && <button onClick={handlePrevPage}> {t('prevp')}</button>}
+        {prevPage && <button onClick={handlePrevPage}> {t("prevp")}</button>}
         <span>
           {currentPage} of {totalPages}
         </span>
         {!nextPage && (
           <button className="cursor-auto disabled:opacity-50" disabled={!nextPage}>
-            {t('nextp')}
+            {t("nextp")}
           </button>
         )}
-        {nextPage && <button onClick={handleNextPage}>{t('nextp')}</button>}
+        {nextPage && <button onClick={handleNextPage}>{t("nextp")}</button>}
       </nav>
     </div>
   )

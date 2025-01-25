@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/heading-has-content */
-import * as React from 'react'
+import * as React from "react"
 
 const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
@@ -10,14 +9,14 @@ const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElemen
     />
   )
 )
-Card.displayName = 'Card'
+Card.displayName = "Card"
 
 const CardHeader = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
     <div ref={ref} className={`flex flex-col space-y-1.5 p-6 ${className}`} {...props} />
   )
 )
-CardHeader.displayName = 'CardHeader'
+CardHeader.displayName = "CardHeader"
 
 const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
@@ -28,11 +27,11 @@ const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttributes<HT
     />
   )
 )
-CardTitle.displayName = 'CardTitle'
+CardTitle.displayName = "CardTitle"
 
 const CardContent = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => <div ref={ref} className={`p-6 pt-0 ${className}`} {...props} />
 )
-CardContent.displayName = 'CardContent'
+CardContent.displayName = "CardContent"
 
 export { Card, CardHeader, CardTitle, CardContent }

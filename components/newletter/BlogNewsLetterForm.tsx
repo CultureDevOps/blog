@@ -1,4 +1,4 @@
-import NewsletterForm, { NewsletterFormProps } from './NewsletterForm'
+import NewsletterForm, { NewsletterFormProps } from "./NewsletterForm"
 
 const BlogNewsletterForm = ({ title, apiUrl }: NewsletterFormProps) => (
   <div className="flex items-center justify-center">

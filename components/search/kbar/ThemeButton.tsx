@@ -11,7 +11,7 @@ const ThemeButton: React.FC<ThemeButtonProps> = ({ t, handleThemeChange, theme, 
     onClick={() => handleThemeChange(theme)}
   >
     <span className="ml-4 mr-2">
-      <Icon className="h-6 w-6" />
+      <Icon className="size-6" />
     </span>
     <div>{t(theme)}</div>
   </button>

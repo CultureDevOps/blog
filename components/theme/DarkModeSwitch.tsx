@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { useSpring, animated } from 'react-spring'
+import * as React from "react"
+import { useSpring, animated } from "@react-spring/web"
 
 export const defaultProperties = {
   dark: {
@@ -7,11 +7,11 @@ export const defaultProperties = {
       r: 9,
     },
     mask: {
-      cx: '50%',
-      cy: '23%',
+      cx: "50%",
+      cy: "23%",
     },
     svg: {
-      transform: 'rotate(40deg)',
+      transform: "rotate(40deg)",
     },
     lines: {
       opacity: 0,
@@ -22,11 +22,11 @@ export const defaultProperties = {
       r: 5,
     },
     mask: {
-      cx: '100%',
-      cy: '0%',
+      cx: "100%",
+      cy: "0%",
     },
     svg: {
-      transform: 'rotate(90deg)',
+      transform: "rotate(90deg)",
     },
     lines: {
       opacity: 1,
@@ -37,7 +37,7 @@ export const defaultProperties = {
 
 let REACT_TOGGLE_DARK_MODE_GLOBAL_ID = 0
 
-type SVGProps = Omit<React.HTMLAttributes<HTMLOrSVGElement>, 'onChange'>
+type SVGProps = Omit<React.HTMLAttributes<HTMLOrSVGElement>, "onChange">
 export interface Props extends SVGProps {
   onChange: (checked: boolean) => void
   checked: boolean
@@ -54,8 +54,8 @@ export const DarkModeSwitch: React.FC<Props> = ({
   checked = false,
   size = 24,
   animationProperties = defaultProperties,
-  moonColor = 'white',
-  sunColor = 'black',
+  moonColor = "white",
+  sunColor = "white",
   style,
   theme,
   ...rest
@@ -71,30 +71,33 @@ export const DarkModeSwitch: React.FC<Props> = ({
     if (animationProperties !== defaultProperties) {
       return Object.assign(defaultProperties, animationProperties)
     }
-
     return animationProperties
   }, [animationProperties])
 
-  if(theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches){
+  if (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches) {
     checked = true
   }
 
-  const { circle, svg, lines, mask } = properties[checked ? 'dark' : 'light']
+  const { circle, svg, lines, mask } = properties[checked ? "dark" : "light"]
 
   const svgContainerProps = useSpring({
-    ...svg,
+    transform: svg.transform,
     config: animationProperties.springConfig,
   })
+
   const centerCircleProps = useSpring({
-    ...circle,
+    r: circle.r,
     config: animationProperties.springConfig,
   })
+
   const maskedCircleProps = useSpring({
-    ...mask,
+    cx: mask.cx,
+    cy: mask.cy,
     config: animationProperties.springConfig,
   })
+
   const linesProps = useSpring({
-    ...lines,
+    opacity: lines.opacity,
     config: animationProperties.springConfig,
   })
 
@@ -102,9 +105,13 @@ export const DarkModeSwitch: React.FC<Props> = ({
 
   const uniqueMaskId = `circle-mask-${id}`
 
+  const AnimatedSvg = animated("svg")
+  const AnimatedCircle = animated("circle")
+  const AnimatedG = animated("g")
+
   return (
-    <animated.div style={{ display: 'flex' }}>
-      <animated.svg
+    <div style={{ display: "flex" }}>
+      <AnimatedSvg
         xmlns="http://www.w3.org/2000/svg"
         width={size}
         height={size}
@@ -117,7 +124,7 @@ export const DarkModeSwitch: React.FC<Props> = ({
         stroke="currentColor"
         onClick={toggle}
         style={{
-          cursor: 'pointer',
+          cursor: "pointer",
           ...svgContainerProps,
           ...style,
         }}
@@ -125,23 +132,17 @@ export const DarkModeSwitch: React.FC<Props> = ({
       >
         <mask id={uniqueMaskId}>
           <rect x="0" y="0" width="100%" height="100%" fill="white" />
-          <animated.circle
-            // @ts-ignore
-            style={maskedCircleProps}
-            r="9"
-            fill="black"
-          />
+          <AnimatedCircle cx={maskedCircleProps.cx} cy={maskedCircleProps.cy} r="9" fill="black" />
         </mask>
 
-        <animated.circle
+        <AnimatedCircle
           cx="12"
           cy="12"
+          r={centerCircleProps.r}
           fill={checked ? moonColor : sunColor}
-          // @ts-ignore
-          style={centerCircleProps}
           mask={`url(#${uniqueMaskId})`}
         />
-        <animated.g stroke="currentColor" style={linesProps}>
+        <AnimatedG style={{ opacity: linesProps.opacity }} stroke="currentColor">
           <line x1="12" y1="1" x2="12" y2="3" />
           <line x1="12" y1="21" x2="12" y2="23" />
           <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
@@ -150,8 +151,8 @@ export const DarkModeSwitch: React.FC<Props> = ({
           <line x1="21" y1="12" x2="23" y2="12" />
           <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-        </animated.g>
-      </animated.svg>
-    </animated.div>
+        </AnimatedG>
+      </AnimatedSvg>
+    </div>
   )
 }

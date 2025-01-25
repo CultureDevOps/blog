@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from "react"
 import {
   Menu,
   MenuButton,
@@ -9,27 +9,27 @@ import {
   Radio,
   RadioGroup,
   Transition,
-} from '@headlessui/react'
-import { DarkModeSwitch } from './DarkModeSwitch'
-import { Monitor, Moon, Sun } from './icons'
-import { useTheme } from './ThemeContext'
-import { useOuterClick } from '../util/useOuterClick'
-import { useParams } from 'next/navigation'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
-import { useTranslation } from 'app/[locale]/i18n/client'
+} from "@headlessui/react"
+import { DarkModeSwitch } from "./DarkModeSwitch"
+import { Monitor, Moon, Sun } from "./icons"
+import { useTheme } from "./ThemeContext"
+import { useOuterClick } from "../util/useOuterClick"
+import { useParams } from "next/navigation"
+import { LocaleTypes } from "app/[locale]/i18n/settings"
+import { useTranslation } from "app/[locale]/i18n/client"
 
 const ThemeSwitch = () => {
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, 'common')
+  const { t } = useTranslation(locale, "common")
   const { theme, setTheme, mounted } = useTheme()
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
-  const [darkModeChecked, setDarkModeChecked] = useState<boolean>(theme === 'dark')
+  const [darkModeChecked, setDarkModeChecked] = useState<boolean>(theme === "dark")
   const menubarRef = useRef<HTMLDivElement>(null)
 
   useOuterClick(menubarRef, () => setMenuOpen(false))
 
   useEffect(() => {
-    setDarkModeChecked(theme === 'dark')
+    setDarkModeChecked(theme === "dark")
   }, [theme])
 
   const handleThemeChange = (newTheme: string) => {
@@ -38,22 +38,18 @@ const ThemeSwitch = () => {
   }
 
   useEffect(() => {
-    const backgroundElement = document.getElementById("background-image");
+    const backgroundElement = document.getElementById("background-image")
     if (backgroundElement) {
-      backgroundElement.style.overflow = menuOpen ? 'hidden' : '';
+      backgroundElement.style.overflow = menuOpen ? "hidden" : ""
     }
-  }, [menuOpen]);
+  }, [menuOpen])
 
   if (!mounted) return null
 
   return (
     <div ref={menubarRef} className="mr-5">
-      <Menu 
-        as="div" 
-        className="relative mt-1 inline-block text-left"
-        data-open={menuOpen}
-      >
-        <MenuButton aria-label={t('theme')}>
+      <Menu as="div" className="relative mt-1 inline-block text-left" data-open={menuOpen}>
+        <MenuButton aria-label={t("theme")}>
           <DarkModeSwitch
             checked={darkModeChecked}
             onChange={(isChecked) => setDarkModeChecked(isChecked)}
@@ -72,33 +68,32 @@ const ThemeSwitch = () => {
           leaveFrom="opacity-100 scale-100 translate-y-0"
           leaveTo="opacity-0 scale-95 translate-y-[10px]"
         >
-          <MenuItems 
+          <MenuItems
             modal={true}
-            className="absolute right-0 z-60 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md 
-                      shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none backdrop-blur-sm">
+            className="absolute right-0 z-60 mt-2 w-32 origin-top-right divide-y divide-gray-100 rounded-md shadow-lg
+              ring-1 ring-black/5 focus:outline-none backdrop-blur-sm"
+          >
             <RadioGroup value={theme} onChange={handleThemeChange}>
-              <div className="p-1 rounded-md 
-                              bg-gradient-to-br from-gray-200/95 via-primary-200/95 to-gray-200/95
-                              dark:bg-gradient-to-br dark:from-gray-900/95 dark:via-primary-900/95 dark:to-gray-900/95                                
-                              shadow-xl shadow-gray-400 dark:shadow-gray-950">
+              <div
+                className="p-1 rounded-md bg-gradient-to-br from-gray-200/95 via-primary-200/95 to-gray-200/95
+                  dark:bg-gradient-to-br dark:from-gray-900/95 dark:via-primary-900/95 dark:to-gray-900/95 shadow-xl
+                  shadow-gray-400 dark:shadow-gray-950"
+              >
                 <Radio value="light">
                   <MenuItem>
                     {({ focus }) => (
                       <button
-                        onClick={() => handleThemeChange('light')}
+                        onClick={() => handleThemeChange("light")}
                         className={`${
-                          focus
-                              ? 'bg-primary-400/50 dark:bg-primary-500/30'
-                              : 'hover:bg-primary-400/50 dark:hover:bg-gray-600/40'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm 
-                        hover:backdrop-blur-sm
-                        text-gray-700 hover:text-primary-500
-                        dark:text-white dark:hover:text-primary-500
-                        dark:hover:text-primary-500
+                        focus
+                            ? "bg-primary-400/50 dark:bg-primary-500/30"
+                            : "hover:bg-primary-400/50 dark:hover:bg-gray-600/40"
+                        } group flex w-full items-center rounded-md p-2 text-sm hover:backdrop-blur-sm text-gray-700
+                        hover:text-primary-500 dark:text-white dark:hover:text-primary-500 dark:hover:text-primary-500
                         text-shadow text-shadow-gray-400/80 dark:text-shadow-black`}
                       >
-                        <Sun className="h-6 w-6" />
-                        <span className="ml-2">{t('light')}</span>
+                        <Sun className="size-6" />
+                        <span className="ml-2">{t("light")}</span>
                       </button>
                     )}
                   </MenuItem>
@@ -107,20 +102,17 @@ const ThemeSwitch = () => {
                   <MenuItem>
                     {({ focus }) => (
                       <button
-                        onClick={() => handleThemeChange('dark')}
+                        onClick={() => handleThemeChange("dark")}
                         className={`${
-                          focus
-                              ? 'bg-primary-400/50 dark:bg-primary-500/30'
-                              : 'hover:bg-primary-400/50 dark:hover:bg-gray-600/40'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm 
-                        hover:backdrop-blur-sm
-                        text-gray-700 hover:text-primary-500
-                        dark:text-white dark:hover:text-primary-500
-                        dark:hover:text-primary-500
+                        focus
+                            ? "bg-primary-400/50 dark:bg-primary-500/30"
+                            : "hover:bg-primary-400/50 dark:hover:bg-gray-600/40"
+                        } group flex w-full items-center rounded-md p-2 text-sm hover:backdrop-blur-sm text-gray-700
+                        hover:text-primary-500 dark:text-white dark:hover:text-primary-500 dark:hover:text-primary-500
                         text-shadow text-shadow-gray-400/80 dark:text-shadow-black`}
                       >
-                        <Moon className="h-6 w-6" />
-                        <span className="ml-2">{t('dark')}</span>
+                        <Moon className="size-6" />
+                        <span className="ml-2">{t("dark")}</span>
                       </button>
                     )}
                   </MenuItem>
@@ -129,20 +121,17 @@ const ThemeSwitch = () => {
                   <MenuItem>
                     {({ focus }) => (
                       <button
-                        onClick={() => handleThemeChange('system')}
+                        onClick={() => handleThemeChange("system")}
                         className={`${
-                          focus
-                              ? 'bg-primary-400/50 dark:bg-primary-500/30'
-                              : 'hover:bg-primary-400/50 dark:hover:bg-gray-600/40'
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm 
-                        text-gray-700 hover:text-primary-500
-                        hover:backdrop-blur-sm
-                        dark:text-white dark:hover:text-primary-500
-                        dark:hover:text-primary-500
+                        focus
+                            ? "bg-primary-400/50 dark:bg-primary-500/30"
+                            : "hover:bg-primary-400/50 dark:hover:bg-gray-600/40"
+                        } group flex w-full items-center rounded-md p-2 text-sm text-gray-700 hover:text-primary-500
+                        hover:backdrop-blur-sm dark:text-white dark:hover:text-primary-500 dark:hover:text-primary-500
                         text-shadow text-shadow-gray-400/80 dark:text-shadow-black`}
                       >
-                        <Monitor className="h-6 w-6" />
-                        <span className="ml-2">{t('system')}</span>
+                        <Monitor className="size-6" />
+                        <span className="ml-2">{t("system")}</span>
                       </button>
                     )}
                   </MenuItem>

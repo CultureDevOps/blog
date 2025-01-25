@@ -1,4 +1,4 @@
-import { FormInputs } from './FormInputs'
+import { FormInputs } from "./FormInputs"
 
 interface ModalBodyProps {
   state: any
@@ -41,9 +41,10 @@ export const ModalBody: React.FC<ModalBodyProps> = ({
           disabled={state.submitting || !name || !email || !message}
           data-te-ripple-init
           data-te-ripple-color="light"
-          className="text-md w-full rounded-full border-2 bg-primary-500 px-4 py-2 font-semibold text-white transition hover:opacity-80"
+          className="text-md w-full rounded-full border-2 bg-primary-500 px-4 py-2 font-semibold text-white transition
+            hover:opacity-80"
         >
-          {t('button')}
+          {t("button")}
         </button>
       </form>
     </div>

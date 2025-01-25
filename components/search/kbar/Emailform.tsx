@@ -1,5 +1,5 @@
-import { MailIcon } from '../icons'
-import { ModalBody } from '@/components/formspree/CBody'
+import { MailIcon } from "../icons"
+import { ModalBody } from "@/components/formspree/CBody"
 
 interface EmailFormProps {
   state: any
@@ -27,11 +27,11 @@ const EmailForm: React.FC<EmailFormProps> = ({
   <>
     <div className="ml-2 mt-5 flex flex-row items-center text-3xl font-semibold text-heading-400">
       <span>
-        <MailIcon className="mr-1 h-6 w-6" />
+        <MailIcon className="mr-1 size-6" />
       </span>
-      <div>{t('title')}</div>
+      <div>{t("title")}</div>
     </div>
-    <div className="mb-16 ml-2 mr-2 mt-16">
+    <div className="my-16 mx-2">
       <ModalBody
         handleSubmit={handleSubmit}
         name={name}

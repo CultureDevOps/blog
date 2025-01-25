@@ -1,16 +1,16 @@
-'use client'
+"use client"
 
-import { ReactNode } from 'react'
-import { KBarSearchProvider } from './kbar'
-import { useParams, useRouter } from 'next/navigation'
-import siteMetadata from '@/data/siteMetadata'
-import { Authors, allAuthors } from 'contentlayer/generated'
-import { CoreContent } from 'pliny/utils/contentlayer'
-import { Blog } from 'contentlayer/generated'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
-import { useTranslation } from 'app/[locale]/i18n/client'
-import { fallbackLng } from 'app/[locale]/i18n/locales'
-import { HomeIcon, BlogIcon, TagsIcon, ProjectsIcon, AboutIcon } from './icons'
+import { ReactNode } from "react"
+import { KBarSearchProvider } from "./kbar"
+import { useParams, useRouter } from "next/navigation"
+import siteMetadata from "@/data/siteMetadata"
+import { Authors, allAuthors } from "contentlayer/generated"
+import { CoreContent } from "pliny/utils/contentlayer"
+import { Blog } from "contentlayer/generated"
+import { LocaleTypes } from "app/[locale]/i18n/settings"
+import { useTranslation } from "app/[locale]/i18n/client"
+import { fallbackLng } from "app/[locale]/i18n/locales"
+import { HomeIcon, BlogIcon, TagsIcon, ProjectsIcon, AboutIcon } from "./icons"
 
 interface SearchProviderProps {
   children: ReactNode
@@ -18,7 +18,7 @@ interface SearchProviderProps {
 
 export const SearchProvider = ({ children }: SearchProviderProps) => {
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, 'common')
+  const { t } = useTranslation(locale, "common")
   const router = useRouter()
   const authors = allAuthors
     .filter((a) => a.language === locale)
@@ -29,9 +29,9 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     return {
       id: slug,
       name: name,
-      keywords: '',
+      keywords: "",
       shortcut: [],
-      section: locale === fallbackLng ? 'Authors' : 'Auteurs',
+      section: locale === fallbackLng ? "Authors" : "Auteurs",
       perform: () => router.push(`/${locale}/about/${slug}`),
       icon: (
         <i>
@@ -48,11 +48,11 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
       ? []
       : [
           {
-            id: 'about',
-            name: locale === fallbackLng ? 'About' : 'À propos',
-            keywords: '',
-            shortcut: ['a'],
-            section: locale === fallbackLng ? 'Navigate' : 'Naviguer',
+            id: "about",
+            name: locale === fallbackLng ? "About" : "À propos",
+            keywords: "",
+            shortcut: ["a"],
+            section: locale === fallbackLng ? "Navigate" : "Naviguer",
             perform: () => router.push(`/${locale}/about`),
             icon: (
               <i>
@@ -63,18 +63,18 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
         ]),
   ]
   /* issue when using regular translations, this is a workaround to show how to implement section titles */
-  const navigationSection = locale === fallbackLng ? 'Navigate' : 'Naviguer'
+  const navigationSection = locale === fallbackLng ? "Navigate" : "Naviguer"
   return (
     <KBarSearchProvider
       kbarConfig={{
-        searchDocumentsPath: 'search.json',
+        searchDocumentsPath: "search.json",
         /* issue when using regular translations, this is a workaround to show how to implement translated menu titles */
         defaultActions: [
           {
-            id: 'home',
-            name: locale === fallbackLng ? 'Home' : 'Accueil',
-            keywords: '',
-            shortcut: ['h'],
+            id: "home",
+            name: locale === fallbackLng ? "Home" : "Accueil",
+            keywords: "",
+            shortcut: ["h"],
             section: navigationSection,
             perform: () => router.push(`/${locale}`),
             icon: (
@@ -84,10 +84,10 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             ),
           },
           {
-            id: 'blog',
-            name: locale === fallbackLng ? 'Blog' : 'Blog',
-            keywords: '',
-            shortcut: ['b'],
+            id: "blog",
+            name: locale === fallbackLng ? "Blog" : "Blog",
+            keywords: "",
+            shortcut: ["b"],
             section: navigationSection,
             perform: () => router.push(`/${locale}/blog`),
             icon: (
@@ -97,10 +97,10 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             ),
           },
           {
-            id: 'tags',
-            name: locale === fallbackLng ? 'Tags' : 'Tags',
-            keywords: '',
-            shortcut: ['t'],
+            id: "tags",
+            name: locale === fallbackLng ? "Tags" : "Tags",
+            keywords: "",
+            shortcut: ["t"],
             section: navigationSection,
             perform: () => router.push(`/${locale}/tags`),
             icon: (
@@ -110,10 +110,10 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             ),
           },
           {
-            id: 'projects',
-            name: locale === fallbackLng ? 'Projects' : 'Projets',
-            keywords: '',
-            shortcut: ['p'],
+            id: "projects",
+            name: locale === fallbackLng ? "Projects" : "Projets",
+            keywords: "",
+            shortcut: ["p"],
             section: navigationSection,
             perform: () => router.push(`/${locale}/projects`),
             icon: (
@@ -130,9 +130,9 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
             .map((post: CoreContent<Blog>) => ({
               id: post.path,
               name: post.title,
-              keywords: post?.summary || '',
-              section: t('content'),
-              subtitle: post.tags.join(', '),
+              keywords: post?.summary || "",
+              section: t("content"),
+              subtitle: post.tags.join(", "),
               perform: () => router.push(`/${locale}/blog/${post.slug}`),
             }))
         },

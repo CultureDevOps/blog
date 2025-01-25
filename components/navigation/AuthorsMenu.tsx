@@ -1,10 +1,10 @@
-'use client'
+"use client"
 
-import Image from 'next/image'
-import Link from 'next/link'
-import siteMetadata from '@/data/siteMetadata'
-import { Authors, allAuthors } from 'contentlayer/generated'
-import { Fragment, useRef, useState, useMemo } from 'react'
+import Image from "next/image"
+import Link from "next/link"
+import siteMetadata from "@/data/siteMetadata"
+import { Authors, allAuthors } from "contentlayer/generated"
+import { Fragment, useRef, useState, useMemo } from "react"
 import {
   Menu,
   MenuButton,
@@ -13,12 +13,12 @@ import {
   Radio,
   RadioGroup,
   Transition,
-} from '@headlessui/react'
-import { useOuterClick } from '../util/useOuterClick'
-import { useParams, usePathname } from 'next/navigation'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
-import { useTranslation } from 'app/[locale]/i18n/client'
-import { motion } from 'framer-motion'
+} from "@headlessui/react"
+import { useOuterClick } from "../util/useOuterClick"
+import { useParams, usePathname } from "next/navigation"
+import { LocaleTypes } from "app/[locale]/i18n/settings"
+import { useTranslation } from "app/[locale]/i18n/client"
+import { motion } from "framer-motion"
 
 type AuthorsMenuProps = {
   className: string
@@ -26,11 +26,11 @@ type AuthorsMenuProps = {
 
 const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, 'common')
+  const { t } = useTranslation(locale, "common")
   const pathname = usePathname()
-  const sections = pathname!.split('/')
+  const sections = pathname!.split("/")
   const lastSection = sections[sections.length - 1]
-  const filterSections = pathname !== `/${locale}` && pathname !== '/'
+  const filterSections = pathname !== `/${locale}` && pathname !== "/"
 
   const authors = useMemo(
     () =>
@@ -67,14 +67,13 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
         <MenuItem>
           {({ focus }) => (
             <div
-              className={`${
-                focus ? 'bg-gray-100 dark:bg-gray-600' : 'hover:bg-gray-100 dark:hover:bg-gray-600'
-              } group flex w-full items-center rounded-md px-2 py-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
+              className={`${focus ? "bg-gray-100 dark:bg-gray-600" : "hover:bg-gray-100 dark:hover:bg-gray-600"} group flex
+              w-full items-center rounded-md p-2 text-sm hover:text-primary-500 dark:hover:text-primary-500`}
             >
               <div className="mr-2">
                 <Image
                   className="rounded-full"
-                  src={avatar ?? ''}
+                  src={avatar ?? ""}
                   alt="avatar"
                   title="avatar"
                   width={25}
@@ -104,15 +103,15 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                 <div
                   className={`hidden font-medium ${
                     isSelected
-                      ? 'text-heading-500'
-                      : 'text-gray-600 hover:text-gray-900 dark:hover:text-gray-100'
-                  } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
+                      ? "text-heading-500"
+                      : "text-gray-600 hover:text-gray-900 dark:hover:text-gray-100"
+                      } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
                 >
-                  <span className="relative z-10">{t('about')}</span>
+                  <span className="relative z-10">{t("about")}</span>
                   {isSelected && (
                     <motion.span
                       layoutId="tab"
-                      transition={{ type: 'spring', duration: 0.4 }}
+                      transition={{ type: "spring", duration: 0.4 }}
                       className="absolute inset-0 z-0 rounded-md bg-gray-100 dark:bg-gray-600"
                     ></motion.span>
                   )}
@@ -130,7 +129,8 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
               leaveTo="opacity-0 scale-95 translate-y-[10px]"
             >
               <MenuItems
-                className="absolute right-0 z-50 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800"
+                className="absolute right-0 z-50 mt-2 w-40 origin-top-right divide-y divide-gray-100 rounded-md bg-white
+                  shadow-lg ring-1 ring-black/5 focus:outline-none dark:bg-gray-800"
                 as="div"
               >
                 <RadioGroup>
@@ -154,15 +154,15 @@ const AuthorsMenu = ({ className }: AuthorsMenuProps) => {
                 key={name}
                 className={`${
                   isSelected
-                    ? 'text-white'
-                    : 'text-gray-600 hover:text-gray-900 dark:hover:text-gray-100'
+                    ? "text-white"
+                    : "text-gray-600 hover:text-gray-900 dark:hover:text-gray-100"
                 } relative rounded-md px-2 py-1 font-medium transition-colors sm:block`}
               >
-                <span className="relative z-10">{t('about')}</span>
+                <span className="relative z-10">{t("about")}</span>
                 {isSelected && (
                   <motion.span
                     layoutId="tab"
-                    transition={{ type: 'spring', duration: 0.4 }}
+                    transition={{ type: "spring", duration: 0.4 }}
                     className="absolute inset-0 z-0 rounded-md bg-heading-500"
                   ></motion.span>
                 )}

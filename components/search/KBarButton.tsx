@@ -1,5 +1,5 @@
-import React, { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
-import { useKBar } from 'kbar'
+import React, { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react"
+import { useKBar } from "kbar"
 
 interface KbarButtonProps {
   children: ReactNode

@@ -1,20 +1,27 @@
-import Image, { ImageProps } from 'next/image';
+import Image, { ImageProps } from "next/image"
 
-interface ImageWithReflectionProps  extends ImageProps {
-  src: string;
-  alt: string;
-  width: number;
-  height: number;
-  className?: string; 
+interface ImageWithReflectionProps extends ImageProps {
+  src: string
+  alt: string
+  width: number
+  height: number
+  className?: string
 }
 
-const ImageWithReflection = ({ src, alt, width, height, className, ...rest }: ImageWithReflectionProps) => {
-  const isExternal = src.startsWith('http'); // Vérifie si l'URL est externe
+const ImageWithReflection = ({
+  src,
+  alt,
+  width,
+  height,
+  className,
+  ...rest
+}: ImageWithReflectionProps) => {
+  const isExternal = src.startsWith("http") // Vérifie si l'URL est externe
 
-  const cloudFrontUrl = process.env.CLOUD_FRONT_URL;
-  let href = isExternal ? src : `${cloudFrontUrl}${src}`;
-  if (!isExternal && !href.includes('?format=')) {
-    href += '?format=auto';
+  const cloudFrontUrl = process.env.CLOUD_FRONT_URL
+  let href = isExternal ? src : `${cloudFrontUrl}${src}`
+  if (!isExternal && !href.includes("?format=")) {
+    href += "?format=auto"
   }
   return (
     <div className="relative flex flex-col items-center">
@@ -30,16 +37,16 @@ const ImageWithReflection = ({ src, alt, width, height, className, ...rest }: Im
 
       {/* Reflet */}
       <div
-        className="absolute top-full mt-1 w-full h-full"
+        className="absolute top-full mt-1 size-full"
         style={{
           backgroundImage: `url(${href})`,
-          backgroundSize: 'cover',
-          transform: 'scaleY(-1)',
-          filter: 'blur(5px) opacity(0.3)',
+          backgroundSize: "cover",
+          transform: "scaleY(-1)",
+          filter: "blur(5px) opacity(0.3)",
         }}
       ></div>
     </div>
-  );
-};
+  )
+}
 
-export default ImageWithReflection;
+export default ImageWithReflection

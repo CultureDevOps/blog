@@ -1,18 +1,18 @@
-'use client'
+"use client"
 
-import { SVGProps, useState } from 'react'
-import Image from 'next/image'
-import Link from '../mdxcomponents/Link'
-import siteMetadata from '@/data/siteMetadata'
-import headerNavLinks from '@/data/headerNavLinks'
-import { Authors, allAuthors } from 'contentlayer/generated'
-import { useParams } from 'next/navigation'
-import { useTranslation } from 'app/[locale]/i18n/client'
-import type { LocaleTypes } from 'app/[locale]/i18n/settings'
-import { motion } from 'framer-motion'
-import LangSwitch from '../langswitch'
-import SearchButton from '../search/SearchButton'
-import ThemeSwitch from '../theme/ThemeSwitch'
+import { SVGProps, useState } from "react"
+import Image from "next/image"
+import Link from "../mdxcomponents/Link"
+import siteMetadata from "@/data/siteMetadata"
+import headerNavLinks from "@/data/headerNavLinks"
+import { Authors, allAuthors } from "contentlayer/generated"
+import { useParams } from "next/navigation"
+import { useTranslation } from "app/[locale]/i18n/client"
+import type { LocaleTypes } from "app/[locale]/i18n/settings"
+import { motion } from "framer-motion"
+import LangSwitch from "../langswitch"
+import SearchButton from "../search/SearchButton"
+import ThemeSwitch from "../theme/ThemeSwitch"
 
 export function ChevronDownIcon({ className, ...props }: SVGProps<SVGSVGElement>) {
   return (
@@ -27,9 +27,9 @@ export function ChevronDownIcon({ className, ...props }: SVGProps<SVGSVGElement>
   )
 }
 
-const MobileNav = ({ navShow, onToggleNav }: { navShow: boolean, onToggleNav: () => void }) => {
+const MobileNav = ({ navShow, onToggleNav }: { navShow: boolean; onToggleNav: () => void }) => {
   const locale = useParams()?.locale as LocaleTypes
-  const { t } = useTranslation(locale, 'common')
+  const { t } = useTranslation(locale, "common")
   const authors = allAuthors
     .filter((a) => a.language === locale)
     .sort((a, b) => (a.default === b.default ? 0 : a.default ? -1 : 1)) as Authors[]
@@ -38,7 +38,6 @@ const MobileNav = ({ navShow, onToggleNav }: { navShow: boolean, onToggleNav: ()
 
   const [accordionOpen, setAccordionOpen] = useState<boolean>(false)
 
-
   const toggleAccordion = () => {
     setAccordionOpen(!accordionOpen)
   }
@@ -46,12 +45,11 @@ const MobileNav = ({ navShow, onToggleNav }: { navShow: boolean, onToggleNav: ()
   return (
     <>
       <div
-        className={`fixed top-0 left-0 z-50 h-full w-full bg-white bg-opacity-90 dark:bg-gray-950 dark:bg-opacity-95 transition-transform duration-300 ease-in-out ${
-          navShow ? 'translate-x-0' : 'translate-x-full'
-          }`}
-        >
+        className={`fixed top-0 left-0 z-50 size-full bg-white/90 dark:bg-gray-950/95 transition-transform duration-300
+          ease-in-out ${navShow ? "translate-x-0" : "translate-x-full"}`}
+      >
         <div className="flex justify-end">
-          <button className="mr-8 mt-11 h-8 w-8" aria-label="Toggle Menu" onClick={onToggleNav}>
+          <button className="mr-8 mt-11 size-8" aria-label="Toggle Menu" onClick={onToggleNav}>
             <svg
               viewBox="0 0 20 20"
               fill="currentColor"

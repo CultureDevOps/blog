@@ -12,8 +12,8 @@ import {
   Threads,
   Instagram,
   Reddit,
-} from './icons'
-import siteMetadata from '@/data/siteMetadata'
+} from "./icons"
+import siteMetadata from "@/data/siteMetadata"
 
 const components = {
   mail: Mail,
@@ -42,11 +42,12 @@ const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
 
   return (
     <>
-      {kind === 'mail' && !href && siteMetadata.formspree === true ? (
+      {kind === "mail" && !href && siteMetadata.formspree === true ? (
         <>
           <span className="sr-only">{kind}</span>
           <SocialSvg
-            className={`cursor-pointer fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-${size} w-${size}`}
+            className={`cursor-pointer fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200
+              dark:hover:text-primary-400 h-${size} w-${size}`}
           />
         </>
       ) : (
@@ -58,7 +59,8 @@ const SocialIcon = ({ kind, href, size = 8 }: SocialIconProps) => {
         >
           <span className="sr-only">{kind}</span>
           <SocialSvg
-            className={`fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400 h-${size} w-${size}`}
+            className={`fill-current text-gray-700 hover:text-primary-500 dark:text-gray-200 dark:hover:text-primary-400
+              h-${size} w-${size}`}
           />
         </a>
       )}

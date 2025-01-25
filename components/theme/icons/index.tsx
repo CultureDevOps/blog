@@ -1,4 +1,4 @@
-import { SVGProps } from 'react'
+import { SVGProps } from "react"
 export function Sun(svgProps: SVGProps<SVGSVGElement>) {
   return (
     <svg {...svgProps} viewBox="0 0 20 20" fill="currentColor">

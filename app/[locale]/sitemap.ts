@@ -1,11 +1,11 @@
-import { MetadataRoute } from 'next'
-import { allBlogs, allAuthors } from 'contentlayer/generated'
-import siteMetadata from '@/data/siteMetadata'
-import { fallbackLng, secondLng } from './i18n/locales'
+import { MetadataRoute } from "next"
+import { allBlogs, allAuthors } from "contentlayer/generated"
+import siteMetadata from "@/data/siteMetadata"
+import { fallbackLng, secondLng } from "./i18n/locales"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = siteMetadata.siteUrl
-  const today = new Date().toISOString().split('T')[0]
+  const today = new Date().toISOString().split("T")[0]
 
   const blogRoutes = allBlogs
     .filter((post) => !post.draft)
@@ -43,17 +43,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return [{ url: mainUrl }, ...alternateauthorsUrls]
   })
 
-  const routes = ['', 'blog', 'projects', 'tags'].flatMap((route) => {
-    const mainUrl = `${siteUrl}/${fallbackLng}/${route}`.replace(/\/$/, '')
+  const routes = ["", "blog", "projects", "tags"].flatMap((route) => {
+    const mainUrl = `${siteUrl}/${fallbackLng}/${route}`.replace(/\/$/, "")
     const alternateUrls: { url: string; lang: string }[] = []
 
     if (route !== fallbackLng) {
-      const alternateUrl = `${siteUrl}/${fallbackLng}/${route}`.replace(/\/$/, '')
+      const alternateUrl = `${siteUrl}/${fallbackLng}/${route}`.replace(/\/$/, "")
       alternateUrls.push({ url: alternateUrl, lang: fallbackLng })
     }
 
     if (route !== secondLng) {
-      const alternateUrl = `${siteUrl}/${secondLng}/${route}`.replace(/\/$/, '')
+      const alternateUrl = `${siteUrl}/${secondLng}/${route}`.replace(/\/$/, "")
       alternateUrls.push({ url: alternateUrl, lang: secondLng })
     }
 

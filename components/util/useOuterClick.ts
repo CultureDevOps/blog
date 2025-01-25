@@ -1,6 +1,6 @@
-import { RefObject, useEffect } from 'react'
+import { RefObject, useEffect } from "react"
 
-export function useOuterClick(dom: RefObject<HTMLElement>, cb: () => void): void {
+export function useOuterClick(dom: RefObject<HTMLElement | null>, cb: () => void): void {
   useEffect(() => {
     function handleClickOutside(event: MouseEvent): void {
       if (dom.current && !dom.current.contains(event.target as Node)) {
@@ -8,10 +8,10 @@ export function useOuterClick(dom: RefObject<HTMLElement>, cb: () => void): void
       }
     }
 
-    window.addEventListener('mousedown', handleClickOutside)
+    window.addEventListener("mousedown", handleClickOutside)
 
     return () => {
-      window.removeEventListener('mousedown', handleClickOutside)
+      window.removeEventListener("mousedown", handleClickOutside)
     }
   }, [dom, cb])
 }

@@ -1,7 +1,7 @@
-import { useRef, useCallback } from 'react'
-import { useOuterClick } from '../util/useOuterClick'
-import { motion } from 'framer-motion'
-import { MailIcon } from '../search/icons'
+import { useRef, useCallback } from "react"
+import { useOuterClick } from "../util/useOuterClick"
+import { motion } from "framer-motion"
+import { MailIcon } from "../search/icons"
 
 interface cModalProps {
   isOpen?: boolean
@@ -45,18 +45,20 @@ export const CModal: React.FC<cModalProps> = ({
       variants={variants}
       initial="hidden"
       animate="enter"
-      transition={{ type: 'linear' }}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-300/50 p-4 backdrop-blur backdrop-filter dark:bg-black/50"
+      transition={{ type: "linear" }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-gray-300/50 p-4 backdrop-blur
+        dark:bg-black/50"
     >
-      <div className="relative mx-auto my-3 h-full w-full sm:h-auto sm:w-2/5 sm:max-w-xl">
+      <div className="relative mx-auto my-3 size-full sm:h-auto sm:w-2/5 sm:max-w-xl">
         <div
           ref={modalContentRef}
-          className="relative flex h-full w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none dark:bg-black lg:h-auto"
+          className="relative flex size-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none
+            focus:outline-none dark:bg-black lg:h-auto"
         >
           <div className="flex items-center justify-between p-6">
             <div className="ml-2 flex flex-row items-center text-3xl font-semibold text-heading-400">
               <span>
-                <MailIcon className="mr-2 h-6 w-6" />
+                <MailIcon className="mr-2 size-6" />
               </span>
               <div>{title}</div>
             </div>
@@ -65,7 +67,7 @@ export const CModal: React.FC<cModalProps> = ({
               onClick={handleClose}
               className="ml-auto border-0 p-1 transition hover:opacity-70"
             >
-              <p className="text-lg font-bold" style={{ fontSize: '1.5rem' }}>
+              <p className="text-lg font-bold" style={{ fontSize: "1.5rem" }}>
                 &times;
               </p>
             </button>

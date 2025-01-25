@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import projectsData from '@/data/projectsData'
-import Card from '@/components/projectcard'
-import { LocaleTypes } from '../i18n/settings'
-import { useParams } from 'next/navigation'
+import projectsData from "@/data/projectsData"
+import Card from "@/components/projectcard"
+import { LocaleTypes } from "../i18n/settings"
+import { useParams } from "next/navigation"
 
 const Project = () => {
   const locale = useParams()?.locale as LocaleTypes

@@ -1,8 +1,8 @@
-import React from 'react'
-import Link from '@/components/mdxcomponents/Link'
-import Tag from '@/components/tag'
-import { formatDate } from 'pliny/utils/formatDate'
-import { LocaleTypes } from 'app/[locale]/i18n/settings'
+import React from "react"
+import Link from "@/components/mdxcomponents/Link"
+import Tag from "@/components/tag"
+import { formatDate } from "pliny/utils/formatDate"
+import { LocaleTypes } from "app/[locale]/i18n/settings"
 
 interface Post {
   slug: string
@@ -24,7 +24,7 @@ interface PostListProps {
 const PostList: React.FC<PostListProps> = ({ posts, locale, t, maxDisplay }) => {
   return (
     <ul className="divide-y divide-gray-200 dark:divide-gray-700">
-      {!posts.length && <li>{t('noposts')}</li>}
+      {!posts.length && <li>{t("noposts")}</li>}
       {posts.slice(0, maxDisplay).map((post) => {
         const { slug, date, title, summary, tags } = post
         return (
@@ -32,7 +32,7 @@ const PostList: React.FC<PostListProps> = ({ posts, locale, t, maxDisplay }) => 
             <article>
               <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                 <dl>
-                  <dt className="sr-only">{t('pub')}</dt>
+                  <dt className="sr-only">{t("pub")}</dt>
                   <dd className="text-base font-medium leading-6 text-gray-600 dark:text-gray-400">
                     <time dateTime={date}>{formatDate(date, locale)}</time>
                   </dd>
@@ -64,9 +64,9 @@ const PostList: React.FC<PostListProps> = ({ posts, locale, t, maxDisplay }) => 
                     <Link
                       href={`/${locale}/blog/${slug}`}
                       className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                      aria-label={`${t('more')}"${title}"`}
+                      aria-label={`${t("more")}"${title}"`}
                     >
-                      {t('more')} &rarr;
+                      {t("more")} &rarr;
                     </Link>
                   </div>
                 </div>

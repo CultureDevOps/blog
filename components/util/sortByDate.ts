@@ -1,6 +1,6 @@
 export const sortByDate = (posts) => {
   if (!Array.isArray(posts)) {
-    console.error('sortByDate: posts is not an array')
+    console.error("sortByDate: posts is not an array")
     return []
   }
 

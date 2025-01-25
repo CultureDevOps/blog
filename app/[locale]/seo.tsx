@@ -1,13 +1,13 @@
-import { Metadata } from 'next'
-import siteMetadata from '@/data/siteMetadata'
-import { maintitle, maindescription } from '@/data/localeMetadata'
-import { LocaleTypes } from './i18n/settings'
+import { Metadata } from "next"
+import siteMetadata from "@/data/siteMetadata"
+import { maintitle, maindescription } from "@/data/localeMetadata"
+import { LocaleTypes } from "./i18n/settings"
 
 interface PageSEOProps {
   title: string
   description?: string
   image?: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   params: { locale: LocaleTypes }
   [key: string]: any
 }
@@ -25,18 +25,18 @@ export function genPageMetadata({
     openGraph: {
       title: `${title} | ${maintitle[locale]}`,
       description: description || maindescription[locale],
-      url: './',
+      url: "./",
       siteName: maintitle[locale],
       images: image ? [image] : [siteMetadata.socialBanner],
       locale: locale,
-      type: 'website',
+      type: "website",
     },
     twitter: {
       title: `${title} | ${maintitle[locale]}`,
       description: description ? description : maindescription[locale],
       site: siteMetadata.siteUrl,
       creator: siteMetadata.author,
-      card: 'summary_large_image',
+      card: "summary_large_image",
       images: image ? [image] : [siteMetadata.socialBanner],
     },
     ...rest,

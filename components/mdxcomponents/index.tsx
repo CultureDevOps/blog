@@ -1,13 +1,13 @@
-import TOCInline from 'pliny/ui/TOCInline'
-import Pre from 'pliny/ui/Pre'
-import BlogNewsletterForm from '../newletter/BlogNewsLetterForm'
-import type { MDXComponents } from 'mdx/types'
-import Image from './Image'
-import CustomLink from './Link'
-import TableWrapper from './TableWrapper'
-import Audioplayer from './Audioplayer'
-import WebsiteEmbed from './WebsiteEmbed'
-import FancyBoxImage from './FancyBoxImage'
+import TOCInline from "pliny/ui/TOCInline"
+import Pre from "pliny/ui/Pre"
+import BlogNewsletterForm from "../newletter/BlogNewsLetterForm"
+import type { MDXComponents } from "mdx/types"
+import Image from "./Image"
+import CustomLink from "./Link"
+import TableWrapper from "./TableWrapper"
+import Audioplayer from "./Audioplayer"
+import WebsiteEmbed from "./WebsiteEmbed"
+import FancyBoxImage from "./FancyBoxImage"
 
 export const components: MDXComponents = {
   Image,
