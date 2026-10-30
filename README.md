@@ -14,18 +14,18 @@ This blog is hosted on [Vercel](https://vercel.com/), built with [Next.js](https
 
 [![Next][Next.js]][Next-url] [![MDX][MDX]][MDX-url] [![Vercel][Vercel]][Vercel-url] [![React][React]][React-url][![Tailwind CSS][Tailwind CSS]][Tailwind CSS-url]
 
-## Développement local
+## Local development
 
-Prérequis : Node.js 22 ou plus récent (Node.js 24 recommandé). Yarn 4.0.2 est fourni dans le dépôt ; aucune installation globale de Yarn n'est nécessaire.
+Requirements: Node.js 22 or later (Node.js 24 recommended). Yarn 4.0.2 is included in the repository; no global Yarn installation is required.
 
 ```sh
 node .yarn/releases/yarn-4.0.2.cjs install --immutable
 node .yarn/releases/yarn-4.0.2.cjs dev
 ```
 
-Ouvrir http://localhost:3000 pour le français et http://localhost:3000/en pour l'anglais.
+Open http://localhost:3000 for French or http://localhost:3000/en for English.
 
-Copier `.env.example` vers `.env.local` pour configurer les services externes. Sans URL CloudFront, les images sont chargées depuis `public/`. Les images d'articles exclues de Git doivent être synchronisées séparément si nécessaire.
+Copy `.env.example` to `.env.local` to configure external services. Without a CloudFront URL, images are loaded from `public/`. Article images excluded from Git must be synced separately if needed.
 
 ```sh
 node .yarn/releases/yarn-4.0.2.cjs lint
@@ -34,31 +34,31 @@ node .yarn/releases/yarn-4.0.2.cjs build
 node .yarn/releases/yarn-4.0.2.cjs serve
 ```
 
-La compilation génère les articles Contentlayer, l'index de recherche et les flux RSS. Lancer une première compilation avant `typecheck` sur un clone neuf. Webpack reste activé pour Contentlayer et le chargement des SVG. `start` reste un alias de développement ; `serve` lance la version compilée.
+The build generates Contentlayer articles, the search index, and RSS feeds. On a fresh clone, run an initial build before `typecheck`. Webpack remains enabled for Contentlayer and SVG loading. `start` is a development alias; `serve` runs the production build.
 
-Le lint conserve les avertissements sur les effets d'hydratation existants ; leur refonte peut être traitée séparément.
+Lint still reports warnings for existing hydration effects; these can be refactored separately.
 
-## Docker Compose (développement)
+## Docker Compose (development)
 
-Avec Docker Desktop démarré en mode conteneurs Linux :
+With Docker Desktop running in Linux container mode:
 
 ```sh
 docker compose up -d --build
 docker compose logs -f blog
 ```
 
-Ouvrir http://localhost:3000 (français) ou http://localhost:3000/en (anglais). Les modifications des sources sont prises en compte automatiquement. `.env.local`, s'il existe, est lu par Next.js à travers le montage des sources. Redémarrer le service après avoir modifié ce fichier.
+Open http://localhost:3000 (French) or http://localhost:3000/en (English). Source changes reload automatically. Next.js reads `.env.local`, if present, through the source bind mount. Restart the service after changing this file.
 
-Les dépendances, le cache Yarn, `.next` et `.contentlayer` utilisent des volumes Docker distincts pour éviter de réutiliser les modules natifs ou les caches Windows. Les dépendances sont vérifiées à chaque démarrage avec `install --immutable`.
+Dependencies, the Yarn cache, `.next`, and `.contentlayer` use separate Docker volumes to avoid reusing Windows native modules or caches. Dependencies are checked at each startup with `install --immutable`.
 
 ```sh
 docker compose stop
 docker compose down
 ```
 
-Ces commandes conservent les volumes de dépendances et de caches. Si le port 3000 est occupé, définir `BLOG_PORT=3001` dans `.env` avant de lancer Compose.
+These commands preserve dependency and cache volumes. If port 3000 is already in use, set `BLOG_PORT=3001` in `.env` before starting Compose.
 
-Pour vérifier une compilation de production sans perturber le serveur de développement, l'arrêter pendant les contrôles :
+To check a production build without interfering with the development server, stop it while running the checks:
 
 ```sh
 docker compose stop blog
@@ -66,8 +66,8 @@ docker compose run --rm --no-deps blog sh -c "node .yarn/releases/yarn-4.0.2.cjs
 docker compose up -d blog
 ```
 
-### Utilisation depuis WSL2
+### Using WSL2
 
-Activer l'intégration de sa distribution dans Docker Desktop > Settings > Resources > WSL Integration. Pour de meilleures performances, conserver les sources dans le système de fichiers Linux, par exemple `~/projects/blog`, plutôt que sous `/mnt/c`. Référence : https://docs.docker.com/desktop/features/wsl/best-practices/
+Enable your distribution in Docker Desktop > Settings > Resources > WSL Integration. For better performance, keep the source files in the Linux filesystem, such as `~/projects/blog`, rather than under `/mnt/c`. See [Docker's WSL best practices](https://docs.docker.com/desktop/features/wsl/best-practices/).
 
-L'archive des sources mise à jour peut être extraite directement dans ce dossier Linux, puis les mêmes commandes `docker compose` s'appliquent. Aucun Node.js ni Yarn global n'est nécessaire sur l'hôte. Le projet peut aussi rester sur le disque Windows et être utilisé depuis WSL2 via `/mnt/c/Users/<utilisateur>/Documents/Codex/...` ; activer l'intégration Docker Desktop pour la distribution utilisée.
+You can extract the source archive into this Linux directory and use the same `docker compose` commands. No global Node.js or Yarn installation is required on the host. The project can also remain on the Windows drive and be accessed from WSL2 through `/mnt/c/Users/<username>/Documents/Codex/...`; enable Docker Desktop integration for the distribution you use.
