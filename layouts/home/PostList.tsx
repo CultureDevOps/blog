@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "@/components/mdxcomponents/Link"
 import Tag from "@/components/tag"
-import { formatDate } from "pliny/utils/formatDate"
+import { formatDate } from "pliny/utils/formatDate.js"
 import { LocaleTypes } from "app/[locale]/i18n/settings"
 
 interface Post {

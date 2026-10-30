@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 import ListLayout from "@/layouts/ListLayout"
-import { allCoreContent, sortPosts } from "pliny/utils/contentlayer"
+import { allCoreContent, sortPosts } from "pliny/utils/contentlayer.js"
 import { allBlogs } from "contentlayer/generated"
 import { genPageMetadata } from "app/[locale]/seo"
 import { createTranslation } from "../i18n/server"

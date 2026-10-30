@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import { useOuterClick } from "../util/useOuterClick"
 import useSidebarStore from "./store"
-import { Toc } from "pliny/mdx-plugins"
+import { Toc } from "pliny/mdx-plugins/index.js"
 import TocBody from "./TocBody"
 import Button from "./Button"
 

@@ -35,7 +35,9 @@ export const defaultProperties = {
   springConfig: { mass: 4, tension: 250, friction: 35 },
 }
 
-let REACT_TOGGLE_DARK_MODE_GLOBAL_ID = 0
+const AnimatedSvg = animated("svg")
+const AnimatedCircle = animated("circle")
+const AnimatedG = animated("g")
 
 type SVGProps = Omit<React.HTMLAttributes<HTMLOrSVGElement>, "onChange">
 export interface Props extends SVGProps {
@@ -60,12 +62,7 @@ export const DarkModeSwitch: React.FC<Props> = ({
   theme,
   ...rest
 }) => {
-  const [id, setId] = React.useState(0)
-
-  React.useEffect(() => {
-    REACT_TOGGLE_DARK_MODE_GLOBAL_ID += 1
-    setId(REACT_TOGGLE_DARK_MODE_GLOBAL_ID)
-  }, [setId])
+  const id = React.useId()
 
   const properties = React.useMemo(() => {
     if (animationProperties !== defaultProperties) {
@@ -104,10 +101,6 @@ export const DarkModeSwitch: React.FC<Props> = ({
   const toggle = () => onChange(!checked)
 
   const uniqueMaskId = `circle-mask-${id}`
-
-  const AnimatedSvg = animated("svg")
-  const AnimatedCircle = animated("circle")
-  const AnimatedG = animated("g")
 
   return (
     <div style={{ display: "flex" }}>

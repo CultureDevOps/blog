@@ -10,7 +10,7 @@ interface ImageWithFancyboxProps extends ImageProps {
 const FancyBoxImage = ({ alt, src, noShadow, ...rest }: ImageWithFancyboxProps) => {
   const isExternal = src.startsWith("http") // Vérifie si l'URL est externe
 
-  const cloudFrontUrl = process.env.CLOUD_FRONT_URL
+  const cloudFrontUrl = process.env.CLOUD_FRONT_URL || ""
   let href = isExternal ? src : `${cloudFrontUrl}${src}`
   if (!isExternal && !href.includes("?format=")) {
     href += "?format=auto"

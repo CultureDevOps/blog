@@ -1,15 +1,28 @@
-version: '3.8'
 services:
-
   blog:
     build:
       context: .
       dockerfile: Dockerfile
-    stdin_open: true
+    init: true
     restart: unless-stopped
+    environment:
+      WATCHPACK_POLLING: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+    command:
+      - sh
+      - -c
+      - node .yarn/releases/yarn-4.0.2.cjs install --immutable && exec node .yarn/releases/yarn-4.0.2.cjs dev --hostname 0.0.0.0
     volumes:
-      - '.:/app'
-      - './node_modules:/app/node_modules:cached'
+      - .:/app
+      - blog_node_modules:/app/node_modules
+      - blog_next:/app/.next
+      - blog_contentlayer:/app/.contentlayer
+      - blog_yarn_cache:/app/.yarn/cache
     ports:
-      - "3000:3000"
+      - "127.0.0.1:${BLOG_PORT:-3000}:3000"
 
+volumes:
+  blog_node_modules:
+  blog_next:
+  blog_contentlayer:
+  blog_yarn_cache:

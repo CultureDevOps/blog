@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import Image from "@/components/mdxcomponents/Image"
-import Bleed from "pliny/ui/Bleed"
-import { CoreContent } from "pliny/utils/contentlayer"
+import Bleed from "pliny/ui/Bleed.js"
+import { CoreContent } from "pliny/utils/contentlayer.js"
 import type { Blog } from "contentlayer/generated"
 import Comments from "@/components/comments/Comments"
 import WalineComments from "@/components/comments/walinecomponents/walineComments"
@@ -13,7 +13,7 @@ import ScrollTopAndComment from "@/components/scroll"
 import { PostSeriesBox } from "@/components/seriescard"
 import Share from "@/components/share"
 import { LocaleTypes } from "app/[locale]/i18n/settings"
-import { Toc } from "pliny/mdx-plugins"
+import { Toc } from "pliny/mdx-plugins/index.js"
 import Sidetoc from "@/components/sidetoc"
 
 interface PostBannerProps {

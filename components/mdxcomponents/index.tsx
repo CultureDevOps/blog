@@ -1,5 +1,5 @@
-import TOCInline from "pliny/ui/TOCInline"
-import Pre from "pliny/ui/Pre"
+import TOCInline from "pliny/ui/TOCInline.js"
+import Pre from "pliny/ui/Pre.js"
 import BlogNewsletterForm from "../newletter/BlogNewsLetterForm"
 import type { MDXComponents } from "mdx/types"
 import Image from "./Image"

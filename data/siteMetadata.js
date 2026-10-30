@@ -1,4 +1,4 @@
-/** @type {import("pliny/config").PlinyConfig } */
+/** @type {import("pliny/config.js").PlinyConfig } */
 const siteMetadata = {
   title: "Culture DevOps",
   author: "Sébastien Chossat",

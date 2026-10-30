@@ -4,7 +4,7 @@ import "pliny/search/algolia.css"
 import { Open_Sans } from "next/font/google"
 import { Roboto_Slab } from "next/font/google"
 import { Alfa_Slab_One } from "next/font/google"
-import { Analytics, AnalyticsConfig } from "pliny/analytics"
+import { Analytics, AnalyticsConfig } from "pliny/analytics/index.js"
 import { SearchProvider } from "@/components/search/SearchProvider"
 import Header from "@/components/navigation/Header"
 import SectionContainer from "@/components/SectionContainer"
@@ -47,10 +47,10 @@ const alfaSlabOne = Alfa_Slab_One({
 export async function generateMetadata({
   params,
 }: {
-  params: { locale: LocaleTypes }
+  params: Promise<{ locale: LocaleTypes }>
 }): Promise<Metadata> {
   const locale = (await params).locale
-  const imageUrl = `${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL}${siteMetadata.socialBanner}?format=auto&width=1200`
+  const imageUrl = `${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL || ""}${siteMetadata.socialBanner}?format=auto&width=1200`
   return {
     metadataBase: new URL(siteMetadata.siteUrl),
     title: {
@@ -105,7 +105,7 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode
-  params
+  params: Promise<{ locale: LocaleTypes }>
 }) {
   const theme = siteMetadata.theme || "system"
   const locale = (await params).locale
@@ -117,14 +117,14 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <script
+        <Script
+          id="site-theme-config"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
-            __html: `
-                  window.siteMetadata = { theme: '${process.env.NEXT_PUBLIC_SITE_THEME}' };
-                `,
+            __html: `window.siteMetadata = ${JSON.stringify({ theme }).replace(/</g, "\\u003c")};`,
           }}
         />
-        <Script src="/static/js/theme-switcher.js" />
+        <Script src="/static/js/theme-switcher.js" strategy="beforeInteractive" />
         <link rel="manifest" href="/static/favicons/site.webmanifest" />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />

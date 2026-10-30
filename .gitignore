@@ -51,3 +51,6 @@ yarn-error.log*
 
 # Contentlayer
 .contentlayer
+
+# TypeScript incremental cache
+*.tsbuildinfo

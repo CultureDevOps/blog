@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react"
 import { useTagStore } from "@/components/util/useTagStore"
-import { formatDate } from "pliny/utils/formatDate"
-import { CoreContent } from "pliny/utils/contentlayer"
+import { formatDate } from "pliny/utils/formatDate.js"
+import { CoreContent } from "pliny/utils/contentlayer.js"
 import type { Blog } from "contentlayer/generated"
 import Link from "@/components/mdxcomponents/Link"
 import { sortByDate } from "@/components/util/sortByDate"

@@ -1,2 +1,11 @@
 node_modules
 .next
+.contentlayer
+.git
+.yarn/cache
+.yarn/install-state.gz
+.env
+.env.*
+!.env.example
+*.log
+*.tsbuildinfo

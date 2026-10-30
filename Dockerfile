@@ -1,18 +1,11 @@
-FROM jitesoft/node-yarn:19
-
-ADD package.json /package.json
-
-ENV NODE_PATH=/node_modules
-ENV PATH=$PATH:/node_modules/.bin
-ENV YARN_VERSION 3.6.1
-
-RUN yarn policies set-version $YARN_VERSION
-
+FROM node:24-bookworm-slim
 WORKDIR /app
-ADD . /app
 
-RUN yarn
+# Cache dependencies independently of application sources.
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn/releases/ .yarn/releases/
+RUN node .yarn/releases/yarn-4.0.2.cjs install --immutable
 
+COPY . .
 EXPOSE 3000
-
-CMD ["yarn","dev"]
+CMD ["node", ".yarn/releases/yarn-4.0.2.cjs", "dev", "--hostname", "0.0.0.0"]

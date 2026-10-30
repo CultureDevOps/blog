@@ -1,11 +1,11 @@
 "use client"
 
-import TOCInline from "pliny/ui/TOCInline"
+import TOCInline from "pliny/ui/TOCInline.js"
 import { useTranslation } from "app/[locale]/i18n/client"
 import { LocaleTypes } from "app/[locale]/i18n/settings"
 import { useParams } from "next/navigation"
 import useSidebarStore from "./store"
-import { Toc, TocItem as OriginalTocItem } from "pliny/mdx-plugins/remark-toc-headings"
+import { Toc, TocItem as OriginalTocItem } from "pliny/mdx-plugins/remark-toc-headings.js"
 
 interface TocBodyProps {
   toc: Toc

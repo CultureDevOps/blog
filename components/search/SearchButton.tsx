@@ -1,4 +1,4 @@
-import { AlgoliaButton } from "pliny/search/AlgoliaButton"
+import { AlgoliaButton } from "pliny/search/AlgoliaButton.js"
 import { KBarButton } from "./KBarButton"
 import siteMetadata from "@/data/siteMetadata"
 import { SearchIcon } from "./icons"
