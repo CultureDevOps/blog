@@ -6,7 +6,7 @@ const base = "http://127.0.0.1:31981"
 const site = "https://culturedevops.com"
 const fr = "/blog/gitlab-ci-python-sans-deploiement"
 const en = "/en/blog/gitlab-ci-python-tests-without-deployment"
-const child = spawn("yarn", ["serve", "-p", "31981"], {
+const child = spawn(process.execPath, ["node_modules/next/dist/bin/next", "start", "-p", "31981"], {
   stdio: ["ignore", "pipe", "pipe"],
   env: { ...process.env, PORT: "31981", VERCEL_ENV: "production" },
 })
@@ -83,4 +83,6 @@ try {
   console.log("OPS-011 built site SEO, redirections, metadata, sitemap, sharing, feeds, and search: OK")
 } finally {
   child.kill("SIGTERM")
+  child.stdout.destroy()
+  child.stderr.destroy()
 }
