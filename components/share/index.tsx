@@ -9,7 +9,7 @@ import { LocaleTypes } from "app/[locale]/i18n/settings"
 
 type ShareProps = { title: string; description?: string; slug: string; className?: string }
 
-const Share = ({ title, description, slug, className }: ShareProps) => {
+const Share = ({ title, slug, className }: ShareProps) => {
   const [showMenu, setShowMenu] = useState<boolean>(false)
   const [copied, setCopied] = useState<boolean>(false)
 

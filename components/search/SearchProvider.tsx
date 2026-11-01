@@ -10,7 +10,7 @@ import { Blog } from "contentlayer/generated"
 import { LocaleTypes } from "app/[locale]/i18n/settings"
 import { useTranslation } from "app/[locale]/i18n/client"
 import { fallbackLng } from "app/[locale]/i18n/locales"
-import { blogPath, localePath } from "@/lib/blogUrls"
+import { blogPath } from "@/lib/blogUrls"
 import { HomeIcon, BlogIcon, TagsIcon, ProjectsIcon, AboutIcon } from "./icons"
 
 interface SearchProviderProps {

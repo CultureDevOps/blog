@@ -20,3 +20,20 @@ jobs:
           node-version: "24"
       - run: python scripts/test-article.py
       - run: node scripts/test-draft-visibility.mjs
+      - run: node scripts/test-seo.mjs
+
+  built-site-seo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "24"
+      - run: corepack enable
+      - run: yarn install --immutable
+      - run: yarn build
+      - run: yarn typecheck
+      - run: node scripts/test-site-output.mjs
