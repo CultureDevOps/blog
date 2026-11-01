@@ -4,7 +4,7 @@ Proposition de cadence : deux articles par mois, de novembre 2026 à février 20
 
 | Cible      | Sujet                                                                       | Angle et démonstration                                         | État                    |
 | ---------- | --------------------------------------------------------------------------- | -------------------------------------------------------------- | ----------------------- |
-| 2026-11-10 | GitLab CI/CD : tester une application Python sans déclencher de déploiement | Trois tests exécutables, workflow et contrôle des intégrations | Brouillon dans cette PR |
+| 2026-11-01 | GitLab CI/CD : tester une application Python sans déclencher de déploiement | Trois tests exécutables, workflow et contrôle des intégrations | Publication validée le 01/11/2026 |
 | 2026-11-24 | Variables GitLab CI : protéger les secrets et limiter leur exposition       | Portée, branches protégées, exemples avec valeurs fictives     | À préparer              |
 | 2026-12-08 | Construire une image Docker reproductible                                   | Multi-stage, utilisateur non root, versions et digest vérifiés | À préparer              |
 | 2026-12-22 | GitLab CI : cache et artefacts, deux usages différents                      | Comparaison sur une petite application, durée et accès         | À préparer              |

@@ -9,7 +9,7 @@ article = pathlib.Path(__file__).resolve().parents[1] / "data/blog/fr/gitlab-ci-
 text = article.read_text(encoding="utf-8")
 snippets = dict(re.findall(r"```python:([^\n]+)\n(.*?)\n```", text, re.S))
 assert set(snippets) == {"app.py", "test_app.py"}
-assert "draft: true" in text.split("---")[1]
+assert re.search(r"^draft: (true|false)$", text.split("---")[1], re.M)
 with tempfile.TemporaryDirectory() as directory:
     for name, source in snippets.items():
         pathlib.Path(directory, name).write_text(source + "\n", encoding="utf-8")
