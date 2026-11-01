@@ -132,7 +132,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
 export const generateStaticParams = async ({
   params,
 }: {
-  params: { locale: LocaleTypes }
+  params: { locale: string; slug?: string[] }
 }) => {
   // A parent [locale] generates FR and EN separately. Returning all slugs
   // for each parent would prerender invalid cross-language combinations.
