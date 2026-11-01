@@ -1,41 +1,29 @@
 "use client"
 
-import siteMetadata from "@/data/siteMetadata"
 import SocialIcon from "@/components/social-icons"
 import { useState } from "react"
-import { useParams, usePathname } from "next/navigation"
+import { useParams } from "next/navigation"
 import { useTranslation } from "app/[locale]/i18n/client"
-import { fallbackLng, secondLng } from "app/[locale]/i18n/locales"
+import { blogUrl } from "@/lib/blogUrls"
 import { LocaleTypes } from "app/[locale]/i18n/settings"
 
 type ShareProps = { title: string; description?: string; slug: string; className?: string }
 
-const Share = ({ title, description, slug, className }: ShareProps) => {
+const Share = ({ title, slug, className }: ShareProps) => {
   const [showMenu, setShowMenu] = useState<boolean>(false)
   const [copied, setCopied] = useState<boolean>(false)
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(window.location.href)
+    navigator.clipboard.writeText(canonicalUrl)
     setCopied(true)
     setTimeout(() => setCopied(false), 10 * 60 * 1000) // Reset copied state after 10 minutes
   }
 
   const locale = useParams()?.locale as LocaleTypes
   const { t } = useTranslation(locale, "common")
-  const pathname = usePathname()
-  const pathSegments = pathname!.split("/")
-
-  // Choose the appropriate segment based on the locale
-  let targetSegment = pathSegments.length >= 2 ? pathSegments[1] : ""
-
-  if (locale === fallbackLng) {
-    // If locale is fallbackLng, use the second segment
-    targetSegment = pathSegments.length >= 2 ? pathSegments[1] : ""
-  } else if (locale === secondLng) {
-    // If locale is secondLng, use the third segment
-    targetSegment = pathSegments.length >= 3 ? pathSegments[2] : ""
-  }
-
+  const canonicalUrl = blogUrl(locale, slug)
+  const encodedUrl = encodeURIComponent(canonicalUrl)
+  const encodedTitle = encodeURIComponent(title)
   return (
     <div className="m-4 mt-8 flex flex-col items-center justify-center pt-4 sm:flex-row">
       <div className="mb-4 sm:mb-0">
@@ -53,7 +41,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
               kind="facebook"
               size={5}
               aria-label={t("facebookshare")}
-              href={`https://facebook.com/sharer/sharer.php?u=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}`}
+              href={`https://facebook.com/sharer/sharer.php?u=${encodedUrl}`}
             />
           </li>
           <li className="ml-4 inline-block">
@@ -61,7 +49,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
               kind="x"
               size={5}
               aria-label={t("twittershare")}
-              href={`https://x.com/intent/tweet/?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
+              href={`https://x.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`}
             />
           </li>
           <li className="ml-4 inline-block">
@@ -69,7 +57,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
               kind="threads"
               size={5}
               aria-label={t("threadsshare")}
-              href={`https://threads.net/intent/post?text=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}`}
+              href={`https://threads.net/intent/post?text=${encodeURIComponent(`${title} ${canonicalUrl}`)}`}
             />
           </li>
           <li className="ml-4 inline-block">
@@ -77,7 +65,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
               kind="linkedin"
               size={5}
               aria-label={t("linkedinshare")}
-              href={`https://www.linkedin.com/shareArticle?mini=true&url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&title=${title}&summary=${description}&source=${siteMetadata.siteUrl}`}
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`}
             />
           </li>
           <li className="ml-4 inline-block">
@@ -85,7 +73,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
               kind="reddit"
               size={5}
               aria-label={t("redditshare")}
-              href={`https://www.reddit.com/submit?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&title=${title}`}
+              href={`https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`}
             />
           </li>
           <li className="ml-4 inline-block">
@@ -93,7 +81,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
               kind="whatsapp"
               size={5}
               aria-label={t("whatsappshare")}
-              href={`https://wa.me/?text=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
+              href={`https://wa.me/?text=${encodeURIComponent(`${title} ${canonicalUrl}`)}`}
             />
           </li>
           <li className="ml-4 inline-block">
@@ -101,7 +89,7 @@ const Share = ({ title, description, slug, className }: ShareProps) => {
               kind="telegram"
               size={5}
               aria-label={t("telegramshare")}
-              href={`https://telegram.me/share/url?url=${siteMetadata.siteUrl}/${locale}/${targetSegment}/${slug}&text=${title}`}
+              href={`https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`}
             />
           </li>
           <li className="relative ml-4 inline-block">

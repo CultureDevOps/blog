@@ -15,6 +15,7 @@ import { notFound } from "next/navigation"
 import { LocaleTypes } from "app/[locale]/i18n/settings"
 import SectionContainer from "@/components/SectionContainer"
 import { isPostVisible } from "../../../../lib/postVisibility"
+import { blogAlternates, blogUrl, SITE_URL } from "@/lib/blogUrls"
 
 interface PageProps {
   params: Promise<{
@@ -90,16 +91,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
   if (post.images) {
     imageList = typeof post.images === "string" ? [post.images] : post.images
   }
-  const ogImages = imageList.map((img) => {
-    return {
-      url: img.includes("http")
-        ? img
-        : process.env.CLOUD_FRONT_URL + img + "?format=auto&width=1200",
-    }
-  })
+  const ogImages = imageList.map((img) => ({
+    url: img.startsWith("http")
+      ? img
+      : `${process.env.CLOUD_FRONT_URL || SITE_URL}${img}`,
+    alt: post.title,
+  }))
+  const canonical = blogUrl(locale, post.slug)
+  const languages = blogAlternates(post, allBlogs.filter((p) => p.draft !== true))
 
   return {
     title: post.title,
+    alternates: {
+      canonical,
+      ...(Object.keys(languages).length ? { languages } : {}),
+    },
     robots: post.draft ? { index: false, follow: false } : undefined,
     description: post.summary,
     openGraph: {
@@ -110,7 +116,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
       type: "article",
       publishedTime: publishedAt,
       modifiedTime: modifiedAt,
-      url: "./",
+      url: canonical,
       images: ogImages,
       authors: authors.length > 0 ? authors : [siteMetadata.author],
     },
@@ -123,9 +129,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
   }
 }
 
-export const generateStaticParams = async () => {
-  const paths = allBlogs.filter((p) => isPostVisible(p)).map((p) => ({ slug: p.slug.split("/") }))
-  return paths
+export const generateStaticParams = async ({
+  params,
+}: {
+  params: { locale: string; slug?: string[] }
+}) => {
+  // A parent [locale] generates FR and EN separately. Returning all slugs
+  // for each parent would prerender invalid cross-language combinations.
+  return allBlogs
+    .filter((p) => p.language === params.locale && isPostVisible(p))
+    .map((p) => ({ slug: p.slug.split("/") }))
 }
 
 export default async function Page({ params }: PageProps) {

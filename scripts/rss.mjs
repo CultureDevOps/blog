@@ -7,7 +7,7 @@ import tagData from "../app/[locale]/tag-data.json" with { type: "json" }
 import { allBlogs } from "../.contentlayer/generated/index.mjs"
 import { sortPosts } from "pliny/utils/contentlayer.js"
 
-const defaultLocale = "en"
+const defaultLocale = "fr"
 
 const generateRssItem = (config, post, locale) => `
   <item>
@@ -31,7 +31,7 @@ const generateRss = (config, posts, locale, page = "feed.xml") => `
       <managingEditor>${config.email} (${config.author})</managingEditor>
       <webMaster>${config.email} (${config.author})</webMaster>
       ${posts.length > 0 ? `<lastBuildDate>${new Date(posts[0].date).toUTCString()}</lastBuildDate>` : ""}
-      <atom:link href="${config.siteUrl}/${defaultLocale === locale ? "" : locale + "/"}${page}" rel="self" type="application/rss+xml"/>
+      <atom:link href="${config.siteUrl}/${locale}/${page}" rel="self" type="application/rss+xml"/>
       ${posts.map((post) => generateRssItem(config, post, locale)).join("")}
     </channel>
   </rss>
@@ -50,7 +50,7 @@ async function generateRSS(config, allBlogs, locale, page = "feed.xml") {
   }
 
   // RSS for tag-specific posts
-  for (const tag of Object.keys(tagData)) {
+  for (const tag of Object.keys(tagData[locale] || {})) {
     const filteredTagPosts = publishPosts.filter((post) =>
       post.tags.map((t) => slug(t)).includes(tag)
     )

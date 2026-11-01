@@ -68,9 +68,8 @@ export async function generateMetadata({
       type: "website",
     },
     alternates: {
-      canonical: "./",
       types: {
-        "application/rss+xml": `${siteMetadata.siteUrl}/feed.xml`,
+        "application/rss+xml": `${siteMetadata.siteUrl}/${locale}/feed.xml`,
       },
     },
     robots: {
@@ -129,7 +128,6 @@ export default async function RootLayout({
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff" />
         <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000" />
-        <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       </head>
       <body
         className="text-black antialiased dark:text-white bg-gradient-to-r from-primary-300 via-primary-200 via-20%
