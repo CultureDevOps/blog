@@ -3,7 +3,7 @@ import "katex/dist/katex.css"
 import { Metadata } from "next"
 import { components } from "@/components/mdxcomponents"
 import { MDXLayoutRenderer } from "pliny/mdx-components.js"
-import { sortPosts, coreContent, allCoreContent } from "pliny/utils/contentlayer.js"
+import { sortPosts, coreContent } from "pliny/utils/contentlayer.js"
 import { allBlogs, allAuthors } from "contentlayer/generated"
 import type { Authors, Blog } from "contentlayer/generated"
 import PostSimple from "@/layouts/PostSimple"
@@ -14,6 +14,7 @@ import { maintitle } from "@/data/localeMetadata"
 import { notFound } from "next/navigation"
 import { LocaleTypes } from "app/[locale]/i18n/settings"
 import SectionContainer from "@/components/SectionContainer"
+import { isPostVisible } from "../../../../lib/postVisibility"
 
 interface PageProps {
   params: Promise<{
@@ -35,7 +36,9 @@ async function getPostFromParams({
 }): Promise<any> {
   const { slug, locale } = await params
   const dslug = decodeURI(slug.join("/"))
-  const post = allBlogs.filter((p) => p.language === locale).find((p) => p.slug === dslug) as Blog
+  const post = allBlogs
+    .filter((p) => p.language === locale && isPostVisible(p))
+    .find((p) => p.slug === dslug) as Blog
 
   if (!post) {
     return null
@@ -43,7 +46,9 @@ async function getPostFromParams({
 
   if (post?.series) {
     const seriesPosts = allBlogs
-      .filter((p) => p.language === locale && p.series?.title === post.series?.title)
+      .filter(
+        (p) => p.language === locale && isPostVisible(p) && p.series?.title === post.series?.title
+      )
       .sort((a, b) => Number(a.series!.order) - Number(b.series!.order))
       .map((p) => {
         return {
@@ -64,7 +69,9 @@ async function getPostFromParams({
 export async function generateMetadata({ params }: PageProps): Promise<Metadata | undefined> {
   const { slug, locale } = await params
   const dslug = decodeURI(slug.join("/"))
-  const post = allBlogs.find((p) => p.slug === dslug && p.language === locale) as Blog
+  const post = allBlogs.find(
+    (p) => p.slug === dslug && p.language === locale && isPostVisible(p)
+  ) as Blog
   if (!post) {
     return
   }
@@ -93,6 +100,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
 
   return {
     title: post.title,
+    robots: post.draft ? { index: false, follow: false } : undefined,
     description: post.summary,
     openGraph: {
       title: post.title,
@@ -116,17 +124,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata 
 }
 
 export const generateStaticParams = async () => {
-  const paths = allBlogs.map((p) => ({ slug: p.slug.split("/") }))
+  const paths = allBlogs.filter((p) => isPostVisible(p)).map((p) => ({ slug: p.slug.split("/") }))
   return paths
 }
 
 export default async function Page({ params }: PageProps) {
   const { slug, locale } = await params
   const dslug = decodeURI(slug.join("/"))
-  // Filter out drafts in production + locale filtering
-  const sortedCoreContents = allCoreContent(
-    sortPosts(allBlogs.filter((p) => p.language === locale))
-  )
+  // Preview builds use NODE_ENV=production too: retain drafts only on direct Preview URLs.
+  const sortedCoreContents = sortPosts(
+    allBlogs.filter((p) => p.language === locale && isPostVisible(p))
+  ).map((p) => coreContent(p))
   const postIndex = sortedCoreContents.findIndex((p) => p.slug === dslug)
   if (postIndex === -1) {
     return notFound()
