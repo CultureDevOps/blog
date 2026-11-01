@@ -53,6 +53,7 @@ try {
   assert.ok([301, 302, 307, 308].includes(redirected.response.status), "French locale should redirect")
   assert.equal(new URL(redirected.response.headers.get("location"), base).pathname, fr)
   assert.equal((await request("/en/blog/gitlab-ci-python-sans-deploiement")).response.status, 404)
+  assert.equal((await request("/blog/gitlab-ci-python-tests-without-deployment")).response.status, 404)
   assert.equal((await request("/en/blog")).response.status, 200)
 
   const xml = await request("/sitemap.xml")
