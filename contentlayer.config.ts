@@ -27,6 +27,7 @@ import rehypeCitation from "rehype-citation"
 import rehypePrismPlus from "rehype-prism-plus"
 import rehypePresetMinify from "rehype-preset-minify"
 import siteMetadata from "./data/siteMetadata"
+import { blogUrl } from "./lib/blogUrls"
 import { allCoreContent, sortPosts } from "pliny/utils/contentlayer.js"
 import { fallbackLng, secondLng } from "./app/[locale]/i18n/locales"
 
@@ -149,9 +150,12 @@ export const Blog = defineDocumentType(() => ({
       type: "json",
       resolve: (doc) => {
         const imageList = typeof doc.images === "string" ? [doc.images] : doc.images
-        const imageUrl = imageList?.[0]
-          ? `${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL || ""}${imageList[0]}?format=auto&width=1200`
-          : `${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL || ""}${siteMetadata.socialBanner}?format=auto&width=1200`
+        const imagePath = imageList?.[0] || siteMetadata.socialBanner
+        const imageUrl = imagePath.startsWith("http")
+          ? imagePath
+          : `${process.env.NEXT_PUBLIC_CLOUD_FRONT_URL || siteMetadata.siteUrl}${imagePath}`
+        const parts = doc._raw.flattenedPath.split("/")
+        const articleSlug = parts.slice(2).join("/")
         return {
           "@context": "https://schema.org",
           "@type": "BlogPosting",
@@ -160,7 +164,7 @@ export const Blog = defineDocumentType(() => ({
           dateModified: doc.lastmod || doc.date,
           description: doc.summary,
           image: imageUrl,
-          url: `${siteMetadata.siteUrl}/${doc._raw.flattenedPath}`,
+          url: blogUrl(doc.language, articleSlug),
         }
       },
     },
