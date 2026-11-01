@@ -4,12 +4,23 @@ import Hero from "@/components/landing/Hero"
 import Benefits from "@/components/landing/Benefits"
 import { devOps, cloud, services, experience } from "@/data/benefits"
 import FullLayoutSectionContainer from "@/components/FullLayoutSectionContainer"
+import { Metadata } from "next"
+import { localePath, pageAlternates, SITE_URL } from "@/lib/blogUrls"
 
 interface PageProps {
   params: Promise<{
     locale: LocaleTypes
   }>
 }
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const locale = (await params).locale
+  const canonical = `${SITE_URL}${localePath(locale)}`
+  return {
+    alternates: { canonical, languages: pageAlternates() },
+    openGraph: { url: canonical },
+  }
+}
+
 export default async function Page({ params }: PageProps) {
   const locale = (await params).locale
   const { t } = await createTranslation(locale, "home")

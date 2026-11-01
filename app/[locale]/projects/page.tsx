@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { t } = await createTranslation(locale, "projects")
   return genPageMetadata({
     title: t("title"),
+    routePath: "projects",
     params: { locale },
   })
 }

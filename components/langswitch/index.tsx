@@ -14,6 +14,7 @@ import {
 } from "@headlessui/react"
 import { ChevronDownIcon } from "./icon"
 import Flag from "./flag"
+import { correspondingSlug, localePath } from "@/lib/blogUrls"
 
 const LangSwitch = () => {
   const pathname = usePathname()
@@ -27,15 +28,15 @@ const LangSwitch = () => {
 
   const handleLocaleChange = useCallback(
     (newLocale: string): string => {
-      const segments = pathname!.split("/")
-      const localeIndex = segments.findIndex((segment) => locales.includes(segment as LocaleTypes))
-      if (localeIndex !== -1) {
-        segments[localeIndex] = newLocale
-      } else {
-        segments.splice(1, 0, newLocale)
+      const segments = (pathname || "/").split("/").filter(Boolean)
+      if (segments.length && locales.includes(segments[0] as LocaleTypes)) {
+        segments.shift()
       }
-      const newPath = segments.join("/").replace(/\/$/, "")
-      return newPath
+      if (segments[0] === "blog" && segments.length > 1) {
+        const currentSlug = segments.slice(1).join("/")
+        segments.splice(1, segments.length - 1, correspondingSlug(currentSlug, newLocale))
+      }
+      return localePath(newLocale, segments.join("/"))
     },
     [pathname]
   )

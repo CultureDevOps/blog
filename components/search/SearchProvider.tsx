@@ -10,6 +10,7 @@ import { Blog } from "contentlayer/generated"
 import { LocaleTypes } from "app/[locale]/i18n/settings"
 import { useTranslation } from "app/[locale]/i18n/client"
 import { fallbackLng } from "app/[locale]/i18n/locales"
+import { blogPath, localePath } from "@/lib/blogUrls"
 import { HomeIcon, BlogIcon, TagsIcon, ProjectsIcon, AboutIcon } from "./icons"
 
 interface SearchProviderProps {
@@ -133,7 +134,7 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
               keywords: post?.summary || "",
               section: t("content"),
               subtitle: post.tags.join(", "),
-              perform: () => router.push(`/${locale}/blog/${post.slug}`),
+              perform: () => router.push(blogPath(locale, post.slug)),
             }))
         },
       }}

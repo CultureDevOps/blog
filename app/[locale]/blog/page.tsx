@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const locale = (await params).locale
   return genPageMetadata({
     title: "Blog",
+    routePath: "blog",
     params: { locale },
   })
 }
