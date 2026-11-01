@@ -1,0 +1,149 @@
+---
+title: "GitLab CI/CD: Test a Python Application Without Triggering a Deployment"
+date: "2026-11-01"
+language: en
+tags: ["gitlab", "ci-cd", "python", "devops"]
+authors: ["default"]
+draft: false
+summary: "Build a test-only GitLab CI pipeline for Python, understand workflow rules, and check external integrations before pushing code."
+layout: PostSimple
+---
+
+> This tutorial uses a standalone Python demo repository, not the source code of this blog.
+
+When adding CI to an application, a useful first step is to verify that the code behaves as expected. You do not need to deploy an application just to receive feedback on a change.
+
+In this walkthrough, we will build a small Python example and run its tests with GitLab CI/CD. The example requires no cloud credentials, external services, or deployment tooling.
+
+## Create a small, testable Python application
+
+Create a directory with these three files:
+
+```text
+demo-python/
+├── app.py
+├── test_app.py
+└── .gitlab-ci.yml
+```
+
+In `app.py`, write a function that calculates a total in cents. Integers help avoid floating-point rounding issues in this deliberately simple example.
+
+```python:app.py
+def total_cents(unit_price_cents: int, quantity: int) -> int:
+    if unit_price_cents < 0 or quantity < 0:
+        raise ValueError("Price and quantity must be non-negative")
+    return unit_price_cents * quantity
+```
+
+This function assumes integer arguments. Python type hints describe that contract but do not enforce it at runtime.
+
+Next, add `test_app.py`:
+
+```python:test_app.py
+import unittest
+
+from app import total_cents
+
+
+class TotalTests(unittest.TestCase):
+    def test_total(self):
+        self.assertEqual(total_cents(250, 3), 750)
+
+    def test_empty_order(self):
+        self.assertEqual(total_cents(250, 0), 0)
+
+    def test_negative_values(self):
+        for price, quantity in [(-1, 2), (250, -1)]:
+            with self.subTest(price=price, quantity=quantity):
+                with self.assertRaises(ValueError):
+                    total_cents(price, quantity)
+
+
+if __name__ == "__main__":
+    unittest.main()
+```
+
+From the demo directory, run the checks with Python 3.12:
+
+```sh
+python -m unittest discover -s . -p 'test_*.py' -v
+python -m compileall -q app.py test_app.py
+```
+
+All three tests should pass. Bytecode compilation checks that Python can compile the files; it does **not** replace behavioral tests.
+
+## Add a test-only GitLab CI pipeline
+
+Place the following `.gitlab-ci.yml` at the root of the demo repository:
+
+```yaml:.gitlab-ci.yml
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH'
+    - when: never
+
+stages:
+  - test
+
+python-tests:
+  stage: test
+  image: python:3.12-slim
+  tags:
+    - saas-linux-small-amd64
+  script:
+    - python --version
+    - python -m unittest discover -s . -p 'test_*.py' -v
+    - python -m compileall -q app.py test_app.py
+```
+
+The runner tag shown above targets GitLab.com hosted Linux amd64 runners. If you use another GitLab instance, select an available, appropriately isolated runner that can run this container image. Check the hosted-runner usage limits and account conditions before executing the pipeline. The image uses a readable, moving tag; pin and maintain a verified digest if reproducibility is important.
+
+No third-party Python package needs to be installed. If your real application has dependencies, lock their versions and review any installation scripts before running them in CI.
+
+## Understand when pipelines are created
+
+GitLab evaluates `workflow:rules` before creating a pipeline. These rules are processed in order:
+
+1. A merge request pipeline is allowed.
+2. A branch push with an open merge request does not create a duplicate branch pipeline.
+3. A branch push without an open merge request creates a branch test pipeline.
+4. Other pipeline sources are rejected: tags, schedules, manual web launches, and API-triggered runs.
+
+| Event | Expected behavior |
+| --- | --- |
+| Push to a branch without an open merge request | Branch test pipeline |
+| Open or update a merge request | Merge request test pipeline |
+| Push to a branch with an open merge request | No additional branch pipeline |
+| Push a tag | No pipeline with these rules |
+| Start a pipeline through the web UI, API, or schedule | No pipeline with these rules |
+
+A push to the default branch also runs tests in this example. The configuration contains no `include`, child pipeline, or deployment job.
+
+## Check what can happen outside the CI file
+
+A test-only YAML file does **not** guarantee that a push cannot trigger a deployment. A Vercel Git integration, webhook, or another platform may react to that same Git event independently of GitLab CI.
+
+Before your first push, inspect repository integrations and webhooks, GitLab Auto DevOps, and any group-level pipeline policies. If hosting is connected, check its production branch and Preview deployment rules. Obtain the relevant approval before activating an external environment.
+
+Use GitLab CI Lint or the pipeline editor to validate the complete CI configuration. Once a pipeline runs, confirm that it contains only the expected jobs. A pending job may simply mean that no runner matches your tag.
+
+## Keep this first pipeline free of secrets
+
+The demo needs no secrets. Do not add cloud access keys or deployment tokens. Privileged runners and host Docker-socket mounts are unnecessary for this use case.
+
+Do not suppress test exit codes: a failed assertion must fail the job. To check this in the demo repository, temporarily change the expected `750` to `751`, observe a failing job, then restore the correct test.
+
+Job logs are sufficient at this stage. If you later introduce artifacts, collect only the reports you need, apply a retention period, and check access permissions. Avoid archiving the entire workspace because it may contain sensitive files.
+
+You now have a minimal CI feedback loop for every code change. Deployment can come later as a separate step with its own environment, privileges, and approval process.
+
+## Official references
+
+- [GitLab: workflow rules](https://docs.gitlab.com/ci/yaml/workflow/)
+- [GitLab: CI/CD configuration validation](https://docs.gitlab.com/ci/yaml/lint/)
+- [GitLab: job artifacts](https://docs.gitlab.com/ci/jobs/job_artifacts/)
+- [Python: the unittest framework](https://docs.python.org/3/library/unittest.html)
+- [Vercel: Git deployments](https://vercel.com/docs/git)
