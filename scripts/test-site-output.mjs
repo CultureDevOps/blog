@@ -81,6 +81,14 @@ try {
     assert.equal(index.response.status, 200)
     assert.ok(index.body.includes(slug), `Search index includes ${locale}`)
   }
+  // Editorial ContinuityOps drafts must never appear in a production build.
+  const draftSlug = "continuityops-chatgpt-gitlab"
+  for (const path of ["/blog/" + draftSlug, "/en/blog/" + draftSlug]) {
+    assert.equal((await request(path)).response.status, 404, "Draft must return 404: " + path)
+    assert.ok(!xml.body.includes(site + path), "Draft must be absent from sitemap: " + path)
+  }
+  const searchIndex = await request("/search.json")
+  assert.ok(!searchIndex.body.includes(draftSlug), "Draft must be absent from production search")
   console.log("OPS-011 built site SEO, redirections, metadata, sitemap, sharing, feeds, and search: OK")
 } finally {
   child.kill("SIGTERM")

@@ -1,0 +1,176 @@
+---
+title: "ContinuityOps: coordinating DevOps work with ChatGPT and GitLab without losing context"
+date: "2026-11-06"
+language: en
+tags: ["devops", "gitlab", "chatgpt", "continuityops"]
+authors: ["default"]
+draft: true
+summary: "Coordinate DevOps workstreams with ChatGPT, GitLab, verifiable checkpoints and clearly separated responsibilities."
+layout: PostSimple
+---
+
+
+> **Editorial draft — not published.** Demonstration scenarios are fictional. Organizational benefits are intended outcomes, not measured performance claims.
+
+A CI pipeline fails. A security review is waiting for approval. A migration is on hold. Three conversations cover three workstreams. Tomorrow, which one has the current status? Which commit passed validation? Who is allowed to deploy? Writing code is only part of the challenge. The harder problem is maintaining **verifiable continuity** across sessions, people and tools.
+
+**ContinuityOps** is an organizational pattern explored with ChatGPT and GitLab. It is not a new commercial product, an AI memory system, or a replacement for Git workflows. Its core principle is straightforward: conversations support reasoning and execution; **Git holds the contract, state and evidence**.
+
+## Why chat history alone is not enough
+
+A conversation can summarize work without being synchronized with other sessions. Meanwhile, a merge request may be merged, a pipeline may fail or an approval may be withdrawn. Reading a transcript does not automatically separate proposals from ratified decisions or historical success from current status.
+
+Four recurring problems are context retrieval, resuming interrupted work, avoiding concurrent edits and coordinating multiple workstreams with different permissions. The goal is not to archive every conversation. It is to leave a **compact, dated and referenced checkpoint**.
+
+## HUB, satellites and Git: clear ownership
+
+The **HUB** discovers, qualifies, prioritizes, delegates and consolidates work. It does not take over technical execution. A **satellite** owns a bounded assignment: one issue, one repository, one exclusive branch, explicit limits and acceptance criteria. It resumes, acts within its mandate, verifies the outcome and records a checkpoint.
+
+**GitLab** provides the durable handoff: issues hold assignments, notes capture decisions and checkpoints, commits and merge requests show changes, and CI pipelines provide validation evidence. Long-lived rules belong in versioned documentation; volatile facts are checked again when work resumes.
+
+Tool access and permission to act are different things. Being able to trigger a deployment does not mean a satellite is authorized to do so.
+
+## The workflow, from assignment to checkpoint
+
+1. **Qualify** the objective, evidence, scope and risks.
+2. **Delegate** to an issue, owner and dedicated branch.
+3. **Resume** by reading the latest decision and checking HEAD, merge requests, CI and new notes.
+4. **Act** within the mandate, test changes and request review.
+5. **Checkpoint** completed work, remaining work, evidence and the next action.
+6. **Consolidate** dependencies and priorities without taking over the satellite's branch.
+
+A useful checkpoint answers four questions: **which revision, which evidence, which authorization and what next?** It also records blockers and actions explicitly not performed.
+
+## A fictional three-workstream scenario
+
+*This scenario is adapted from the OPS-028 presentation storyboard. Its issues, merge requests and CI states are illustrative, not production evidence.*
+
+Workstream A has committed a CI fix but has not yet confirmed the pipeline result. Workstream B is implementing a feature after an API decision changed; its review remains open. Workstream C has finished a permissions audit but cannot change permissions without approval.
+
+Without a shared protocol, the next session must reconstruct three histories. With ContinuityOps, each satellite reads its issue and checkpoint, then checks the latest Git facts. The HUB can see that A needs CI validation, B needs review and C needs authorization. Nothing is silently marked successful.
+
+### An anonymized checkpoint example
+
+```text
+OPS-DEMO — CONTINUE
+Source: example repository / feature/demo
+HEAD: <SHA to verify>
+MR: open; CI: pending
+Done: fix and local tests
+Not done: merge or deployment
+Authorization: CI validation only
+Next: inspect CI and resume review
+```
+
+A commit SHA pins repository content. It does **not** freeze subsequent comments, pipeline results or access permissions.
+
+## ChatGPT, Codex and Claude Code: shared method, different tools
+
+The pattern can be implemented with standard ChatGPT and connectors, agentic development tools, or a Claude Code-centered setup. These tools already offer ways to read repositories, edit files, run tests and manage context. The distinctive idea here is a **shared operational protocol across sessions and workstreams**: explicit decisions, separated roles, a durable source of truth and evidence-based resumption.
+
+Deterministic CI tests can run without any language-model call. That does not mean the full workflow consumes no quotas: model usage, tooling and CI runners have different limits and costs. We make no numerical claim about time, tokens or savings without a comparable measurement.
+
+## Safety and operational boundaries
+
+Least privilege applies to assistants as well as humans. A documentation mandate does not permit deployment. A green pipeline is not production approval. Secrets belong in suitable secret-management systems, not prompts, issues, logs or screenshots. Before an operation with side effects, check its target, revision, protections, approvals and automatic consequences.
+
+The protocol itself requires discipline. Oversized checkpoints, conflicting decisions and stale references can recreate the original problem. An issue is not a technical lock; exclusive branch ownership must be enforced in practice.
+
+## The interactive presentation and the video preview
+
+The OPS-028 storyboard contrasts a fragmented workflow with a coordinated one, then illustrates HUB → satellite → Git → CI. The interactive example is **fictional**; a private presentation is not evidence of a live integration.
+
+OPS-010 also produced a **review video preview** with French narration, SRT captions and nine scenes, rendered at 720p/30 fps and approximately 5 minutes 43 seconds. GitLab checkpoints document technical validation of that preview, while final human audiovisual review is still pending. Editorial reuse and public embedding must be approved before publishing this article.
+
+## A practical starting point
+
+Start with two or three non-sensitive workstreams. Give each an issue with a goal, scope, branch and acceptance criteria. Version decisions that should outlive individual issues. Write a short checkpoint at each milestone. On resumption, compare it against the actual HEAD, notes and CI. Then measure restart time, repeated reading, duplicate actions and status errors on comparable tasks.
+
+The key question is not “can AI remember everything?” but **“can another session resume without guessing?”** ContinuityOps is designed to make that possible through a verifiable, transferable and reversible workflow.
+
+*Next: a fictional-repository walkthrough, followed by measured results from repeated handoffs.*
+
+
+## Full walkthrough: coordinate three workstreams without blurring ownership
+
+Consider a fictional platform, **Atelier**, with three parallel tasks: stabilize CI, document a storage migration and prepare a service upgrade. This example is fictional; its identifiers are not taken from any live infrastructure.
+
+The HUB opens a separate issue for each task, documenting the outcome, repository, exclusive branch, acceptance criteria, dependencies, prohibited operations and owner. The issue becomes an **execution contract**, not merely a ticket. A satellite may fix tests and open a PR within scope; that does not authorize cloud identity changes or a production deployment.
+
+| Fictional workstream | Satellite mandate | Expected evidence | Reserved decision |
+| --- | --- | --- | --- |
+| OPS-101 — CI | Fix YAML validation on a dedicated branch | SHA, tests, pipeline, PR | Merge with unapproved side effects |
+| OPS-102 — storage | Compare options and write a migration procedure | Report, assumptions, rollback plan | Bucket mutation or deletion |
+| OPS-103 — service | Prepare a reversible release | Inventory, backup, acceptance test, rollback | Out-of-scope production release |
+
+### Step 1 — Qualify the evidence
+
+The HUB distinguishes **verified facts** (observed HEAD or CI), **historical results** (yesterday's successful run), **hypotheses** and **next actions**. Volatile facts carry timestamps; versioned sources carry SHAs. A green pipeline from yesterday is not an implicit deployment approval today.
+
+### Step 2 — Delegate a bounded mandate
+
+The brief specifies issue, repository, branch, scope, exclusions and completion evidence. Each satellite owns an exclusive branch; two satellites do not edit the same files concurrently. Sensitive decisions return to the HUB. Routine, explicitly delegated edits and tests can proceed without repeated approvals.
+
+### Step 3 — Resume without rereading the entire chat
+
+At the start of a session, read the latest checkpoint, then **revalidate only what may have changed**: new comments, HEAD, PR state, CI and relevant permissions. Reuse proven tests when the tested SHA and conditions are unchanged. If GitLab is unavailable, mark the last state as historical and avoid pretending it is synchronized.
+
+### Step 4 — Execute and verify
+
+Within its mandate, the satellite edits, tests, fixes, commits and opens a PR, checking automatic CI effects before sensitive actions. A successful CI job proves that its defined checks passed, **not** that every security or production condition is satisfied. Report the tested SHA, relevant jobs and limitations.
+
+### Step 5 — Checkpoint and consolidate
+
+A useful checkpoint records status, new decisions, SHA/PR/CI, completed and outstanding work, blockers and **one actionable next step**. The HUB reconciles that evidence with issues and durable decisions. It does not take over the satellite's branch to finish the technical work.
+
+## A reusable checkpoint example
+
+```text
+OPS-101 — TO_CONTINUE — 2026-11-06
+Repository: example/atelier-ci
+Branch: fix/OPS-101-yaml
+Verified HEAD: <example SHA>
+PR: #12 (Draft); pipeline: #345 (tests passed)
+Done: YAML validation and unit tests
+Not done: review of merge side effects
+Blocker: none
+Next action: inspect CI rules on the target branch;
+request a decision only if an out-of-scope effect is found.
+```
+
+This is illustrative, not a real operational record. Its value is **verifiability**: the next session knows what to check and what it must not assume.
+
+## Architecture: why GitLab remains the source of truth
+
+The HUB coordinates decisions; satellites execute bounded work. GitLab retains issues, decisions, branches, merge requests and pipelines. ChatGPT helps reason and write, but a chat transcript is neither a transactional registry nor a permission system. Versioned documents and volatile states must be reconciled explicitly: a SHA freezes files, not comments added later or rerun CI.
+
+The following diagrams come from versioned SVG sources and were verified on the CloudFront CDN. They illustrate a workflow model, not the topology of any real private infrastructure.
+
+![Architecture diagram showing the coordinating HUB, executing satellites and GitLab as the source of decisions and evidence](https://d3nrx9dqtowrp8.cloudfront.net/blog/images/continuityops/5c09221467e8/e2c6ae9f1b6c6109/architecture.svg)
+
+*Conceptual ContinuityOps architecture: distinct roles and a versioned source of truth.*
+
+![OPS lifecycle diagram showing qualification, delegation, resumption, execution, verification, checkpoint and consolidation](https://d3nrx9dqtowrp8.cloudfront.net/blog/images/continuityops/5c09221467e8/21184608a9182a72/lifecycle.svg)
+
+*Illustrative workstream lifecycle, including resumption after interruption.*
+
+## Benefits to evaluate, without fabricated metrics
+
+The approach aims to reduce time spent reconstructing state, concurrent edits, ambiguous authorization and handoff friction. Evaluate it on comparable restarts: time to first correct action, files reread, repeated tests at the same SHA, stale-status mistakes, branch conflicts and decisions lacking evidence. Publish methodology and counterexamples. **No numerical productivity improvement is claimed here** without controlled measurements.
+
+## Limitations and anti-patterns
+
+Coordination has overhead. Too many checkpoints add noise; too few make resumption ambiguous. Automations may read stale state, connectors may lose access and CI can pass despite a business-level defect. Avoid secrets in issues or logs, broad permissions, shared satellite branches, public exposure of private URLs and unverifiable claims without SHA or date.
+
+Use **proportionate controls**: reuse evidence when state is unchanged, strengthen checks for sensitive operations and keep human arbitration for mandate changes. ContinuityOps complements Git, CI/CD and coding agents; it does not replace them.
+
+## Get started in 30 minutes
+
+1. Create a private governance repository with `AGENTS.md`, a decision log and checkpoint templates.
+2. Choose a small OPS with no production effect and define its scope and exclusions.
+3. Assign an exclusive branch; require SHA, tests and PR evidence rather than a chat summary alone.
+4. End the session with a short checkpoint in the issue.
+5. Resume from another session, rechecking HEAD, comments and CI; record discrepancies.
+6. Compare coordination overhead against repeated reading and errors before scaling up.
+
+The objective is not uncontrolled AI autonomy. It is **a system where decisions and actions can be explained, verified and resumed**.

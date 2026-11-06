@@ -6,6 +6,7 @@ import { genPageMetadata } from "app/[locale]/seo"
 import { createTranslation } from "../i18n/server"
 import { LocaleTypes } from "../i18n/settings"
 import SectionContainer from "@/components/SectionContainer"
+import { isPostVisible } from "@/lib/postVisibility"
 
 interface PageProps {
   params: Promise<{
@@ -25,8 +26,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function BlogPage({ params }: PageProps) {
   const locale = (await params).locale
   const { t } = await createTranslation(locale, "home")
-  const posts = allCoreContent(sortPosts(allBlogs))
-  const filteredPosts = posts.filter((post) => post.language === locale)
+  const visibleBlogs = allBlogs.filter((post) => post.language === locale && isPostVisible(post))
+  const posts = allCoreContent(sortPosts(visibleBlogs))
+  const filteredPosts = posts
 
   return (
     <SectionContainer>

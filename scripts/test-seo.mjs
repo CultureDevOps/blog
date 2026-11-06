@@ -55,4 +55,20 @@ assert.match(read("app/robots.ts"), /\/sitemap.xml/)
 assert.doesNotMatch(read("proxy.ts"), /\|sitemap\.xml/)
 assert.match(read("scripts/rss.mjs"), /Object\.keys\(tagData\[locale\] \|\| \{\}\)/)
 assert.doesNotMatch(read("components/share/index.tsx"), /targetSegment/)
+// OPS-011: verified CDN diagrams and pre-publication status.
+const continuityMedia = [
+  "https://d3nrx9dqtowrp8.cloudfront.net/blog/images/continuityops/5c09221467e8/e2c6ae9f1b6c6109/architecture.svg",
+  "https://d3nrx9dqtowrp8.cloudfront.net/blog/images/continuityops/5c09221467e8/21184608a9182a72/lifecycle.svg",
+]
+for (const locale of ["fr", "en"]) {
+  const article = read("data/blog/" + locale + "/continuityops-chatgpt-gitlab.mdx")
+  assert.match(article, /^draft: true$/m)
+  assert.match(article, new RegExp("^language: " + locale + "$", "m"))
+  for (const url of continuityMedia) {
+    const matchingLines = article.split("\n").filter(line => line.includes(url))
+    assert.equal(matchingLines.length, 1, "Unique diagram in " + locale)
+    assert.match(matchingLines[0], /^!\[[^\]]{40,}\]\(https:\/\/[^)]+\)$/, "Descriptive alt text in " + locale)
+  }
+}
+
 console.log("OPS-011 bilingual routes, canonical links, translation and SEO source checks: OK")

@@ -1,0 +1,176 @@
+---
+title: "ContinuityOps : piloter plusieurs chantiers DevOps avec ChatGPT et GitLab sans perdre le contexte"
+date: "2026-11-06"
+language: fr
+tags: ["devops", "gitlab", "chatgpt", "continuityops"]
+authors: ["default"]
+draft: true
+summary: "Piloter plusieurs chantiers DevOps avec ChatGPT, GitLab, des checkpoints vérifiables et une séparation claire des responsabilités."
+layout: PostSimple
+---
+
+
+> **Brouillon éditorial — non publié.** Les scénarios de démonstration sont fictifs. Les bénéfices organisationnels décrits sont des objectifs, pas des gains chiffrés prouvés.
+
+Une pipeline échoue, une revue de sécurité attend une décision et une migration est suspendue. Trois conversations travaillent sur trois sujets. Le lendemain, laquelle possède le dernier état ? Quel commit a été testé ? Qui peut autoriser une mise en production ? La difficulté n'est pas toujours d'écrire du code : c'est de conserver une continuité vérifiable entre les sessions, les personnes et les outils.
+
+C'est le problème auquel répond **ContinuityOps**, un *pattern d'organisation* expérimenté autour de ChatGPT et de GitLab. Il ne s'agit ni d'un produit nouveau, ni d'une mémoire magique de l'IA, ni d'un remplaçant des workflows Git existants. L'idée est simple : les conversations aident à décider et à travailler ; **Git garde le contrat, l'état et les preuves**.
+
+## Pourquoi un historique de chat ne suffit pas
+
+Une conversation peut résumer une tâche, mais elle n'est pas nécessairement synchronisée avec une autre. Entre deux sessions, une merge request peut être fusionnée, une CI peut échouer, une autorisation peut changer. Relire une longue transcription ne garantit pas de distinguer une proposition d'une décision ou une réussite ancienne de l'état courant.
+
+Quatre frictions reviennent : retrouver le contexte, reprendre après interruption, éviter que deux intervenants écrivent sur la même branche et suivre plusieurs chantiers sans confondre leurs autorisations. Le remède n'est pas de recopier toutes les conversations dans Git : c'est de conserver un **checkpoint compact**, sourcé et daté.
+
+## HUB, satellites et Git : trois responsabilités
+
+Le **HUB** découvre les travaux, les qualifie, arbitre leurs priorités, délègue et consolide. Il ne réalise pas les opérations techniques à la place des équipes ou des satellites. Un **satellite** reçoit une mission bornée : une issue, un dépôt, une branche exclusive, des limites et des critères de fin. Il reprend les preuves, agit dans son mandat, vérifie et publie un checkpoint.
+
+**GitLab** joue le rôle de relais durable : issues pour les mandats, notes pour les décisions et checkpoints, commits et merge requests pour les changements, pipelines pour les validations. Les décisions durables restent dans des documents versionnés ; les états volatils sont revérifiés à la reprise.
+
+Ce découpage empêche une confusion fréquente : disposer d'un outil capable d'exécuter une action ne signifie pas avoir l'autorisation de l'exécuter.
+
+## Le cycle de travail en pratique
+
+1. **Qualifier** : préciser l'objectif, les risques, les sources et le périmètre.
+2. **Déléguer** : associer une issue, un responsable et une branche dédiée.
+3. **Reprendre** : relire la dernière décision, vérifier le HEAD, les MR, la CI et les nouvelles notes.
+4. **Agir** : modifier uniquement ce qui est autorisé, tester et faire relire.
+5. **Checkpoint** : inscrire ce qui est fait, ce qui reste, les preuves et la prochaine action.
+6. **Consolider** : le HUB réévalue les dépendances sans se substituer au satellite.
+
+Un checkpoint utile répond en quelques lignes à quatre questions : **sur quelle version ? avec quelle preuve ? sous quelle autorisation ? quelle prochaine action ?** Il indique aussi explicitement les blocages et les effets non autorisés.
+
+## Exemple : trois chantiers, une interruption
+
+*Scénario fictif, adapté du storyboard de présentation OPS-028 — aucune issue, MR ou CI citée ci-dessous n'est une preuve de production.*
+
+Le chantier A corrige un test CI : le correctif est committé mais le résultat reste à vérifier. Le chantier B prépare une fonctionnalité : une décision d'API a changé, la revue est ouverte. Le chantier C audite des permissions : le rapport est prêt, mais la mutation est interdite tant qu'un responsable n'a pas validé.
+
+Sans protocole commun, le retour exige de reconstituer trois historiques. Avec ContinuityOps, chaque satellite consulte son issue, le checkpoint le plus récent, puis les faits Git courants. Le HUB voit que A attend une CI, B une revue et C une autorisation. Il n'invente ni statut vert, ni déploiement réussi.
+
+### Un exemple de checkpoint anonymisé
+
+```text
+OPS-DEMO — À_CONTINUER
+Source : dépôt d'exemple / branche feature/demo
+HEAD : <SHA à vérifier>
+MR : ouverte ; CI : en attente
+Fait : correctif et tests locaux
+Non fait : fusion et déploiement
+Autorisation : validation CI seulement
+Prochaine action : vérifier CI et reprendre la revue
+```
+
+Le SHA est un point d'ancrage pour les fichiers, **pas** une garantie que les commentaires, les pipelines ou les permissions n'ont pas évolué depuis.
+
+## ChatGPT, Codex, Claude Code : une méthode, pas un concours
+
+Le pattern peut être utilisé avec ChatGPT classique et ses connecteurs, avec des outils de développement agentiques ou avec une organisation centrée sur Claude Code. Des outils différents savent déjà lire Git, gérer des branches, exécuter des tests et utiliser des fichiers de contexte. La différence proposée ici est le **protocole partagé entre plusieurs sessions et chantiers** : décisions explicites, responsabilités séparées, source de vérité et reprise vérifiable.
+
+Une CI déterministe peut tester des fichiers sans faire appel à un modèle de langage. Cela ne signifie pas que l'ensemble du workflow ne consomme aucun quota : les appels aux modèles, les outils et les runners ont chacun leurs propres contraintes. Aucun gain de temps, de tokens ou de coût n'est revendiqué sans mesure comparable.
+
+## Où placer les garde-fous
+
+Le principe de moindre privilège vaut aussi pour les assistants. Un mandat documentaire n'autorise pas un déploiement. Une CI verte n'est pas un feu vert de production. Les secrets doivent rester dans des systèmes adaptés et ne pas être recopiés dans les issues, prompts, logs ou illustrations. Avant toute opération à effet, vérifier la cible, le HEAD, les protections, les approbations et les effets automatiques.
+
+Le pattern demande une discipline : checkpoints trop longs, décisions contradictoires ou références périmées peuvent recréer la confusion qu'il cherche à résoudre. Une issue n'est pas un verrou technique ; l'exclusivité d'une branche doit être réellement respectée.
+
+## Une présentation interactive et une vidéo de démonstration
+
+Le storyboard OPS-028 illustre les parcours « sans protocole » et « avec protocole », puis le cycle HUB → satellite → Git → CI. La démonstration est **fictive** et sa présentation privée n'est pas une preuve d'intégration live.
+
+Une vidéo OPS-010 de **prévisualisation** a également été produite : narration française, sous-titres SRT, neuf scènes, 720p à 30 images/seconde, environ 5 min 43 s. Le checkpoint GitLab documente une préversion et ses contrôles techniques ; la revue audiovisuelle humaine finale reste ouverte. Son insertion publique dans l'article et les droits de réutilisation éditoriale restent à valider avant publication.
+
+## Comment commencer sans tout automatiser
+
+Choisissez deux ou trois chantiers non sensibles. Pour chacun, créez une issue avec objectif, périmètre, branche et critères de fin. Écrivez une décision durable lorsque la règle doit survivre à l'issue. Après chaque jalon, publiez un checkpoint court. À la reprise, comparez-le au HEAD, aux notes et à la CI réels. Mesurez ensuite le temps de reprise, les relectures, les doublons et les erreurs de statut sur des lots comparables.
+
+La question utile n'est pas « l'IA se souvient-elle de tout ? » mais **« une autre session peut-elle reprendre sans deviner ? »**. ContinuityOps vise cette continuité : une organisation vérifiable, transférable et réversible.
+
+*À suivre : une démonstration du protocole sur un dépôt fictif, puis un retour mesuré sur plusieurs reprises.*
+
+
+## Tutoriel complet : piloter trois chantiers sans mélanger les responsabilités
+
+Imaginons une plateforme fictive, **Atelier**, avec trois travaux simultanés : fiabiliser la CI, documenter une migration de stockage et préparer une mise à jour de service. Cet exemple est volontairement fictif : les identifiants ci-dessous ne correspondent à aucune infrastructure réelle.
+
+Le HUB ouvre trois issues distinctes. Pour chacune, il inscrit le résultat attendu, le dépôt, la branche exclusive, les critères d'acceptation, les dépendances, les opérations interdites et le propriétaire. Une issue n'est pas un simple ticket : elle sert de **contrat d'exécution**. Un satellite peut corriger un test et ouvrir une MR dans son périmètre ; il ne peut pas en déduire qu'il a le droit de modifier les identités cloud ou de déployer en production.
+
+| Chantier fictif | Mission du satellite | Preuve attendue | Décision réservée |
+| --- | --- | --- | --- |
+| OPS-101 — CI | Corriger les validations YAML sur une branche dédiée | SHA, tests, pipeline, MR | Fusion avec effets automatiques non prévus |
+| OPS-102 — stockage | Comparer deux options et rédiger une procédure | Rapport, hypothèses, plan de retour arrière | Mutation du bucket ou suppression |
+| OPS-103 — service | Préparer un déploiement réversible | Inventaire, sauvegarde, recette, rollback | Mise en production hors mandat |
+
+### Étape 1 — Qualifier le travail
+
+Le HUB sépare les **faits vérifiés** (par exemple le HEAD et l'état CI observés), l'**historique** (un succès de la veille), les **hypothèses** et les actions **à réaliser**. Il rattache chaque fait volatil à une date et chaque source versionnée à un SHA. Cette distinction empêche une ancienne pipeline verte de devenir une autorisation implicite de déployer.
+
+### Étape 2 — Déléguer un mandat borné
+
+Le brief indique l'issue, le dépôt, la branche, le périmètre, les interdits et les preuves de fin. Chaque satellite possède sa branche ; deux satellites ne modifient pas simultanément le même fichier. Les décisions sensibles remontent au HUB. Les changements ordinaires explicitement mandatés restent autonomes : pas besoin de redemander l'autorisation à chaque test ou commit.
+
+### Étape 3 — Reprendre sans relire toute la conversation
+
+Au début d'une session, le satellite consulte le dernier checkpoint, puis **revalide seulement les éléments susceptibles d'avoir changé** : nouveaux commentaires, HEAD, état de MR, CI et permissions pertinentes. Si le SHA n'a pas changé, il réutilise les tests déjà prouvés plutôt que de les relancer par réflexe. Si GitLab est inaccessible, il distingue l'état historique du nouvel état inconnu et n'invente pas de synchronisation.
+
+### Étape 4 — Agir et prouver
+
+Dans son mandat, le satellite modifie le code, teste, corrige, crée un commit et une MR, puis inspecte les effets automatiques de la CI. Un job « vert » atteste l'exécution des contrôles définis, **pas** une validation universelle de sécurité ou de production. Le compte rendu contient les commandes ou jobs pertinents, le SHA testé et les limites de la preuve.
+
+### Étape 5 — Écrire le checkpoint et consolider
+
+Un checkpoint exploitable contient un statut, les décisions nouvelles, le SHA/MR/CI, ce qui est fait, ce qui reste, le blocage et **une prochaine action exécutable**. Le HUB rapproche ces éléments des issues et des décisions durables, puis arbitre la suite. Il ne prend pas la branche du satellite pour finir le travail à sa place.
+
+## Exemple de checkpoint réutilisable
+
+```text
+OPS-101 — À_CONTINUER — 2026-11-06
+Dépôt : exemple/atelier-ci
+Branche : fix/OPS-101-yaml
+HEAD vérifié : <SHA de l'exemple>
+MR : !12 (Draft) ; pipeline : #345 (tests réussis)
+Fait : validation YAML et tests unitaires
+Non fait : revue des effets de fusion
+Blocage : aucun
+Prochaine action : inspecter les règles CI sur la branche cible,
+puis demander une décision uniquement si un effet hors mandat apparaît.
+```
+
+Ce format est une illustration, pas un relevé réel. Son intérêt tient à sa **vérifiabilité** : la session suivante sait quoi contrôler et ce qu'elle ne doit pas présumer.
+
+## Architecture : pourquoi GitLab reste la source de vérité
+
+Le HUB est un orchestrateur de décisions ; les satellites exécutent des tâches bornées. GitLab conserve issues, décisions, branches, MR et pipelines. ChatGPT apporte l'analyse et la rédaction, mais une conversation n'est ni un registre transactionnel ni un système de permissions. Les sources versionnées et les états volatils doivent être rapprochés explicitement : un SHA fige un fichier, pas une note ajoutée ensuite ni une CI relancée.
+
+Les deux diagrammes suivants sont issus de sources SVG versionnées et ont été vérifiés sur le CDN CloudFront. Ils illustrent un modèle de travail, et non la topologie d'une infrastructure réelle.
+
+![Schéma des rôles : HUB pour la coordination, satellites pour l'exécution et GitLab pour les décisions et preuves](https://d3nrx9dqtowrp8.cloudfront.net/blog/images/continuityops/5c09221467e8/e2c6ae9f1b6c6109/architecture.svg)
+
+*Architecture conceptuelle ContinuityOps : rôles séparés et source de vérité versionnée.*
+
+![Schéma du cycle d'une OPS : qualifier, déléguer, reprendre, agir, vérifier, publier un checkpoint et consolider](https://d3nrx9dqtowrp8.cloudfront.net/blog/images/continuityops/5c09221467e8/21184608a9182a72/lifecycle.svg)
+
+*Cycle de vie illustratif d'un chantier et de sa reprise après interruption.*
+
+## Les bénéfices à évaluer, sans chiffres inventés
+
+La méthode vise quatre effets : moins de temps perdu à reconstruire l'état, moins de modifications concurrentes, des décisions d'autorisation explicites et une meilleure transmission entre sessions. Pour les mesurer, constituez un petit échantillon de reprises comparables et relevez : temps jusqu'à la première action correcte, nombre de fichiers relus, répétitions de tests au même SHA, erreurs de statut, conflits de branche et décisions sans preuve. Documentez le protocole et les contre-exemples. **Aucun gain chiffré n'est revendiqué ici** faute de mesure contrôlée.
+
+## Les limites et les anti-patterns
+
+Cette organisation a un coût documentaire. Trop de checkpoints créent du bruit ; trop peu rendent la reprise ambiguë. Une automatisation peut lire un état périmé, un connecteur peut perdre l'accès, et une CI peut passer tout en laissant une erreur métier. Il faut éviter les secrets dans les issues et les journaux, les permissions trop larges, les branches partagées entre satellites, la publication d'URL privées et les « validations » qui ne mentionnent ni SHA ni date.
+
+La bonne règle est **proportionnelle** : des preuves réutilisées à état identique, des contrôles renforcés pour les opérations sensibles, et un humain qui arbitre les changements de mandat. ContinuityOps complète Git, CI/CD et les agents de développement ; il ne les remplace pas.
+
+## Guide de démarrage en 30 minutes
+
+1. Créez un dépôt privé de gouvernance avec `AGENTS.md`, un registre de décisions et des modèles de checkpoint.
+2. Choisissez une petite OPS sans effet de production et rédigez son mandat avec les interdits explicites.
+3. Dédiez une branche au satellite ; exigez SHA, tests et MR comme preuves, pas seulement un résumé conversationnel.
+4. Terminez la session par un checkpoint court dans l'issue.
+5. Reprenez dans une autre session en revalidant HEAD, commentaires et CI ; notez les écarts.
+6. Comparez le coût de coordination aux erreurs et relectures évitées avant de généraliser.
+
+Le résultat recherché n'est pas une IA autonome sans contrôle : c'est **un système où chaque décision et chaque action peut être expliquée, vérifiée et reprise**.
