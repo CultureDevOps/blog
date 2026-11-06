@@ -4,7 +4,7 @@ date: "2026-11-06"
 language: fr
 tags: ["devops", "gitlab", "chatgpt", "continuityops"]
 authors: ["default"]
-draft: false
+draft: true
 summary: "Piloter plusieurs chantiers DevOps avec ChatGPT, GitLab, des checkpoints vérifiables et une séparation claire des responsabilités."
 layout: PostSimple
 ---
@@ -144,7 +144,15 @@ Ce format est une illustration, pas un relevé réel. Son intérêt tient à sa 
 
 Le HUB est un orchestrateur de décisions ; les satellites exécutent des tâches bornées. GitLab conserve issues, décisions, branches, MR et pipelines. ChatGPT apporte l'analyse et la rédaction, mais une conversation n'est ni un registre transactionnel ni un système de permissions. Les sources versionnées et les états volatils doivent être rapprochés explicitement : un SHA fige un fichier, pas une note ajoutée ensuite ni une CI relancée.
 
-Les diagrammes de cette architecture, du cycle d'une OPS et de la reprise après interruption sont préparés comme **sources SVG versionnées**. Les versions destinées au public seront diffusées via S3 privé et CloudFront après contrôle des permissions, des contenus et de la cacheabilité ; aucune URL CDN n'est supposée active avant vérification.
+Les deux diagrammes suivants sont issus de sources SVG versionnées et ont été vérifiés sur le CDN CloudFront. Ils illustrent un modèle de travail, et non la topologie d'une infrastructure réelle.
+
+![Schéma des rôles : HUB pour la coordination, satellites pour l'exécution et GitLab pour les décisions et preuves](https://d3nrx9dqtowrp8.cloudfront.net/blog/images/continuityops/5c09221467e8/e2c6ae9f1b6c6109/architecture.svg)
+
+*Architecture conceptuelle ContinuityOps : rôles séparés et source de vérité versionnée.*
+
+![Schéma du cycle d'une OPS : qualifier, déléguer, reprendre, agir, vérifier, publier un checkpoint et consolider](https://d3nrx9dqtowrp8.cloudfront.net/blog/images/continuityops/5c09221467e8/21184608a9182a72/lifecycle.svg)
+
+*Cycle de vie illustratif d'un chantier et de sa reprise après interruption.*
 
 ## Les bénéfices à évaluer, sans chiffres inventés
 
