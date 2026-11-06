@@ -1,0 +1,149 @@
+---
+title: "GitLab CI/CD : tester une application Python sans déclencher de déploiement"
+date: "2026-11-01"
+language: fr
+tags: ["gitlab", "ci-cd", "python", "devops"]
+authors: ["default"]
+draft: false
+summary: "Mettre en place une première pipeline de tests Python, comprendre ses déclencheurs et vérifier les intégrations avant de pousser du code."
+layout: PostSimple
+---
+
+> Les exemples concernent un dépôt de démonstration Python indépendant de ce blog.
+
+Lorsque vous ajoutez une pipeline à une application, vous souhaitez souvent commencer par une étape simple : vérifier que le code fonctionne. Il n’est pas nécessaire de déployer un service pour obtenir ce premier retour.
+
+Nous allons préparer une petite application Python et lancer ses tests dans GitLab CI/CD. Aucun identifiant cloud, service externe ou outil de déploiement n’est nécessaire pour cet exemple.
+
+## Préparer une application facile à tester
+
+Créez un répertoire contenant les trois fichiers suivants :
+
+```text
+demo-python/
+├── app.py
+├── test_app.py
+└── .gitlab-ci.yml
+```
+
+Dans `app.py`, ajoutez une fonction qui calcule un montant en centimes. Utiliser des entiers évite les approximations des nombres flottants pour ce petit calcul.
+
+```python:app.py
+def total_cents(unit_price_cents: int, quantity: int) -> int:
+    if unit_price_cents < 0 or quantity < 0:
+        raise ValueError("Le prix et la quantité doivent être positifs ou nuls")
+    return unit_price_cents * quantity
+```
+
+Le contrat de cette fonction suppose des arguments entiers. Les annotations Python documentent ce contrat ; elles ne valident pas les types à l’exécution.
+
+Ajoutez ensuite `test_app.py` :
+
+```python:test_app.py
+import unittest
+
+from app import total_cents
+
+
+class TotalTests(unittest.TestCase):
+    def test_total(self):
+        self.assertEqual(total_cents(250, 3), 750)
+
+    def test_empty_order(self):
+        self.assertEqual(total_cents(250, 0), 0)
+
+    def test_negative_values(self):
+        for price, quantity in [(-1, 2), (250, -1)]:
+            with self.subTest(price=price, quantity=quantity):
+                with self.assertRaises(ValueError):
+                    total_cents(price, quantity)
+
+
+if __name__ == "__main__":
+    unittest.main()
+```
+
+Depuis ce répertoire, vérifiez le résultat avec Python 3.12 :
+
+```sh
+python -m unittest discover -s . -p 'test_*.py' -v
+python -m compileall -q app.py test_app.py
+```
+
+Les trois tests doivent réussir. La compilation complète ce contrôle en vérifiant que les fichiers Python peuvent être compilés ; elle ne remplace pas les tests de comportement.
+
+## Ajouter une pipeline limitée aux tests
+
+Créez ce fichier à la racine du dépôt de démonstration :
+
+```yaml:.gitlab-ci.yml
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS'
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH'
+    - when: never
+
+stages:
+  - test
+
+python-tests:
+  stage: test
+  image: python:3.12-slim
+  tags:
+    - saas-linux-small-amd64
+  script:
+    - python --version
+    - python -m unittest discover -s . -p 'test_*.py' -v
+    - python -m compileall -q app.py test_app.py
+```
+
+Le tag de runner correspond à GitLab.com sur Linux amd64. Sur une autre installation, choisissez un runner disponible et isolé, capable d’utiliser cette image. Les quotas et conditions d’utilisation du compte restent à vérifier avant l’exécution. L’image utilise ici un tag lisible qui peut évoluer ; pour une chaîne reproductible, sélectionnez et maintenez un digest vérifié.
+
+La bibliothèque standard suffit : aucune installation de paquet Python n’est effectuée. Si votre application a des dépendances, ajoutez une étape d’installation avec des versions verrouillées et examinez aussi leurs scripts d’installation.
+
+## Comprendre les déclencheurs
+
+`workflow:rules` décide si GitLab crée une pipeline, avant l’évaluation des jobs. Les règles sont parcourues dans l’ordre :
+
+1. Un événement de merge request est accepté.
+2. Un push sur une branche ayant une merge request ouverte est ignoré pour éviter une seconde pipeline de branche.
+3. Un push sur une branche sans merge request ouverte est accepté.
+4. Les autres sources sont refusées, notamment les tags, les schedules et les lancements depuis l’interface ou l’API.
+
+| Action                                    | Résultat attendu                          |
+| ----------------------------------------- | ----------------------------------------- |
+| Push sur une branche sans MR              | Pipeline de tests de branche              |
+| Ouverture ou mise à jour d’une MR         | Pipeline de tests de MR                   |
+| Push sur une branche ayant une MR ouverte | Pas de pipeline de branche supplémentaire |
+| Push d’un tag                             | Aucune pipeline avec ce workflow          |
+| Lancement manuel, API ou schedule         | Aucune pipeline avec ce workflow          |
+
+Dans cet exemple, le push sur la branche principale exécute également les tests. La configuration ne contient ni `include`, ni pipeline enfant, ni job de déploiement.
+
+## Vérifier ce qui se passe en dehors du YAML
+
+Un fichier CI limité aux tests ne suffit pas à garantir qu’un push ne déploiera rien. Une intégration Vercel, un webhook ou une autre plateforme peut réagir au même événement indépendamment de GitLab CI.
+
+Avant le premier push, examinez les intégrations du dépôt, les webhooks, Auto DevOps et les éventuelles politiques de pipeline du groupe. Si un hébergement est connecté, vérifiez la branche de production et les règles de Preview. Demandez l’accord correspondant avant de déclencher un environnement externe.
+
+Dans GitLab, utilisez CI Lint ou l’éditeur de pipeline pour valider le fichier et examiner la configuration complète. Vérifiez ensuite que seuls les jobs attendus apparaissent. Un job en attente peut indiquer qu’aucun runner ne correspond au tag choisi.
+
+## Garder les tests sans secrets
+
+Cette application ne nécessite aucun secret. Ne lui fournissez pas de clé cloud ou de jeton de déploiement. Évitez aussi les runners privilégiés et les montages de socket Docker pour ce cas d’usage.
+
+Ne remplacez pas la commande de tests par une commande qui ignore son code de sortie : une assertion en échec doit faire échouer le job. Pour vérifier ce comportement dans votre dépôt de démonstration, changez temporairement le résultat attendu de `750` à `751`, constatez l’échec, puis rétablissez le test.
+
+Les logs suffisent à cette première étape. Si vous ajoutez des artefacts, sélectionnez uniquement les rapports utiles, définissez une durée de conservation et contrôlez leurs accès. N’archivez pas tout le répertoire de travail : il pourrait contenir des fichiers sensibles.
+
+Vous disposez maintenant d’un point de départ pour obtenir un retour à chaque changement. L’ajout d’un déploiement sera une évolution distincte, avec son environnement, ses droits et sa validation.
+
+## Références officielles
+
+- [GitLab : workflow et règles de création des pipelines](https://docs.gitlab.com/ci/yaml/workflow/)
+- [GitLab : validation de la configuration CI/CD](https://docs.gitlab.com/ci/yaml/lint/)
+- [GitLab : artefacts des jobs](https://docs.gitlab.com/ci/jobs/job_artifacts/)
+- [Python : exécuter des tests avec unittest](https://docs.python.org/3/library/unittest.html)
+- [Vercel : déploiements depuis Git](https://vercel.com/docs/git)
